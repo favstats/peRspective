@@ -1,0 +1,28 @@
+---
+title: "peRspective"
+output: github_document
+---
+
+Install package from GitHub:
+
+```{r, eval = F}
+devtools::install_github("favstats/peRspective")
+```
+
+```{r}
+library(peRspective)
+
+```
+
+
+## Example
+
+```{r}
+key <- "xxx"
+
+prsp_score("Hello whats going on? Please don't leave. I need to be free.", 
+           key = key,
+           score_model = peRspective::prsp_models)
+
+```
+
