@@ -178,6 +178,7 @@ my_text <- "Hello whats going on? Please don't leave. I need to be free."
 
 text_scores <- prsp_score(
            text = my_text, 
+           languages = "en",
            key = key,
            score_model = peRspective::prsp_models
            )
@@ -199,8 +200,35 @@ trump_tweet <- "The Fake News Media has NEVER been more Dishonest or Corrupt tha
 
 text_scores <- prsp_score(
            trump_tweet, 
-           key = key,
+           key = key, 
+           score_sentences = T,
            score_model = peRspective::prsp_models
+           )
+
+text_scores %>% 
+  unnest(sentence_scores) %>% 
+  select(type, score, sentences) %>% 
+  gather(value, key, -sentences, -score) %>% 
+  mutate(key = fct_reorder(key, score)) %>% 
+  ggplot(aes(key, score)) +
+  geom_col() +
+  coord_flip() +
+  facet_wrap(~sentences, ncol = 2) +
+  theme_minimal() +
+  geom_hline(yintercept = 0.5, linetype = "dashed")
+```
+
+![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+
+``` r
+spanish_text <- "Con la llegado de internet y de las nuevas tecnologías de la información, la forma de contactar que tenemos entre los seres humanos ha cambiado y lo va a seguir haciendo en un futuro no muy lejano."
+
+
+text_scores <- prsp_score(
+           text = spanish_text, 
+           languages = "es",
+           key = key,
+           score_model = c("TOXICITY", "SEVERE_TOXICITY")
            )
 
 text_scores %>% 
@@ -211,4 +239,53 @@ text_scores %>%
   coord_flip()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+
+``` r
+install.packages("anomalize")
+install.packages("tsibble")
+
+library(anomalize)
+library(tsibble)
+
+tsibble::as_tsibble()
+
+count_combined2 <- read_csv("data/count_combined2.csv")
+
+anomalize::tidyverse_cran_downloads %>% 
+  # ungroup() %>% 
+  # count(date) %>% arrange(n)
+  
+   time_decompose(count) %>%
+   anomalize(remainder, alpha = 0.05, max_anoms = 0.2) %>%
+   time_recompose()
+
+count_combined2 %>% count(keyword)   
+   
+count_combined2 %>% #count(date)
+  drop_na(date) %>%
+  rename(count2 = count) %>% 
+  # na.omit() %>% 
+  # as_tsibble(key = keyword) %>% 
+  # add_count(date) %>% arrange(desc(n)) %>%
+  # filter(n == 4) %>%
+  # unclass() %>% 
+  # distinct(date, .keep_all = T) %>% 
+  tibbletime::as_tbl_time(index = date) %>%#class
+  group_by(keyword) %>%
+  # ungroup() %>% 
+   time_decompose(count2) %>%
+   anomalize(remainder, alpha = 0.05, max_anoms = 0.2) %>%
+   time_recompose()
+
+
+
+count_combined2 %>% 
+  drop_na(date) %>%
+  arrange(date) %>% 
+  tibbletime::as_tbl_time(index = date) %>%
+  group_by(keyword) %>%
+  time_decompose(frequency) %>%
+  anomalize(remainder, alpha = 0.05, max_anoms = 0.2) %>%
+  time_recompose()
+```

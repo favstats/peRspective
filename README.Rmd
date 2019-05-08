@@ -200,7 +200,7 @@ text_scores %>%
   ggplot(aes(key, score)) +
   geom_col() +
   coord_flip() +
-  facet_wrap(~sentence, ncol = 2) +
+  facet_wrap(~sentences, ncol = 2) +
   theme_minimal() +
   geom_hline(yintercept = 0.5, linetype = "dashed")
 
