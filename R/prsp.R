@@ -1,15 +1,17 @@
-
 #' Analyze comments with Perspective API
 #'
 #' Provide a character string with your text, your API key and what scores you want to obtain.
 #'
+#' For more detail see Perspective API documentation: https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md
+#'
 #' @md
 #' @param text a character string.
-#' @param key Your API key (see here: `https://github.com/conversationai/perspectiveapi/blob/master/quickstart.md`).
-#' @param score_model Specify what model do you want to use (e.g. `TOXICITY` or `SEVERE_TOXICITY`). Specify a character vector if you want more than one score. See `peRspective::prsp_models`.
+#' @param languages A vector of [ISO 631-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) two-letter language codes specifying the language(s) that comment is in (for example, "en", "es", "fr", "de", etc). If unspecified, the API will autodetect the comment language. If language detection fails, the API returns an error.
+#' @param key Your API key (for a quickstart [see here](https://github.com/conversationai/perspectiveapi/blob/master/quickstart.md)).
+#' @param score_model Specify what model do you want to use (for example `TOXICITY` and/or `SEVERE_TOXICITY`). Specify a character vector if you want more than one score. See `peRspective::prsp_models`.
 #' @return a `tibble`
 #' @export
-prsp_score <- function(text, key, score_model, sleep = 1) {
+prsp_score <- function(text, languages = NULL, score_sentences = F,key, score_model, sleep = 1) {
 
   if (!all(score_model %in% prsp_models)) {
     stop(stringr::str_glue("Invalid Model type provided.\n\nShould be one of the following:\n\n{peRspective::prsp_models %>% glue::glue_collapse('\n')}"))
@@ -17,43 +19,107 @@ prsp_score <- function(text, key, score_model, sleep = 1) {
   
   Sys.sleep(sleep)
 
+  # browser()
+  
   # score_model <- c("TOXICITY", "SEVERE_TOXICITY")
+  # score_model <- prsp_models
+  # languages <- "es"
 
   model_list <- score_model %>%
     purrr::map(
       ~{list(x = NULL) %>% purrr::set_names(.x)}
     ) %>%
     purrr::flatten()
-
+  
+  
   analyze_request <- list(
     comment = list(text = text),
+    spanAnnotations = T,
     requestedAttributes = model_list
-  ) %>%
+  ) 
+
+  if (!is.null(languages)) {
+    analyze_request <- rlist::list.append(analyze_request, languages = languages)
+  }
+  
+  analyze_request <- analyze_request %>%
     jsonlite::toJSON(auto_unbox = T)
-
-
+  
   result <- httr::POST(stringr::str_glue("https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key={key}"),
                  body = analyze_request,
                  httr::add_headers(.headers = c("Content-Type"="application/json")))
 
   Output <- httr::content(result)
-
+  
+  if (any(str_detect(Output %>% names(), "error"))) {
+    stop(str_glue("HTTP {Output$error$code}\n{Output$error$status}: {Output$error$message}"))
+  }
+  
   ## cleaning
-  final_dat <- score_model %>%
-    purrr::map(
-      ~{
-        Output %>%
-          purrr::map(.x) %>%
-          purrr::map("spanScores") %>%
-          magrittr::extract2(1) %>%
-          purrr::map("score") %>%
-          purrr::map("value") %>%
-          unlist() %>%
-          purrr::set_names(.x) %>%
-          dplyr::bind_rows()
-      }
-    ) %>%
-    dplyr::bind_cols()
+  if (!score_sentences) {
+    final_dat <- score_model %>%
+      purrr::map(
+        ~{
+          Output %>%
+            purrr::map(.x) %>%
+            purrr::map("spanScores") %>%
+            magrittr::extract2(1) %>%
+            purrr::map("score") %>%
+            purrr::map("value") %>%
+            unlist() %>%
+            purrr::set_names(.x) %>%
+            dplyr::bind_rows()
+        }
+      ) %>%
+      dplyr::bind_cols()    
+  } else if (score_sentences) {
+    final_dat <- score_model %>%
+      purrr::map(
+        ~{
+          spanscores <- Output %>%
+            purrr::map(.x) %>%
+            purrr::map("spanScores") %>%
+            magrittr::extract2(1) 
+          
+          begin <- spanscores %>% 
+            map("begin") %>% 
+            unlist()
+          
+          end <- spanscores %>% 
+            map("end") %>% 
+            unlist()
+          
+          score <- spanscores %>%
+            purrr::map("score") %>%
+            purrr::map("value") %>% 
+            unlist()
+          
+          summary_score <- Output %>%
+            purrr::map(.x) %>% 
+            purrr::map("summaryScore")%>%
+            purrr::map("value") %>% 
+            unlist()
+          
+          spans <- spanscores %>% length
+          
+          final <- tibble(begin, end, score, summary_score, spans, .x)
+          
+          return(final)
+        }
+      ) %>%
+      set_names(score_model) %>% #-> ss 
+      bind_rows() %>% #-> ss#%>% 
+      rename(type = .x) %>% 
+      mutate(text = stringr::str_sub(text, start = begin, end = end) %>% str_trim)
+    #-> ss
+    
+    #   match_begins <- ss %>% map("begin") %>% magrittr::extract2(1)
+    #   
+    # ww <- ss %>% 
+    #   map("begin") %>% 
+    #   map(~identical(.x, match_begins) %>% all) %>% 
+    #   bind_rows()
+  }
 
   return(final_dat)
 }

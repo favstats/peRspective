@@ -4,18 +4,23 @@
 \alias{prsp_score}
 \title{Analyze comments with Perspective API}
 \usage{
-prsp_score(text, key, score_model)
+prsp_score(text, languages = "en", key, score_model, sleep = 1)
 }
 \arguments{
 \item{text}{a character string.}
 
-\item{key}{Your API key (see here: \code{https://github.com/conversationai/perspectiveapi/blob/master/quickstart.md}).}
+\item{key}{Your API key (for a quickstart \href{https://github.com/conversationai/perspectiveapi/blob/master/quickstart.md}{see here}).}
 
-\item{score_model}{Specify what model do you want to use (e.g. \code{TOXICITY} or \code{SEVERE_TOXICITY}). Specify a character vector if you want more than one score. See \code{peRspective::prsp_models}.}
+\item{score_model}{Specify what model do you want to use (for example \code{TOXICITY} and/or \code{SEVERE_TOXICITY}). Specify a character vector if you want more than one score. See \code{peRspective::prsp_models}.}
+
+\item{language}{A vector of \href{https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes}{ISO 631-1} two-letter language codes specifying the language(s) that comment is in (for example, "en", "es", "fr", "de", etc). If unspecified, the API will autodetect the comment language. If language detection fails, the API returns an error.}
 }
 \value{
 a \code{tibble}
 }
 \description{
 Provide a character string with your text, your API key and what scores you want to obtain.
+}
+\details{
+For more detail see Perspective API documentation: https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md
 }

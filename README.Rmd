@@ -151,7 +151,7 @@ peRspective::prsp_models
 First, define your key variable:
 
 ```{r, echo = F}
-key <- read_lines("../keys/prsp.txt")
+key <- readr::read_lines("../keys/prsp.txt")
 ```
 
 
@@ -167,6 +167,7 @@ my_text <- "Hello whats going on? Please don't leave. I need to be free."
 
 text_scores <- prsp_score(
            text = my_text, 
+           languages = "en",
            key = key,
            score_model = peRspective::prsp_models
            )
@@ -181,13 +182,43 @@ text_scores %>%
 
 Let's try something else:
 
-```{r, eval = T}
+```{r, eval = T, fig.width=12, fig.height=8}
 trump_tweet <- "The Fake News Media has NEVER been more Dishonest or Corrupt than it is right now. There has never been a time like this in American History. Very exciting but also, very sad! Fake News is the absolute Enemy of the People and our Country itself!"
 
 text_scores <- prsp_score(
            trump_tweet, 
-           key = key,
+           key = key, score_sentences = T,
            score_model = peRspective::prsp_models
+           )
+
+text_scores %>% 
+  select(type, score, text) %>% 
+  gather(key, value, -text, -score) %>% 
+  mutate(value = fct_reorder2(value, text, score)) %>% 
+  ggplot(aes(value, score)) +
+  geom_col() +
+  coord_flip() +
+  facet_wrap(~text, ncol = 2) +
+  theme_minimal()
+
+
+dat <- data.frame(date = c(as.Date("2019-01-02"),
+                           as.Date("2019-01-01"),
+                           as.Date("2019-01-03")))
+
+dat$date <- as.numeric(as.factor(dat$date))
+```
+
+```{r}
+spanish_text <- "Con la llegado de internet y de las nuevas tecnologías de la información, la forma de contactar que tenemos entre los seres humanos ha cambiado y lo va a seguir haciendo en un futuro no muy lejano."
+
+text <- "Con la llegado de internet y de las nuevas tecnologías de la información, la forma de contactar que tenemos entre los seres humanos ha cambiado y lo va a seguir haciendo en un futuro no muy lejano."
+
+text_scores <- prsp_score(
+           text = spanish_text, 
+           languages = "es",
+           key = key,
+           score_model = c("TOXICITY", "SEVERE_TOXICITY")
            )
 
 text_scores %>% 
