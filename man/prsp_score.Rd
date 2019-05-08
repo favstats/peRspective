@@ -4,16 +4,19 @@
 \alias{prsp_score}
 \title{Analyze comments with Perspective API}
 \usage{
-prsp_score(text, languages = "en", key, score_model, sleep = 1)
+prsp_score(text, languages = NULL, score_sentences = F, key,
+  score_model, sleep = 1)
 }
 \arguments{
 \item{text}{a character string.}
 
-\item{key}{Your API key (for a quickstart \href{https://github.com/conversationai/perspectiveapi/blob/master/quickstart.md}{see here}).}
+\item{languages}{A vector of \href{https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes}{ISO 631-1} two-letter language codes specifying the language(s) that comment is in (for example, "en", "es", "fr", "de", etc). If unspecified, the API will autodetect the comment language. If language detection fails, the API returns an error.}
+
+\item{score_sentences}{A boolean value that indicates if the request should return spans that describe the scores for each part of the text (currently done at per sentence level). Defaults to \code{FALSE}.}
+
+\item{key}{Your API key (\href{https://github.com/conversationai/perspectiveapi/blob/master/quickstart.md}{see here} to set up an API key).}
 
 \item{score_model}{Specify what model do you want to use (for example \code{TOXICITY} and/or \code{SEVERE_TOXICITY}). Specify a character vector if you want more than one score. See \code{peRspective::prsp_models}.}
-
-\item{language}{A vector of \href{https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes}{ISO 631-1} two-letter language codes specifying the language(s) that comment is in (for example, "en", "es", "fr", "de", etc). If unspecified, the API will autodetect the comment language. If language detection fails, the API returns an error.}
 }
 \value{
 a \code{tibble}

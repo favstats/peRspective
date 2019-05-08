@@ -7,11 +7,12 @@
 #' @md
 #' @param text a character string.
 #' @param languages A vector of [ISO 631-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) two-letter language codes specifying the language(s) that comment is in (for example, "en", "es", "fr", "de", etc). If unspecified, the API will autodetect the comment language. If language detection fails, the API returns an error.
-#' @param key Your API key (for a quickstart [see here](https://github.com/conversationai/perspectiveapi/blob/master/quickstart.md)).
+#' @param score_sentences A boolean value that indicates if the request should return spans that describe the scores for each part of the text (currently done at per sentence level). Defaults to `FALSE`.
+#' @param key Your API key ([see here](https://github.com/conversationai/perspectiveapi/blob/master/quickstart.md) to set up an API key).
 #' @param score_model Specify what model do you want to use (for example `TOXICITY` and/or `SEVERE_TOXICITY`). Specify a character vector if you want more than one score. See `peRspective::prsp_models`.
 #' @return a `tibble`
 #' @export
-prsp_score <- function(text, languages = NULL, score_sentences = F,key, score_model, sleep = 1) {
+prsp_score <- function(text, languages = NULL, score_sentences = F, key, score_model, sleep = 1) {
 
   if (!all(score_model %in% prsp_models)) {
     stop(stringr::str_glue("Invalid Model type provided.\n\nShould be one of the following:\n\n{peRspective::prsp_models %>% glue::glue_collapse('\n')}"))
@@ -24,6 +25,7 @@ prsp_score <- function(text, languages = NULL, score_sentences = F,key, score_mo
   # score_model <- c("TOXICITY", "SEVERE_TOXICITY")
   # score_model <- prsp_models
   # languages <- "es"
+  # score_sentences <- T
 
   model_list <- score_model %>%
     purrr::map(
@@ -34,7 +36,7 @@ prsp_score <- function(text, languages = NULL, score_sentences = F,key, score_mo
   
   analyze_request <- list(
     comment = list(text = text),
-    spanAnnotations = T,
+    spanAnnotations = score_sentences,
     requestedAttributes = model_list
   ) 
 
@@ -76,17 +78,20 @@ prsp_score <- function(text, languages = NULL, score_sentences = F,key, score_mo
     final_dat <- score_model %>%
       purrr::map(
         ~{
+          
+          # .x <- "TOXICITY"
+          
           spanscores <- Output %>%
             purrr::map(.x) %>%
             purrr::map("spanScores") %>%
             magrittr::extract2(1) 
           
           begin <- spanscores %>% 
-            map("begin") %>% 
+            purrr::map("begin") %>% 
             unlist()
           
           end <- spanscores %>% 
-            map("end") %>% 
+            purrr::map("end") %>% 
             unlist()
           
           score <- spanscores %>%
@@ -102,16 +107,20 @@ prsp_score <- function(text, languages = NULL, score_sentences = F,key, score_mo
           
           spans <- spanscores %>% length
           
-          final <- tibble(begin, end, score, summary_score, spans, .x)
+          final <- dplyr::tibble(begin, end, score, summary_score, spans, .x) %>% 
+            dplyr::rename(type = .x) %>%
+            dplyr::mutate(sentences = stringr::str_sub(text, start = begin, end = end) %>% stringr::str_trim())
+          
+          final <- final[1,] %>% 
+            dplyr::mutate(sentence_scores = list(final %>% select(-summary_score:-type))) %>% 
+            dplyr::select(-begin:-score, -sentence) %>% 
+            dplyr::mutate(text = text)
           
           return(final)
         }
       ) %>%
       set_names(score_model) %>% #-> ss 
-      bind_rows() %>% #-> ss#%>% 
-      rename(type = .x) %>% 
-      mutate(text = stringr::str_sub(text, start = begin, end = end) %>% str_trim)
-    #-> ss
+      bind_rows()
     
     #   match_begins <- ss %>% map("begin") %>% magrittr::extract2(1)
     #   
