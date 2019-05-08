@@ -194,8 +194,8 @@ text_scores <- prsp_score(
 
 text_scores %>% 
   unnest(sentence_scores) %>% 
-  select(type, score, sentence) %>% 
-  gather(value, key, -sentence, -score) %>% 
+  select(type, score, sentences) %>% 
+  gather(value, key, -sentences, -score) %>% 
   mutate(key = fct_reorder(key, score)) %>% 
   ggplot(aes(key, score)) +
   geom_col() +

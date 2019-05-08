@@ -113,7 +113,7 @@ prsp_score <- function(text, languages = NULL, score_sentences = F, key, score_m
           
           final <- final[1,] %>% 
             dplyr::mutate(sentence_scores = list(final %>% select(-summary_score:-type))) %>% 
-            dplyr::select(-begin:-score, -sentence) %>% 
+            dplyr::select(-begin:-score, -sentences) %>% 
             dplyr::mutate(text = text)
           
           return(final)
