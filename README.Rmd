@@ -1,5 +1,4 @@
 ---
-title: "peRspective"
 output: github_document
 ---
 
@@ -8,6 +7,9 @@ knitr::opts_chunk$set(message = F, warning = F)
 ```
 
 <!-- [![Travis build status](https://travis-ci.org/favstats/peRspective.svg?branch=master)](https://travis-ci.org/favstats/peRspective) -->
+
+# peRspective <img src="images/perspective2.png" width="160px" align="right" />
+
 
 ```{r, echo = FALSE, results='asis', eval = T}
 
@@ -234,7 +236,8 @@ text_scores %>%
 So far we have only seen how to get individual comments or sentences scored. But what if you would like to run the function for an entire dataset full text? This is where `prsp_stream` comes in. At its core `prsp_stream` is a loop implemented within `purrr::map` to iterate over your text column. To use it let's first generate a mock tibble.
 
 ```{r}
-text_sample <- tibble(ctext = c("What the hell is going on?",
+text_sample <- tibble(
+       ctext = c("What the hell is going on?",
                  "Please no what I don't get it.",
                  "This goes even farther!",
                  "What the hell is going on?",
@@ -242,7 +245,8 @@ text_sample <- tibble(ctext = c("What the hell is going on?",
                  "This goes even farther!"),
        textid = c("#efdcxct", "#ehfcsct", 
                   "#ekacxwt",  "#ewatxad", 
-                  "#ekacswt",  "#ewftxwd"))
+                  "#ekacswt",  "#ewftxwd")
+       )
 ```
 
 `prsp_stream` requires a `text` and `text_id column`. It wraps `prsp_score` and takes all its arguments. Let's run the most basic version:
@@ -261,7 +265,8 @@ Now, the problem is that sometimes the call might fail at some point. It is ther
 Let's try it out with a new dataset that contains text that the Perspective API can't score
 
 ```{r}
-text_sample <- tibble(ctext = c("What the hell is going on?",
+text_sample <- tibble(
+       ctext = c("What the hell is going on?",
                  "Please no what I don't get it.",
                  ## empty string
                  "",
@@ -270,14 +275,15 @@ text_sample <- tibble(ctext = c("What the hell is going on?",
                  "Please no what I don't get it.",
                  ## Gibberish
                  "kdlfkmgkdfmgkfmg",
-                 ## Gibberish
                  "This goes even farther!",
+                 ## Gibberish
                  "Hippi Hoppo"),
        textid = c("#efdcxct", "#ehfcsct", 
                   "#ekacxwt",  "#ewatxad", 
                   "#ekacswt",  "#ewftxwd", 
                   "#ekacbwt",  "#ejatxwd", 
-                  "dfdfgss"))
+                  "dfdfgss")
+       )
 ```
 
 And run the function with `safe_output = TRUE`.
@@ -312,7 +318,7 @@ Or the (not as pretty) output in Markdown
 text_sample %>%
   prsp_stream(text = ctext,
               text_id = textid,
-              score_model = c("TOXICITY", "SEVERE_TOXICITY"),
+              score_model = prsp_models,
               verbose = T,
               safe_output = T)
 

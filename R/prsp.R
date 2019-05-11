@@ -126,9 +126,9 @@ prsp_score <- function(text, text_id = NULL, languages = NULL, score_sentences =
 
   # browser()
   
-  # score_model <- c("TOXICITY", "SEVERE_TOXICITY")
+  # score_model <- c("TOXICITY", "SEVERE_TOXICITY", "FLIRTATION")
   # score_model <- prsp_models
-  # languages <- "de"
+  # languages <- "en"
   # score_sentences <- T
   
   # score_model <- "SEVERE_TOXICITY_EXPERIMENTAL"
@@ -140,6 +140,7 @@ prsp_score <- function(text, text_id = NULL, languages = NULL, score_sentences =
     ) %>%
     purrr::flatten()
   
+  # model_list %>% jsonlite::toJSON()
   
   analyze_request <- list(
     comment = list(text = text),
@@ -341,7 +342,7 @@ prsp_stream <- function(.data,
     )
   }
   
-  if (any(is.na(id_col))) {
+  if (any(is.na(text_col))) {
     stop(
       "NAs detected in the text column. Please make sure your text column has no missing values."
     )
