@@ -308,8 +308,22 @@ msg <- function(type, type_style = crayon::make_style('red4'), msg) {
 
 # msg("WHAT", msg = "hatsap")
 
-
-prsp_stream <- function(input_text, 
+#' Analyze comments with Perspective API
+#'
+#' Provide a character string with your text, your API key and what scores you want to obtain.
+#'
+#' For more details see ?peRspective or [Perspective API documentation](https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md)
+#'
+#' @md
+#' @param .data a dataset with a text and text_id column.
+#' @param text a character vector with text you want to score.
+#' @param text_id a unique ID for the text that you supply
+#' @param safe_output wraps the function into a `purrr::safely` environment (defaults to `FALSE`). Loop will run without pause and catch + output errors in a tidy `tibble` along with the results.
+#' @param verbose narrates the streaming procedure (defaults to `FALSE`).
+#' @param ... arguments passed to \code{\link{prsp_score}}.
+#' @return a `tibble`
+#' @export
+prsp_stream <- function(.data, 
                         text = NULL, 
                         text_id = NULL, 
                         ..., 
@@ -330,8 +344,8 @@ prsp_stream <- function(input_text,
     stop("You need to provide a text_id column.")
   }
   
-  text_col <- input_text %>% pull(!!text)
-  id_col <- input_text %>% pull(!!text_id)
+  text_col <- .data %>% pull(!!text)
+  id_col <- .data %>% pull(!!text_id)
   
   if (any(is.na(id_col))) {
     stop("NAs detected in the text_id column. Please make sure your text_id column has no missing values.")
@@ -349,7 +363,7 @@ prsp_stream <- function(input_text,
   prsp_params <- list(...)
   
   ## loop over prsp_score
-  final_text <- input_text %>%
+  final_text <- .data %>%
     select(!!text_id, !!text) %>% 
     split(1:nrow(.)) %>% 
     ## fix column names
@@ -358,9 +372,9 @@ prsp_stream <- function(input_text,
       
       ## Print Progress
       if (verbose) {
-        msg(type = peRspective:::print_progress(.y, nrow(input_text), print_prct = T), 
+        msg(type = peRspective:::print_progress(.y, nrow(.data), print_prct = T), 
             type_style = crayon::green, 
-            msg = peRspective:::print_progress(.y, nrow(input_text)))
+            msg = peRspective:::print_progress(.y, nrow(.data)))
       }
       
       ## Make prsp_score to safely
