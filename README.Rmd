@@ -158,9 +158,8 @@ Sys.setenv(perspective_api_key = key)
 # perspective_api_key()
 ```
 
-`peRspective` functions will read the API key from environment variable `perspective_api_key`. You can assign the object like this at the start of your script:
-#'   
-#'   \code{Sys.setenv(perspective_api_key = "**********")}
+`peRspective` functions will read the API key from environment variable `perspective_api_key`. You can assign an environment object like this in your script:
+
 
 ```{r, eval = F}
 Sys.setenv(perspective_api_key = "YOUR_API_KEY")

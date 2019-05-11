@@ -166,8 +166,13 @@ peRspective::prsp_models
 
 First, define your key variable:
 
+`peRspective` functions will read the API key from environment variable
+`perspective_api_key`. You can assign the object like this at the start
+of your script: \#’  
+\#’ 
+
 ``` r
-key <- "YOUR_API_KEY"
+Sys.setenv(perspective_api_key = "YOUR_API_KEY")
 ```
 
 Next, you can use `prsp_score` function to your comments scored with
@@ -179,7 +184,6 @@ my_text <- "Hello whats going on? Please don't leave. I need to be free."
 text_scores <- prsp_score(
            text = my_text, 
            languages = "en",
-           key = key,
            score_model = peRspective::prsp_models
            )
 
@@ -193,6 +197,27 @@ text_scores %>%
 
 ![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
+A Trump Tweet
+
+``` r
+trump_tweet <- "The Fake News Media has NEVER been more Dishonest or Corrupt than it is right now. There has never been a time like this in American History. Very exciting but also, very sad! Fake News is the absolute Enemy of the People and our Country itself!"
+
+text_scores <- prsp_score(
+           trump_tweet, 
+           score_sentences = F,
+           score_model = peRspective::prsp_models
+           )
+
+text_scores %>% 
+  gather() %>% 
+  mutate(key = fct_reorder(key, value)) %>% 
+  ggplot(aes(key, value)) +
+  geom_col() +
+  coord_flip()
+```
+
+![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+
 Let’s try something else:
 
 ``` r
@@ -200,7 +225,6 @@ trump_tweet <- "The Fake News Media has NEVER been more Dishonest or Corrupt tha
 
 text_scores <- prsp_score(
            trump_tweet, 
-           key = key, 
            score_sentences = T,
            score_model = peRspective::prsp_models
            )
@@ -218,7 +242,7 @@ text_scores %>%
   geom_hline(yintercept = 0.5, linetype = "dashed")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 ``` r
 spanish_text <- "Con la llegado de internet y de las nuevas tecnologías de la información, la forma de contactar que tenemos entre los seres humanos ha cambiado y lo va a seguir haciendo en un futuro no muy lejano."
@@ -239,4 +263,4 @@ text_scores %>%
   coord_flip()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
