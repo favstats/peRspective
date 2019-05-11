@@ -90,7 +90,7 @@ tibble::tribble(
 
 ```
 
-\\***Note:** Languages that are annotated with "\\*" are only accessible in the `_EXPERIMENTAL` version of the models. In order to access them just add to the supplied model string like this: `TOXICITY_EXPERIMENTAL`.
+**Note:** Languages that are annotated with "*" are only accessible in the `_EXPERIMENTAL` version of the models. In order to access them just add to the supplied model string like this: `TOXICITY_EXPERIMENTAL`.
 
 A character vector that includes all supported models can be obtained like this:
 
