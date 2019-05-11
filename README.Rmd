@@ -297,7 +297,6 @@ text_sample %>%
               verbose = T,
               safe_output = T)
 
-prsp_params <- list(hello = 2)
 
 ```
 

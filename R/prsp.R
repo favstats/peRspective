@@ -362,7 +362,7 @@ prsp_stream <- function(.data,
     purrr::imap(~{
       ## Print Progress
       if (verbose) {
-        msg(
+        peRspective:::msg(
           type = peRspective::print_progress(.y, nrow(.data), print_prct = T),
           type_style = crayon::green,
           msg = peRspective::print_progress(.y, nrow(.data))
@@ -415,7 +415,7 @@ prsp_stream <- function(.data,
           }
 
         }
-
+browser()
         ## when not error
         if (length(int_results) != 1 & !is.null(prsp_params[["score_sentences"]])) {
           ## do a switcheroo because score_sentences argument requires different strategy
@@ -423,7 +423,7 @@ prsp_stream <- function(.data,
             score_label <- int_results %>%
               dplyr::select(-text_id) %>%
               as.list() %>%
-              dplyr::enframe() %>%
+              tibble::enframe() %>%
               dplyr::mutate(value = as.numeric(value))
           } else if (prsp_params[["score_sentences"]]) {
             score_label <- int_results %>%
