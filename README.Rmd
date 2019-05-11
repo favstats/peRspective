@@ -152,7 +152,12 @@ First, define your key variable:
 
 ```{r, echo = F}
 key <- readr::read_lines("../keys/prsp.txt")
+
+Sys.setenv(perspective_api_key = key)
+
+# perspective_api_key()
 ```
+
 
 
 ```{r, eval = F}

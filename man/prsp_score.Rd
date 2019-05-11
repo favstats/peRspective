@@ -4,7 +4,7 @@
 \alias{prsp_score}
 \title{Analyze comments with Perspective API}
 \usage{
-prsp_score(text, languages = NULL, score_sentences = F, key,
+prsp_score(text, languages = NULL, score_sentences = F, key = NULL,
   score_model, sleep = 1)
 }
 \arguments{

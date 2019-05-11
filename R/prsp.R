@@ -1,3 +1,42 @@
+#' peRspective: Interface to the Perspective API
+#'
+#' Provides access to the Perspective API (\url{http://www.perspectiveapi.com/}).
+#'
+#' @section Setup:
+#'   1. Create a Google Cloud project in your [Google Cloud console](https://console.developers.google.com/)
+#'
+#'   2. Go to [Perspective API's overview page](https://console.developers.google.com/apis/api/commentanalyzer.googleapis.com/overview) and click **_Enable_**
+#'   
+#'   3. Go to the [API credentials page](https://console.developers.google.com/apis/credentials), just click **_Create credentials_**, and choose "API Key".
+#' 
+#' @section API:
+#'   \pkg{peRspective} functions will read the API key from
+#'   environment variable \code{perspective_api_key}. 
+#'   You can specify it like this at the start of your script:
+#'   
+#'   \code{Sys.setenv(perspective_api_key = "**********")}
+#'   
+#'   To start R session with the
+#'   initialized environvent variable create an \code{.Renviron} file in your R home
+#'   with a line like this:
+#'   
+#'   \code{perspective_api_key = "**********"}
+#'
+#'   To check where your R home is, try \code{normalizePath("~")}.
+#'   
+#' @section Quota and character length Limits:
+#'   You can check your quota limits by going to [your google cloud project's Perspective API page](https://console.cloud.google.com/apis/api/commentanalyzer.googleapis.com/quotas), and check 
+#'   your projects quota usage at 
+#'   [the cloud console quota usage page](https://console.cloud.google.com/iam-admin/quotas).
+#'
+#'   The maximum text size per request is 3000 bytes.
+#' @md
+#' @docType package
+#' @name perspective-package
+#' @aliases peRspective
+NULL
+
+
 #' Analyze comments with Perspective API
 #'
 #' Provide a character string with your text, your API key and what scores you want to obtain.
@@ -12,7 +51,7 @@
 #' @param score_model Specify what model do you want to use (for example `TOXICITY` and/or `SEVERE_TOXICITY`). Specify a character vector if you want more than one score. See `peRspective::prsp_models`.
 #' @return a `tibble`
 #' @export
-prsp_score <- function(text, languages = NULL, score_sentences = F, key, score_model, sleep = 1) {
+prsp_score <- function(text, languages = NULL, score_sentences = F, key = NULL, score_model, sleep = 1) {
 
   if (!all(score_model %in% prsp_models)) {
     stop(stringr::str_glue("Invalid Model type provided.\n\nShould be one of the following:\n\n{peRspective::prsp_models %>% glue::glue_collapse('\n')}"))
@@ -47,14 +86,14 @@ prsp_score <- function(text, languages = NULL, score_sentences = F, key, score_m
   analyze_request <- analyze_request %>%
     jsonlite::toJSON(auto_unbox = T)
   
-  result <- httr::POST(stringr::str_glue("https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key={key}"),
+  result <- httr::POST(stringr::str_glue("https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key={perspective_api_key()}"),
                  body = analyze_request,
                  httr::add_headers(.headers = c("Content-Type"="application/json")))
 
   Output <- httr::content(result)
   
-  if (any(str_detect(Output %>% names(), "error"))) {
-    stop(str_glue("HTTP {Output$error$code}\n{Output$error$status}: {Output$error$message}"))
+  if (any(stringr::str_detect(Output %>% names(), "error"))) {
+    stop(stringr::str_glue("HTTP {Output$error$code}\n{Output$error$status}: {Output$error$message}"))
   }
   
   ## cleaning
@@ -112,15 +151,15 @@ prsp_score <- function(text, languages = NULL, score_sentences = F, key, score_m
             dplyr::mutate(sentences = stringr::str_sub(text, start = begin, end = end) %>% stringr::str_trim())
           
           final <- final[1,] %>% 
-            dplyr::mutate(sentence_scores = list(final %>% select(-summary_score:-type))) %>% 
+            dplyr::mutate(sentence_scores = list(final %>% dplyr::select(-summary_score:-type))) %>% 
             dplyr::select(-begin:-score, -sentences) %>% 
             dplyr::mutate(text = text)
           
           return(final)
         }
       ) %>%
-      set_names(score_model) %>% #-> ss 
-      bind_rows()
+      purrr::set_names(score_model) %>% #-> ss 
+      dplyr::bind_rows()
     
     #   match_begins <- ss %>% map("begin") %>% magrittr::extract2(1)
     #   
@@ -147,4 +186,14 @@ print_progress <- function(x, total) {
   perc <- round((iterator/total)*100, 2)
   progress_text <- stringr::str_glue("{iterator} out of {total} ({perc}%)\n\n")
   return(progress_text)
+}
+
+
+
+perspective_api_key <- function () {
+  key <- Sys.getenv("perspective_api_key")
+  if (key == "") {
+    stop("perspective_api_key environment variable is empty. See ?airtabler for help.")
+  }
+  key
 }

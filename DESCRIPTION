@@ -1,12 +1,16 @@
 Package: peRspective
-Title: What the Package Does (one line, title case)
+Title: Interface to the Perspective API
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: person("Fabio", "Votta", email = "fabio.votta@gmail.com", role = c("aut", "cre"))
+Description: Provides access to the Perspective API.
+URL: https://github.com/favstats/peRspective
 Depends: R (>= 3.5.1)
-License: What license is it under?
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
 Imports: 
-    magrittr
+    magrittr,
+    openmindR
+Suggests: 
+    testthat (>= 2.1.0)
