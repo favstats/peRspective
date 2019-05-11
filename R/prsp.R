@@ -415,17 +415,22 @@ prsp_stream <- function(.data,
           }
 
         }
-browser()
+# browser()
+        # & !is.null(prsp_params[["score_sentences"]])
         ## when not error
-        if (length(int_results) != 1 & !is.null(prsp_params[["score_sentences"]])) {
+        if (length(int_results) != 1) {
+          
+          
           ## do a switcheroo because score_sentences argument requires different strategy
-          if (!prsp_params[["score_sentences"]]) {
+          score_sentence_switcher <-  ifelse(is.null(prsp_params[["score_sentences"]]), F, T)
+          
+          if (!score_sentence_switcher) {
             score_label <- int_results %>%
               dplyr::select(-text_id) %>%
               as.list() %>%
               tibble::enframe() %>%
               dplyr::mutate(value = as.numeric(value))
-          } else if (prsp_params[["score_sentences"]]) {
+          } else if (score_sentence_switcher) {
             score_label <- int_results %>%
               dplyr::select(name = type, value = summary_score)
           }
