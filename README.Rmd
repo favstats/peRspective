@@ -148,23 +148,6 @@ peRspective::prsp_models
 
 ## Usage
 
-```{r, eval = F}
-# install.packages("ratelimitr")
-library(ratelimitr)
-f <- function() NULL
-
-# create a version of f that can only be called 10 times per second
-f_lim <- limit_rate(f, rate(n = 10, period = 1))
-
-# time without limiting
-system.time(replicate(11, f()))
-#>    user  system elapsed 
-#>       0       0       0
-
-# time with limiting
-system.time(replicate(11, f_lim()))
-```
-
 
 First, define your key variable.
 
@@ -267,3 +250,34 @@ text_scores %>%
   geom_col() +
   coord_flip()
 ```
+
+## `prsp_stream`
+
+```{r}
+text_sample <- tibble(ctext = c("What the hell is going on?",
+                 "Please no what I don't get it.",
+                 "",
+                 "This goes even farther!",
+                 "What the hell is going on?",
+                 "Please no what I don't get it.",
+                 "kdlfkmgkdfmgkfmg",
+                 "This goes even farther!",
+                 "Hippi Hoppo"),
+       textid = c("#efdcxct", "#ehfcsct", 
+                  "#ekacxwt",  "#ewatxad", 
+                  "#ekacswt",  "#ewftxwd", 
+                  "#ekacbwt",  "#ejatxwd", 
+                  "dfdfgss"))
+```
+
+
+```{r, message=T}
+text_sample %>%
+  prsp_stream(text = ctext,
+              text_id = textid,
+              score_model = c("TOXICITY", "SEVERE_TOXICITY"),
+              score_sentences  = T,
+              verbose = T,
+              safe_output = T)
+```
+

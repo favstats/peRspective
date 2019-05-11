@@ -4,8 +4,8 @@
 \alias{prsp_score}
 \title{Analyze comments with Perspective API}
 \usage{
-prsp_score(text, languages = NULL, score_sentences = F, key = NULL,
-  score_model, sleep = 1)
+prsp_score(text, text_id = NULL, languages = NULL,
+  score_sentences = F, score_model, sleep = 1, key = NULL)
 }
 \arguments{
 \item{text}{a character string.}
@@ -14,9 +14,9 @@ prsp_score(text, languages = NULL, score_sentences = F, key = NULL,
 
 \item{score_sentences}{A boolean value that indicates if the request should return spans that describe the scores for each part of the text (currently done at per sentence level). Defaults to \code{FALSE}.}
 
-\item{key}{Your API key (\href{https://github.com/conversationai/perspectiveapi/blob/master/quickstart.md}{see here} to set up an API key).}
-
 \item{score_model}{Specify what model do you want to use (for example \code{TOXICITY} and/or \code{SEVERE_TOXICITY}). Specify a character vector if you want more than one score. See \code{peRspective::prsp_models}.}
+
+\item{key}{Your API key (\href{https://github.com/conversationai/perspectiveapi/blob/master/quickstart.md}{see here} to set up an API key).}
 }
 \value{
 a \code{tibble}
@@ -25,5 +25,5 @@ a \code{tibble}
 Provide a character string with your text, your API key and what scores you want to obtain.
 }
 \details{
-For more detail see Perspective API documentation: https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md
+For more details see ?peRspective or \href{https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md}{Perspective API documentation}
 }

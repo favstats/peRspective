@@ -132,6 +132,10 @@ prsp_score <- function(text, text_id = NULL, languages = NULL, score_sentences =
     stop(stringr::str_glue("Invalid Model type provided.\n\nShould be one of the following:\n\n{peRspective::prsp_models %>% glue::glue_collapse('\n')}"))
   }
   
+  if (sleep <= 0.7) {
+    stop("Sleeps below 0.7s are sure to hit the ratelimit")
+  }
+  
   Sys.sleep(sleep)
 
   # browser()
@@ -294,29 +298,6 @@ perspective_api_key <- function () {
   key
 }
 
-data_obj <- R6::R6Class(
-  "data",
-  private = list(data = NULL),
-  public = list(
-    result = NULL,
-    initialize = function() {
-      
-    },
-    import_data = function(data) {
-      private$data <- data
-    },
-    mean_plus_sd = function() {
-      self$result  <- mean(private$data) + sd(private$data)
-      return(self$result)
-    }
-  )
-)
-
-nn <- data_obj$new()
-nn$import_data(mtcars$cyl)
-nn$mean_plus_sd()
-nn$result
-
 msg <- function(type, type_style = crayon::make_style('red4'), msg) {
   
   cat(stringr::str_glue("{type_style(type)} [{crayon::italic(Sys.time())}]: {crayon::make_style('gray90')(msg)}"))
@@ -326,6 +307,7 @@ msg <- function(type, type_style = crayon::make_style('red4'), msg) {
 # crayon::make_style('red4')("hell")
 
 # msg("WHAT", msg = "hatsap")
+
 
 prsp_stream <- function(input_text, 
                         text = NULL, 
@@ -380,14 +362,6 @@ prsp_stream <- function(input_text,
             type_style = crayon::green, 
             msg = peRspective:::print_progress(.y, nrow(input_text)))
       }
-      
-      # crayon::cyan("hello") %>% cat
-      
-      # tibble(text_id = .x$text_id)
-      # 
-      # name <- function(variables) {
-      #   
-      # }
       
       ## Make prsp_score to safely
       if (safe_output) {
@@ -497,55 +471,13 @@ prsp_stream <- function(input_text,
 }
 
 
-text_sample <- tibble(ctext = c("What the hell is going on?",
-                 "Please no what I don't get it.",
-                 "",
-                 "This goes even farther!",
-                 "What the hell is going on?",
-                 "Please no what I don't get it.",
-                 "kdlfkmgkdfmgkfmg",
-                 "This goes even farther!",
-                 "Hippi Hoppo"),
-       textid = c("#efdcxct", "#ehfcsct", 
-                  "#ekacxwt",  "#ewatxad", 
-                  "#ekacswt",  "#ewftxwd", 
-                  "#ekacbwt",  "#ejatxwd", 
-                  "dfdfgss"))
 
 # TODO: Write tests 
-# TODO: ratelimitr
-
 # ss <- 
-  text_sample %>%
-  prsp_stream(text = ctext,
-              text_id = textid,
-              score_model = c("TOXICITY", "SEVERE_TOXICITY"),
-              score_sentences  = F,
-              verbose = F,
-              safe_output = T)
-
-
-int_id <- ss$`2`  %>% pull(text_id)
-
-score_label <- ss$`2` %>% 
-  select(-text_id) %>% 
-  as.list() %>% 
-  enframe() %>% 
-  mutate(value = as.numeric(value)) %>% 
-  arrange(desc(value)) %>%
-  mutate(label = stringr::str_glue("{name}: {value}")) %>% 
-  select(label) %>% 
-  slice(1:3) %>% 
-  pull(label) %>% 
-  glue::glue_collapse(sep = "\n") %>% 
-  paste0(., "\n")
-
-
-
-  ss$`1`$error %>% class()
-
-
-# text_sample %>%
-#   prsp_stream()
-
-# prsp_score("hallo", 3, score_model = "TOXICITY")
+  # tibble(ctext = "kdlfkmgkdfmgjgkfmg", textid = "#ewqyccfr") #%>%
+  # prsp_stream_nolimit(text_sample, text = ctext,
+  #             text_id = textid,
+  #             score_model = c("TOXICITY", "SEVERE_TOXICITY"),
+  #             score_sentences  = T,
+  #             verbose = T,
+  #             safe_output = F)

@@ -4,12 +4,14 @@
 \alias{print_progress}
 \title{Print progress in purrr::imap environment}
 \usage{
-print_progress(x, total)
+print_progress(x, total, print_prct = F)
 }
 \arguments{
 \item{x}{interator number.}
 
 \item{total}{length of items to be iterated over.}
+
+\item{print_prct}{only print percentage progress (defaults to \code{FALSE}).}
 }
 \value{
 a \code{chr}

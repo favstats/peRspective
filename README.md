@@ -164,6 +164,23 @@ peRspective::prsp_models
 
 ## Usage
 
+``` r
+# install.packages("ratelimitr")
+library(ratelimitr)
+f <- function() NULL
+
+# create a version of f that can only be called 10 times per second
+f_lim <- limit_rate(f, rate(n = 10, period = 1))
+
+# time without limiting
+system.time(replicate(11, f()))
+#>    user  system elapsed 
+#>       0       0       0
+
+# time with limiting
+system.time(replicate(11, f_lim()))
+```
+
 First, define your key variable.
 
 `peRspective` functions will read the API key from environment variable
@@ -194,7 +211,7 @@ text_scores %>%
   coord_flip()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 A Trump Tweet
 
@@ -215,7 +232,7 @@ text_scores %>%
   coord_flip()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 Let’s try something else:
 
@@ -241,7 +258,7 @@ text_scores %>%
   geom_hline(yintercept = 0.5, linetype = "dashed")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 ``` r
 spanish_text <- "Con la llegado de internet y de las nuevas tecnologías de la información, la forma de contactar que tenemos entre los seres humanos ha cambiado y lo va a seguir haciendo en un futuro no muy lejano."
@@ -262,4 +279,4 @@ text_scores %>%
   coord_flip()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
