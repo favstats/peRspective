@@ -362,7 +362,7 @@ prsp_stream <- function(.data,
     purrr::imap(~{
       ## Print Progress
       if (verbose) {
-        peRspective:::msg(
+        msg(
           type = peRspective::print_progress(.y, nrow(.data), print_prct = T),
           type_style = crayon::green,
           msg = peRspective::print_progress(.y, nrow(.data))
