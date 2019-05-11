@@ -1,6 +1,7 @@
+key <- readr::read_lines("prsp.txt")
+
 test_that("sentence choice works", {
   
-  key <- readr::read_lines("../../../keys/prsp.txt")
   
   scored_text <- peRspective::prsp_score("I wanna test this real good.",
                           key = key, 
@@ -13,8 +14,6 @@ test_that("sentence choice works", {
 
 test_that("text choice works", {
   
-  key <- readr::read_lines("../../../keys/prsp.txt")
-  
   scored_text <- peRspective::prsp_score("I wanna test this real good.",
                                          key = key, 
                                          score_sentences = F,
@@ -25,8 +24,6 @@ test_that("text choice works", {
 
 
 test_that("when sentence valid models", {
-  
-  key <- readr::read_lines("../../../keys/prsp.txt")
   
   scored_text <- peRspective::prsp_score("I wanna test this real good.",
                                          key = key,
@@ -40,8 +37,6 @@ test_that("when sentence valid models", {
 
 
 test_that("when text valid models", {
-  
-  key <- readr::read_lines("../../../keys/prsp.txt")
   
   scored_text <- peRspective::prsp_score("I wanna test this real good.",
                                          key = key, 

@@ -135,7 +135,7 @@ Now you can use `prsp_score` to score your comments with various models
 provided by the Perspective API.
 
 ``` r
-my_text <- "Hello whats going on? Please don't leave. I need to be free."
+my_text <- "You wrote this? Wow. This is dumb and childish, please go f**** yourself."
 
 text_scores <- prsp_score(
            text = my_text, 
@@ -148,12 +148,14 @@ text_scores %>%
   mutate(key = fct_reorder(key, value)) %>% 
   ggplot(aes(key, value)) +
   geom_col() +
-  coord_flip()
+  coord_flip() +
+  ylim(0, 1) +
+  geom_hline(yintercept = 0.5, linetype = "dashed")
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
-A Trump Tweet
+A Trump Tweet:
 
 ``` r
 trump_tweet <- "The Fake News Media has NEVER been more Dishonest or Corrupt than it is right now. There has never been a time like this in American History. Very exciting but also, very sad! Fake News is the absolute Enemy of the People and our Country itself!"
@@ -169,7 +171,9 @@ text_scores %>%
   mutate(key = fct_reorder(key, value)) %>% 
   ggplot(aes(key, value)) +
   geom_col() +
-  coord_flip()
+  coord_flip() +
+  ylim(0, 1) +
+  geom_hline(yintercept = 0.5, linetype = "dashed")
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
@@ -203,18 +207,18 @@ text_scores %>%
 
 ![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
-You can also use Spanish (`es`) for `TOXICITY` and `SEVERE_TOXICITY`
-scoring.
+You can also use Spanish (`es`) for `TOXICITY` and `SEVERE_TOXICITY` and
+`_EXPERIMENTAL`scoring.
 
 ``` r
-spanish_text <- "Con la llegado de internet y de las nuevas tecnologías de la información, la forma de contactar que tenemos entre los seres humanos ha cambiado y lo va a seguir haciendo en un futuro no muy lejano."
+spanish_text <- "gastan en cosas que de nada sirven-nunca tratan de saber la verdad del funcionalismo de nuestro sistema solar y origen del cosmos-falso por Kepler. LAS UNIVERSIDADES DEL MUNDO NO SABEN ANALIZAR VERDAD O MENTIRA-LO QUE DICE KEPLER"
 
 
 text_scores <- prsp_score(
            text = spanish_text, 
            languages = "es",
            key = key,
-           score_model = c("TOXICITY", "SEVERE_TOXICITY")
+           score_model = c("TOXICITY", "SEVERE_TOXICITY", "INSULT_EXPERIMENTAL")
            )
 
 text_scores %>% 
@@ -222,7 +226,8 @@ text_scores %>%
   mutate(key = fct_reorder(key, value)) %>% 
   ggplot(aes(key, value)) +
   geom_col() +
-  coord_flip()
+  coord_flip() +
+  geom_hline(yintercept = 0.5, linetype = "dashed")
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
@@ -237,12 +242,12 @@ your text column. To use it let’s first generate a mock tibble.
 
 ``` r
 text_sample <- tibble(
-       ctext = c("What the hell is going on?",
-                 "Please no what I don't get it.",
-                 "This goes even farther!",
+       ctext = c("You wrote this? Wow. This is dumb and childish, please go f**** yourself.",
+                 "I don't know what to say about this but it's not good. The commenter is just an idiot",
+                 "This goes even further!",
                  "What the hell is going on?",
-                 "Please no what I don't get it.",
-                 "This goes even farther!"),
+                 "Please. I don't get it. Explain it again",
+                 "Annoying and irrelevant! I'd rather watch the paint drying on the wall!"),
        textid = c("#efdcxct", "#ehfcsct", 
                   "#ekacxwt",  "#ewatxad", 
                   "#ekacswt",  "#ewftxwd")
@@ -265,12 +270,12 @@ text_sample %>%
     ## # A tibble: 6 x 3
     ##   text_id  TOXICITY SEVERE_TOXICITY
     ##   <chr>       <dbl>           <dbl>
-    ## 1 #efdcxct   0.666           0.309 
-    ## 2 #ehfcsct   0.0709          0.0288
-    ## 3 #ekacxwt   0.0582          0.0221
+    ## 1 #efdcxct   0.955           0.794 
+    ## 2 #ehfcsct   0.927           0.436 
+    ## 3 #ekacxwt   0.0562          0.0224
     ## 4 #ewatxad   0.666           0.309 
-    ## 5 #ekacswt   0.0709          0.0288
-    ## 6 #ewftxwd   0.0582          0.0221
+    ## 5 #ekacswt   0.0694          0.0290
+    ## 6 #ewftxwd   0.442           0.224
 
 You receive a `tibble` with your desired scorings including the
 `text_id` to match your score with your original dataframe.
@@ -285,23 +290,23 @@ Perspective API can’t score
 
 ``` r
 text_sample <- tibble(
-       ctext = c("What the hell is going on?",
-                 "Please no what I don't get it.",
+       ctext = c("You wrote this? Wow. This is dumb and childish, please go f**** yourself.",
+                 "I don't know what to say about this but it's not good. The commenter is just an idiot",
                  ## empty string
                  "",
-                 "This goes even farther!",
+                 "This goes even further!",
                  "What the hell is going on?",
-                 "Please no what I don't get it.",
+                 "Please. I don't get it. Explain it again",
                  ## Gibberish
                  "kdlfkmgkdfmgkfmg",
-                 "This goes even farther!",
+                 "Annoying and irrelevant! I'd rather watch the paint drying on the wall!",
                  ## Gibberish
                  "Hippi Hoppo"),
        textid = c("#efdcxct", "#ehfcsct", 
                   "#ekacxwt",  "#ewatxad", 
                   "#ekacswt",  "#ewftxwd", 
-                  "#ekacbwt",  "#ejatxwd", 
-                  "dfdfgss")
+                  "#eeadswt",  "#enfhxed",
+                  "#efdmjd")
        )
 ```
 
@@ -311,22 +316,22 @@ And run the function with `safe_output = TRUE`.
 text_sample %>%
   prsp_stream(text = ctext,
               text_id = textid,
-              score_model = c("TOXICITY", "SEVERE_TOXICITY"),
+              score_model = c("TOXICITY", "SEVERE_TOXICITY", "INSULT"),
               safe_output = T)
 ```
 
-    ## # A tibble: 9 x 4
-    ##   text_id  error                                   TOXICITY SEVERE_TOXICITY
-    ##   <chr>    <chr>                                      <dbl>           <dbl>
-    ## 1 #efdcxct No Error                                  0.666           0.309 
-    ## 2 #ehfcsct No Error                                  0.0709          0.0288
-    ## 3 #ekacxwt "Error in .f(...): HTTP 400\nINVALID_A~  NA              NA     
-    ## 4 #ewatxad No Error                                  0.0582          0.0221
-    ## 5 #ekacswt No Error                                  0.666           0.309 
-    ## 6 #ewftxwd No Error                                  0.0709          0.0288
-    ## 7 #ekacbwt "Error in .f(...): HTTP 400\nINVALID_A~  NA              NA     
-    ## 8 #ejatxwd No Error                                  0.0582          0.0221
-    ## 9 dfdfgss  "Error in .f(...): HTTP 400\nINVALID_A~  NA              NA
+    ## # A tibble: 9 x 5
+    ##   text_id  error                           TOXICITY SEVERE_TOXICITY  INSULT
+    ##   <chr>    <chr>                              <dbl>           <dbl>   <dbl>
+    ## 1 #efdcxct No Error                          0.955           0.794   0.923 
+    ## 2 #ehfcsct No Error                          0.927           0.436   0.947 
+    ## 3 #ekacxwt "Error in .f(...): HTTP 400\nI~  NA              NA      NA     
+    ## 4 #ewatxad No Error                          0.0562          0.0224  0.0315
+    ## 5 #ekacswt No Error                          0.666           0.309   0.331 
+    ## 6 #ewftxwd No Error                          0.0694          0.0290  0.0499
+    ## 7 #eeadswt "Error in .f(...): HTTP 400\nI~  NA              NA      NA     
+    ## 8 #enfhxed No Error                          0.442           0.224   0.321 
+    ## 9 #efdmjd  "Error in .f(...): HTTP 400\nI~  NA              NA      NA
 
 `safe_output = T` will also provide us with the error messages that
 occured so that we can check what went wrong\!
@@ -349,76 +354,66 @@ text_sample %>%
 
 Or the (not as pretty) output in Markdown
 
-    ## 11.11% [2019-05-12 01:11:08]: 1 out of 9 (11.11%)
+    ## 11.11% [2019-05-12 01:30:20]: 1 out of 9 (11.11%)
     ## text_id: #efdcxct
-    ##  0.98 LIKELY_TO_REJECT
-    ##  0.96 OBSCENE
-    ##  0.80 PROFANITY
+    ##  0.96 TOXICITY
+    ##  0.79 SEVERE_TOXICITY
     ## 
-    ## 22.22% [2019-05-12 01:11:09]: 2 out of 9 (22.22%)
+    ## 22.22% [2019-05-12 01:30:21]: 2 out of 9 (22.22%)
     ## text_id: #ehfcsct
-    ##  0.89 UNSUBSTANTIAL
-    ##  0.66 LIKELY_TO_REJECT
-    ##  0.59 ATTACK_ON_COMMENTER
+    ##  0.93 TOXICITY
+    ##  0.44 SEVERE_TOXICITY
     ## 
-    ## 33.33% [2019-05-12 01:11:10]: 3 out of 9 (33.33%)
+    ## 33.33% [2019-05-12 01:30:22]: 3 out of 9 (33.33%)
     ## text_id: #ekacxwt
     ## ERROR
     ## Error in .f(...): HTTP 400
     ## INVALID_ARGUMENT: Comment must be non-empty.
     ## NO SCORES
     ## 
-    ## 44.44% [2019-05-12 01:11:11]: 4 out of 9 (44.44%)
+    ## 44.44% [2019-05-12 01:30:23]: 4 out of 9 (44.44%)
     ## text_id: #ewatxad
-    ##  0.86 UNSUBSTANTIAL
-    ##  0.46 LIKELY_TO_REJECT
-    ##  0.45 INCOHERENT
+    ##  0.06 TOXICITY
+    ##  0.02 SEVERE_TOXICITY
     ## 
-    ## 55.56% [2019-05-12 01:11:12]: 5 out of 9 (55.56%)
+    ## 55.56% [2019-05-12 01:30:24]: 5 out of 9 (55.56%)
     ## text_id: #ekacswt
-    ##  0.98 LIKELY_TO_REJECT
-    ##  0.96 OBSCENE
-    ##  0.80 PROFANITY
+    ##  0.67 TOXICITY
+    ##  0.31 SEVERE_TOXICITY
     ## 
-    ## 66.67% [2019-05-12 01:11:13]: 6 out of 9 (66.67%)
+    ## 66.67% [2019-05-12 01:30:26]: 6 out of 9 (66.67%)
     ## text_id: #ewftxwd
-    ##  0.89 UNSUBSTANTIAL
-    ##  0.66 LIKELY_TO_REJECT
-    ##  0.59 ATTACK_ON_COMMENTER
+    ##  0.07 TOXICITY
+    ##  0.03 SEVERE_TOXICITY
     ## 
-    ## 77.78% [2019-05-12 01:11:15]: 7 out of 9 (77.78%)
-    ## text_id: #ekacbwt
+    ## 77.78% [2019-05-12 01:30:27]: 7 out of 9 (77.78%)
+    ## text_id: #eeadswt
     ## ERROR
     ## Error in .f(...): HTTP 400
-    ## INVALID_ARGUMENT: Attribute INCOHERENT does not support request languages: is
+    ## INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: is
     ## NO SCORES
     ## 
-    ## 88.89% [2019-05-12 01:11:16]: 8 out of 9 (88.89%)
-    ## text_id: #ejatxwd
-    ##  0.86 UNSUBSTANTIAL
-    ##  0.46 LIKELY_TO_REJECT
-    ##  0.45 INCOHERENT
+    ## 88.89% [2019-05-12 01:30:28]: 8 out of 9 (88.89%)
+    ## text_id: #enfhxed
+    ##  0.44 TOXICITY
+    ##  0.22 SEVERE_TOXICITY
     ## 
-    ## 100.00% [2019-05-12 01:11:17]: 9 out of 9 (100.00%)
-    ## text_id: dfdfgss
+    ## 100.00% [2019-05-12 01:30:29]: 9 out of 9 (100.00%)
+    ## text_id: #efdmjd
     ## ERROR
     ## Error in .f(...): HTTP 400
-    ## INVALID_ARGUMENT: Attribute SEXUALLY_EXPLICIT does not support request languages: ja-Latn
+    ## INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: ja-Latn
     ## NO SCORES
 
-    ## # A tibble: 9 x 18
-    ##   text_id error TOXICITY SEVERE_TOXICITY IDENTITY_ATTACK  INSULT PROFANITY
-    ##   <chr>   <chr>    <dbl>           <dbl>           <dbl>   <dbl>     <dbl>
-    ## 1 #efdcx~ No E~   0.666           0.309           0.0802  0.331     0.800 
-    ## 2 #ehfcs~ No E~   0.0709          0.0288          0.0515  0.0566    0.0269
-    ## 3 #ekacx~ "Err~  NA              NA              NA      NA        NA     
-    ## 4 #ewatx~ No E~   0.0582          0.0221          0.0390  0.0319    0.0213
-    ## 5 #ekacs~ No E~   0.666           0.309           0.0802  0.331     0.800 
-    ## 6 #ewftx~ No E~   0.0709          0.0288          0.0515  0.0566    0.0269
-    ## 7 #ekacb~ "Err~  NA              NA              NA      NA        NA     
-    ## 8 #ejatx~ No E~   0.0582          0.0221          0.0390  0.0319    0.0213
-    ## 9 dfdfgss "Err~  NA              NA              NA      NA        NA     
-    ## # ... with 11 more variables: SEXUALLY_EXPLICIT <dbl>, THREAT <dbl>,
-    ## #   FLIRTATION <dbl>, ATTACK_ON_AUTHOR <dbl>, ATTACK_ON_COMMENTER <dbl>,
-    ## #   INCOHERENT <dbl>, INFLAMMATORY <dbl>, LIKELY_TO_REJECT <dbl>,
-    ## #   OBSCENE <dbl>, SPAM <dbl>, UNSUBSTANTIAL <dbl>
+    ## # A tibble: 9 x 4
+    ##   text_id  error                                   TOXICITY SEVERE_TOXICITY
+    ##   <chr>    <chr>                                      <dbl>           <dbl>
+    ## 1 #efdcxct No Error                                  0.955           0.794 
+    ## 2 #ehfcsct No Error                                  0.927           0.436 
+    ## 3 #ekacxwt "Error in .f(...): HTTP 400\nINVALID_A~  NA              NA     
+    ## 4 #ewatxad No Error                                  0.0562          0.0224
+    ## 5 #ekacswt No Error                                  0.666           0.309 
+    ## 6 #ewftxwd No Error                                  0.0694          0.0290
+    ## 7 #eeadswt "Error in .f(...): HTTP 400\nINVALID_A~  NA              NA     
+    ## 8 #enfhxed No Error                                  0.442           0.224 
+    ## 9 #efdmjd  "Error in .f(...): HTTP 400\nINVALID_A~  NA              NA

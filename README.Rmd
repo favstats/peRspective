@@ -127,7 +127,7 @@ library(tidyverse)
 Define your key variable.
 
 ```{r, echo = F}
-key <- readr::read_lines("../keys/prsp.txt")
+key <- readr::read_lines("prsp.txt")
 
 Sys.setenv(perspective_api_key = key)
 
@@ -148,7 +148,7 @@ Now you can use `prsp_score` to score your comments with various models provided
 
 ```{r, eval = T}
 
-my_text <- "Hello whats going on? Please don't leave. I need to be free."
+my_text <- "You wrote this? Wow. This is dumb and childish, please go f**** yourself."
 
 text_scores <- prsp_score(
            text = my_text, 
@@ -161,10 +161,12 @@ text_scores %>%
   mutate(key = fct_reorder(key, value)) %>% 
   ggplot(aes(key, value)) +
   geom_col() +
-  coord_flip()
+  coord_flip() +
+  ylim(0, 1) +
+  geom_hline(yintercept = 0.5, linetype = "dashed")
 ```
 
-A Trump Tweet
+A Trump Tweet:
 
 ```{r}
 trump_tweet <- "The Fake News Media has NEVER been more Dishonest or Corrupt than it is right now. There has never been a time like this in American History. Very exciting but also, very sad! Fake News is the absolute Enemy of the People and our Country itself!"
@@ -180,7 +182,9 @@ text_scores %>%
   mutate(key = fct_reorder(key, value)) %>% 
   ggplot(aes(key, value)) +
   geom_col() +
-  coord_flip()
+  coord_flip() +
+  ylim(0, 1) +
+  geom_hline(yintercept = 0.5, linetype = "dashed")
 ```
 
 
@@ -210,17 +214,17 @@ text_scores %>%
 
 ```
 
-You can also use Spanish (`es`) for `TOXICITY` and `SEVERE_TOXICITY` scoring.
+You can also use Spanish (`es`) for `TOXICITY` and `SEVERE_TOXICITY` and `_EXPERIMENTAL`scoring.
 
 ```{r}
-spanish_text <- "Con la llegado de internet y de las nuevas tecnologías de la información, la forma de contactar que tenemos entre los seres humanos ha cambiado y lo va a seguir haciendo en un futuro no muy lejano."
+spanish_text <- "gastan en cosas que de nada sirven-nunca tratan de saber la verdad del funcionalismo de nuestro sistema solar y origen del cosmos-falso por Kepler. LAS UNIVERSIDADES DEL MUNDO NO SABEN ANALIZAR VERDAD O MENTIRA-LO QUE DICE KEPLER"
 
 
 text_scores <- prsp_score(
            text = spanish_text, 
            languages = "es",
            key = key,
-           score_model = c("TOXICITY", "SEVERE_TOXICITY")
+           score_model = c("TOXICITY", "SEVERE_TOXICITY", "INSULT_EXPERIMENTAL")
            )
 
 text_scores %>% 
@@ -228,7 +232,8 @@ text_scores %>%
   mutate(key = fct_reorder(key, value)) %>% 
   ggplot(aes(key, value)) +
   geom_col() +
-  coord_flip()
+  coord_flip() +
+  geom_hline(yintercept = 0.5, linetype = "dashed")
 ```
 
 ### `prsp_stream`
@@ -237,12 +242,12 @@ So far we have only seen how to get individual comments or sentences scored. But
 
 ```{r}
 text_sample <- tibble(
-       ctext = c("What the hell is going on?",
-                 "Please no what I don't get it.",
-                 "This goes even farther!",
+       ctext = c("You wrote this? Wow. This is dumb and childish, please go f**** yourself.",
+                 "I don't know what to say about this but it's not good. The commenter is just an idiot",
+                 "This goes even further!",
                  "What the hell is going on?",
-                 "Please no what I don't get it.",
-                 "This goes even farther!"),
+                 "Please. I don't get it. Explain it again",
+                 "Annoying and irrelevant! I'd rather watch the paint drying on the wall!"),
        textid = c("#efdcxct", "#ehfcsct", 
                   "#ekacxwt",  "#ewatxad", 
                   "#ekacswt",  "#ewftxwd")
@@ -266,23 +271,23 @@ Let's try it out with a new dataset that contains text that the Perspective API 
 
 ```{r}
 text_sample <- tibble(
-       ctext = c("What the hell is going on?",
-                 "Please no what I don't get it.",
+       ctext = c("You wrote this? Wow. This is dumb and childish, please go f**** yourself.",
+                 "I don't know what to say about this but it's not good. The commenter is just an idiot",
                  ## empty string
                  "",
-                 "This goes even farther!",
+                 "This goes even further!",
                  "What the hell is going on?",
-                 "Please no what I don't get it.",
+                 "Please. I don't get it. Explain it again",
                  ## Gibberish
                  "kdlfkmgkdfmgkfmg",
-                 "This goes even farther!",
+                 "Annoying and irrelevant! I'd rather watch the paint drying on the wall!",
                  ## Gibberish
                  "Hippi Hoppo"),
        textid = c("#efdcxct", "#ehfcsct", 
                   "#ekacxwt",  "#ewatxad", 
                   "#ekacswt",  "#ewftxwd", 
-                  "#ekacbwt",  "#ejatxwd", 
-                  "dfdfgss")
+                  "#eeadswt",  "#enfhxed",
+                  "#efdmjd")
        )
 ```
 
@@ -292,7 +297,7 @@ And run the function with `safe_output = TRUE`.
 text_sample %>%
   prsp_stream(text = ctext,
               text_id = textid,
-              score_model = c("TOXICITY", "SEVERE_TOXICITY"),
+              score_model = c("TOXICITY", "SEVERE_TOXICITY", "INSULT"),
               safe_output = T)
 ```
 
@@ -318,7 +323,7 @@ Or the (not as pretty) output in Markdown
 text_sample %>%
   prsp_stream(text = ctext,
               text_id = textid,
-              score_model = prsp_models,
+              score_model = c("TOXICITY", "SEVERE_TOXICITY"),
               verbose = T,
               safe_output = T)
 
