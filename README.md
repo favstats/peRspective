@@ -1,6 +1,8 @@
 peRspective
 ================
 
+<!-- [![Travis build status](https://travis-ci.org/favstats/peRspective.svg?branch=master)](https://travis-ci.org/favstats/peRspective) -->
+
 [![](https://img.shields.io/github/languages/code-size/favstats/peRspective.svg)](https://github.com/favstats/peRspective)
 [![](https://img.shields.io/github/last-commit/favstats/peRspective.svg)](https://github.com/favstats/peRspective/commits/master)
 
@@ -296,51 +298,51 @@ text_sample %>%
               safe_output = T)
 ```
 
-    ## 11.11% [2019-05-11 20:59:50]: 1 out of 9 (11.11%)
+    ## 11.11% [2019-05-11 21:24:20]: 1 out of 9 (11.11%)
     ## text_id: #efdcxct
     ##  0.67 TOXICITY
     ##  0.31 SEVERE_TOXICITY
     ## 
-    ## 22.22% [2019-05-11 20:59:51]: 2 out of 9 (22.22%)
+    ## 22.22% [2019-05-11 21:24:21]: 2 out of 9 (22.22%)
     ## text_id: #ehfcsct
     ##  0.07 TOXICITY
     ##  0.03 SEVERE_TOXICITY
     ## 
-    ## 33.33% [2019-05-11 20:59:53]: 3 out of 9 (33.33%)
+    ## 33.33% [2019-05-11 21:24:22]: 3 out of 9 (33.33%)
     ## text_id: #ekacxwt
     ## ERROR
     ## Error in .f(...): HTTP 400
     ## INVALID_ARGUMENT: Comment must be non-empty.
     ## NO SCORES
     ## 
-    ## 44.44% [2019-05-11 20:59:54]: 4 out of 9 (44.44%)
+    ## 44.44% [2019-05-11 21:24:23]: 4 out of 9 (44.44%)
     ## text_id: #ewatxad
     ##  0.06 TOXICITY
     ##  0.02 SEVERE_TOXICITY
     ## 
-    ## 55.56% [2019-05-11 20:59:55]: 5 out of 9 (55.56%)
+    ## 55.56% [2019-05-11 21:24:24]: 5 out of 9 (55.56%)
     ## text_id: #ekacswt
     ##  0.67 TOXICITY
     ##  0.31 SEVERE_TOXICITY
     ## 
-    ## 66.67% [2019-05-11 20:59:56]: 6 out of 9 (66.67%)
+    ## 66.67% [2019-05-11 21:24:25]: 6 out of 9 (66.67%)
     ## text_id: #ewftxwd
     ##  0.07 TOXICITY
     ##  0.03 SEVERE_TOXICITY
     ## 
-    ## 77.78% [2019-05-11 20:59:57]: 7 out of 9 (77.78%)
+    ## 77.78% [2019-05-11 21:24:26]: 7 out of 9 (77.78%)
     ## text_id: #ekacbwt
     ## ERROR
     ## Error in .f(...): HTTP 400
     ## INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: is
     ## NO SCORES
     ## 
-    ## 88.89% [2019-05-11 20:59:58]: 8 out of 9 (88.89%)
+    ## 88.89% [2019-05-11 21:24:27]: 8 out of 9 (88.89%)
     ## text_id: #ejatxwd
     ##  0.06 TOXICITY
     ##  0.02 SEVERE_TOXICITY
     ## 
-    ## 100.00% [2019-05-11 20:59:59]: 9 out of 9 (100.00%)
+    ## 100.00% [2019-05-11 21:24:29]: 9 out of 9 (100.00%)
     ## text_id: dfdfgss
     ## ERROR
     ## Error in .f(...): HTTP 400
