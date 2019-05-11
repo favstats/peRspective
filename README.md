@@ -164,19 +164,18 @@ peRspective::prsp_models
 
 ## Usage
 
-First, define your key variable:
+First, define your key variable.
 
 `peRspective` functions will read the API key from environment variable
-`perspective_api_key`. You can assign the object like this at the start
-of your script: \#’  
-\#’ 
+`perspective_api_key`. You can assign an environment object like this in
+your script:
 
 ``` r
 Sys.setenv(perspective_api_key = "YOUR_API_KEY")
 ```
 
-Next, you can use `prsp_score` function to your comments scored with
-various models provided by the Perspective API.
+Next, you can use `prsp_score` to score your comments with various
+models provided by the Perspective API.
 
 ``` r
 my_text <- "Hello whats going on? Please don't leave. I need to be free."

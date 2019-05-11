@@ -1,3 +1,7 @@
+key <- readr::read_lines("../../../keys/prsp.txt")
+
+Sys.setenv(perspective_api_key = key)
+
 test_that("sentence key authorization works without specifying key", {
   
   scored_text <- peRspective::prsp_score("I wanna test this real good.",

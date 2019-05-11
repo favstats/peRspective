@@ -148,7 +148,25 @@ peRspective::prsp_models
 
 ## Usage
 
-First, define your key variable:
+```{r, eval = F}
+# install.packages("ratelimitr")
+library(ratelimitr)
+f <- function() NULL
+
+# create a version of f that can only be called 10 times per second
+f_lim <- limit_rate(f, rate(n = 10, period = 1))
+
+# time without limiting
+system.time(replicate(11, f()))
+#>    user  system elapsed 
+#>       0       0       0
+
+# time with limiting
+system.time(replicate(11, f_lim()))
+```
+
+
+First, define your key variable.
 
 ```{r, echo = F}
 key <- readr::read_lines("../keys/prsp.txt")
@@ -165,7 +183,7 @@ Sys.setenv(perspective_api_key = key)
 Sys.setenv(perspective_api_key = "YOUR_API_KEY")
 ```
 
-Next, you can use `prsp_score` function to your comments scored with various models provided by the Perspective API.
+Next, you can use `prsp_score` to score your comments with various models provided by the Perspective API.
 
 ```{r, eval = T}
 

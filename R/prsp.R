@@ -122,8 +122,12 @@ NULL
 #' @param score_model Specify what model do you want to use (for example `TOXICITY` and/or `SEVERE_TOXICITY`). Specify a character vector if you want more than one score. See `peRspective::prsp_models`.
 #' @return a `tibble`
 #' @export
-prsp_score <- function(text, languages = NULL, score_sentences = F, key = NULL, score_model, sleep = 1) {
+prsp_score <- function(text, text_id = NULL, languages = NULL, score_sentences = F, score_model, sleep = 1, key = NULL) {
 
+  if (is.null(score_model)) {
+    stop(stringr::str_glue("No Model type provided in score_model.\n\nShould be one of the following:\n\n{peRspective::prsp_models %>% glue::glue_collapse('\n')}"))
+  }
+  
   if (!all(score_model %in% prsp_models)) {
     stop(stringr::str_glue("Invalid Model type provided.\n\nShould be one of the following:\n\n{peRspective::prsp_models %>% glue::glue_collapse('\n')}"))
   }
@@ -157,7 +161,11 @@ prsp_score <- function(text, languages = NULL, score_sentences = F, key = NULL, 
   analyze_request <- analyze_request %>%
     jsonlite::toJSON(auto_unbox = T)
   
-  result <- httr::POST(stringr::str_glue("https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key={perspective_api_key()}"),
+  if (is.null(key)) {
+    key <- perspective_api_key()
+  }
+  
+  result <- httr::POST(stringr::str_glue("https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key={key}"),
                  body = analyze_request,
                  httr::add_headers(.headers = c("Content-Type"="application/json")))
 
@@ -231,7 +239,7 @@ prsp_score <- function(text, languages = NULL, score_sentences = F, key = NULL, 
       ) %>%
       purrr::set_names(score_model) %>% #-> ss 
       dplyr::bind_rows()
-    
+  
     #   match_begins <- ss %>% map("begin") %>% magrittr::extract2(1)
     #   
     # ww <- ss %>% 
@@ -239,9 +247,20 @@ prsp_score <- function(text, languages = NULL, score_sentences = F, key = NULL, 
     #   map(~identical(.x, match_begins) %>% all) %>% 
     #   bind_rows()
   }
+  
+  # browser()
 
+  if (!is.null(text_id)) {
+    final_dat <- final_dat %>% 
+      mutate(text_id = text_id) %>% 
+      select(text_id, everything())
+  }
+  
   return(final_dat)
 }
+
+specify_decimal <- function(x, k) trimws(format(round(x, k), nsmall=k))
+
 
 #' Print progress in purrr::imap environment
 #'
@@ -250,11 +269,17 @@ prsp_score <- function(text, languages = NULL, score_sentences = F, key = NULL, 
 #' @md
 #' @param x interator number.
 #' @param total length of items to be iterated over.
+#' @param print_prct only print percentage progress (defaults to `FALSE`).
 #' @return a `chr`
 #' @export
-print_progress <- function(x, total) {
+print_progress <- function(x, total, print_prct = F) {
   iterator <- x %>% as.numeric()
-  perc <- round((iterator/total)*100, 2)
+  perc <- specify_decimal((iterator/total)*100, 2)
+  
+  if (print_prct) {
+    return(stringr::str_glue("{perc}%"))
+  }
+  
   progress_text <- stringr::str_glue("{iterator} out of {total} ({perc}%)\n\n")
   return(progress_text)
 }
@@ -264,7 +289,263 @@ print_progress <- function(x, total) {
 perspective_api_key <- function () {
   key <- Sys.getenv("perspective_api_key")
   if (key == "") {
-    stop("perspective_api_key environment variable is empty. See ?airtabler for help.")
+    stop("perspective_api_key environment variable is empty. See ?peRspective for help.")
   }
   key
 }
+
+data_obj <- R6::R6Class(
+  "data",
+  private = list(data = NULL),
+  public = list(
+    result = NULL,
+    initialize = function() {
+      
+    },
+    import_data = function(data) {
+      private$data <- data
+    },
+    mean_plus_sd = function() {
+      self$result  <- mean(private$data) + sd(private$data)
+      return(self$result)
+    }
+  )
+)
+
+nn <- data_obj$new()
+nn$import_data(mtcars$cyl)
+nn$mean_plus_sd()
+nn$result
+
+msg <- function(type, type_style = crayon::make_style('red4'), msg) {
+  
+  cat(stringr::str_glue("{type_style(type)} [{crayon::italic(Sys.time())}]: {crayon::make_style('gray90')(msg)}"))
+
+}
+
+# crayon::make_style('red4')("hell")
+
+# msg("WHAT", msg = "hatsap")
+
+prsp_stream <- function(input_text, 
+                        text = NULL, 
+                        text_id = NULL, 
+                        ..., 
+                        safe_output = F,
+                        verbose = F){
+
+  # browser()
+    
+  text_id <- enquo(text_id)
+  text <- enquo(text)
+  
+  ## some tests to make sure everything is in order
+  if (str_detect(rlang::as_label(text), "NULL")) {
+    stop("You need to provide a text column.")
+  }
+  
+  if (str_detect(rlang::as_label(text_id), "NULL")) {
+    stop("You need to provide a text_id column.")
+  }
+  
+  text_col <- input_text %>% pull(!!text)
+  id_col <- input_text %>% pull(!!text_id)
+  
+  if (any(is.na(id_col))) {
+    stop("NAs detected in the text_id column. Please make sure your text_id column has no missing values.")
+  }
+  
+  if (any(is.na(id_col))) {
+    stop("NAs detected in the text column. Please make sure your text column has no missing values.")
+  }
+  
+  if (!length(id_col) == length(unique(id_col))) {
+    stop("Duplicates detected in the text_id column. Please make sure your text_id column is unique.")
+  }
+  
+  ## keep function parameters
+  prsp_params <- list(...)
+  
+  ## loop over prsp_score
+  final_text <- input_text %>%
+    select(!!text_id, !!text) %>% 
+    split(1:nrow(.)) %>% 
+    ## fix column names
+    map(~set_names(.x, c("text_id", "text"))) %>% 
+    imap(~{
+      
+      ## Print Progress
+      if (verbose) {
+        msg(type = peRspective:::print_progress(.y, nrow(input_text), print_prct = T), 
+            type_style = crayon::green, 
+            msg = peRspective:::print_progress(.y, nrow(input_text)))
+      }
+      
+      # crayon::cyan("hello") %>% cat
+      
+      # tibble(text_id = .x$text_id)
+      # 
+      # name <- function(variables) {
+      #   
+      # }
+      
+      ## Make prsp_score to safely
+      if (safe_output) {
+        prsp_score <- safely(prsp_score, otherwise = tibble(text_id = .x$text_id))
+      }
+      
+      # browser()
+      
+      ## run prsp score with parameters
+      raw_text <- do.call(
+        prsp_score, 
+        c(list(text = .x$text),
+          list(text_id = .x$text_id), 
+          prsp_params)
+        ) 
+      
+      ## Print scores while everything runs
+      if (verbose) {
+        
+        # browser()
+        
+        ## do a switcheroo because safe output looks a bit different
+        if (safe_output) {
+          int_id <- raw_text$result %>% pull(text_id) %>% unique
+          
+          int_results <- raw_text$result
+        } else if (!safe_output) {
+          int_id <- raw_text %>% pull(text_id) %>% unique()
+          
+          int_results <- raw_text
+        }
+        
+        ## always print text_id first
+        cat(stringr::str_glue("text_id: {int_id}\n\n"))
+          
+          # browser()
+        ## when safe output show errors as you go
+        if (safe_output) {
+          if ("error" %in% class(raw_text$error)) {
+            cat(str_glue("\t\t{crayon::red('ERROR')}\n\t\t{make_style('gray90')(as.character(raw_text$error))}"))
+          } 
+          
+        }
+        
+        ## when not error
+        if (length(int_results) != 1) {
+          
+          ## do a switcheroo because score_sentences argument requires different strategy
+          if (!prsp_params[["score_sentences"]]) {
+            score_label <- int_results %>% 
+              select(-text_id) %>% 
+              as.list() %>% 
+              enframe() %>% 
+              mutate(value = as.numeric(value)) 
+          } else if (prsp_params[["score_sentences"]]) {
+            score_label <- int_results %>% 
+              select(name = type, value = summary_score) 
+          }  
+          
+          ## get score labels
+          score_label <- score_label %>% 
+              arrange(desc(value)) %>%
+              mutate(value = specify_decimal(value, 2)) %>% 
+              mutate(label = stringr::str_glue("{value} {name}")) %>% 
+              select(label) %>% 
+              slice(1:3) %>% 
+              pull(label) %>% 
+              glue::glue_collapse(sep = "\n\t") %>% 
+              paste0(., "\n") %>% 
+              paste0("\t", .)              
+            
+            cat(str_glue("{crayon::make_style('gray50')(score_label)}\n\n"))            
+          }  else if (length(int_results) == 1) {
+          
+          cat(str_glue("\t{crayon::red('NO SCORES')}\n\n\n"))
+          
+        }
+        
+      
+      }
+      
+      return(raw_text)
+    })
+  
+  # return(final_text)
+  ## do some restructuring when safe_output to get tidy data output
+  if (safe_output) {
+    
+    final_text <- final_text %>% 
+      set_names(id_col) %>% 
+      map("error") %>% 
+      map(~ifelse(is.null(.x), "No Error", as.character(.x))) %>% 
+      bind_rows() %>% 
+      t() %>% 
+      as_tibble(rownames = .[1,]) %>% 
+      set_names(c("text_id", "error")) %>% 
+      right_join(final_text %>% map_dfr("result"), by = "text_id")  
+
+    return(final_text)
+  } 
+  
+  cat("Binding rows...\n")
+  
+  final_text <- bind_rows(final_text)
+  
+  return(final_text)
+}
+
+
+text_sample <- tibble(ctext = c("What the hell is going on?",
+                 "Please no what I don't get it.",
+                 "",
+                 "This goes even farther!",
+                 "What the hell is going on?",
+                 "Please no what I don't get it.",
+                 "kdlfkmgkdfmgkfmg",
+                 "This goes even farther!",
+                 "Hippi Hoppo"),
+       textid = c("#efdcxct", "#ehfcsct", 
+                  "#ekacxwt",  "#ewatxad", 
+                  "#ekacswt",  "#ewftxwd", 
+                  "#ekacbwt",  "#ejatxwd", 
+                  "dfdfgss"))
+
+# TODO: Write tests 
+# TODO: ratelimitr
+
+# ss <- 
+  text_sample %>%
+  prsp_stream(text = ctext,
+              text_id = textid,
+              score_model = c("TOXICITY", "SEVERE_TOXICITY"),
+              score_sentences  = F,
+              verbose = F,
+              safe_output = T)
+
+
+int_id <- ss$`2`  %>% pull(text_id)
+
+score_label <- ss$`2` %>% 
+  select(-text_id) %>% 
+  as.list() %>% 
+  enframe() %>% 
+  mutate(value = as.numeric(value)) %>% 
+  arrange(desc(value)) %>%
+  mutate(label = stringr::str_glue("{name}: {value}")) %>% 
+  select(label) %>% 
+  slice(1:3) %>% 
+  pull(label) %>% 
+  glue::glue_collapse(sep = "\n") %>% 
+  paste0(., "\n")
+
+
+
+  ss$`1`$error %>% class()
+
+
+# text_sample %>%
+#   prsp_stream()
+
+# prsp_score("hallo", 3, score_model = "TOXICITY")
