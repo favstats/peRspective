@@ -3,6 +3,9 @@ peRspective
 
 <!-- [![Travis build status](https://travis-ci.org/favstats/peRspective.svg?branch=master)](https://travis-ci.org/favstats/peRspective) -->
 
+[![](https://img.shields.io/github/languages/code-size/favstats/peRspective.svg)](https://github.com/favstats/peRspective)
+[![](https://img.shields.io/github/last-commit/favstats/peRspective.svg)](https://github.com/favstats/peRspective/commits/master)
+
 Perspective is an API that uses machine learning models to score the
 perceived impact a comment might have on a conversation.
 [Website](http://www.perspectiveapi.com/).
@@ -51,24 +54,24 @@ here](https://github.com/conversationai/perspectiveapi/blob/master/api_reference
 
 Here is a list of models currently supported by `peRspective`:
 
-| Model Attribute Name  | Version                             | Supported Languages | Shourd Description                                                                                  |
-| :-------------------- | :---------------------------------- | :------------------ | :-------------------------------------------------------------------------------------------------- |
-| TOXICITY              | Alpha                               | en, es              | rude, disrespectful, or unreasonable comment that is likely to make people leave a discussion.      |
-| SEVERE\_TOXICITY      | Alpha                               | en, es              | Same deep-CNN algorithm as TOXICITY, but is trained on ‘very toxic’ labels.                         |
-| IDENTITY\_ATTACK      | Experimental toxicity sub-attribute | en                  | negative or hateful comments targeting someone because of their identity.                           |
-| INSULT                | Experimental toxicity sub-attribute | en                  | insulting, inflammatory, or negative comment towards a person or a group of people.                 |
-| PROFANITY             | Experimental toxicity sub-attribute | en                  | swear words, curse words, or other obscene or profane language.                                     |
-| SEXUALLY\_EXPLICIT    | Experimental toxicity sub-attribute | en                  | contains references to sexual acts, body parts, or other lewd content.                              |
-| THREAT                | Experimental toxicity sub-attribute | en                  | describes an intention to inflict pain, injury, or violence against an individual or group.         |
-| FLIRTATION            | Experimental toxicity sub-attribute | en                  | pickup lines, complimenting appearance, subtle sexual innuendos, etc.                               |
-| ATTACK\_ON\_AUTHOR    | NYT moderation models               | en                  | Attack on the author of an article or post.                                                         |
-| ATTACK\_ON\_COMMENTER | NYT moderation models               | en                  | Attack on fellow commenter.                                                                         |
-| INCOHERENT            | NYT moderation models               | en                  | Difficult to understand, nonsensical.                                                               |
-| INFLAMMATORY          | NYT moderation models               | en                  | Intending to provoke or inflame.                                                                    |
-| LIKELY\_TO\_REJECT    | NYT moderation models               | en                  | Overall measure of the likelihood for the comment to be rejected according to the NYT’s moderation. |
-| OBSCENE               | NYT moderation models               | en                  | Obscene or vulgar language such as cursing.                                                         |
-| SPAM                  | NYT moderation models               | en                  | Irrelevant and unsolicited commercial content.                                                      |
-| UNSUBSTANTIAL         | NYT moderation models               | en                  | Trivial or short comments.                                                                          |
+| Model Attribute Name  | Version                             | Supported Languages  | Short Description                                                                                   |
+| :-------------------- | :---------------------------------- | :------------------- | :-------------------------------------------------------------------------------------------------- |
+| TOXICITY              | Alpha                               | en, es, fr\*, de\*   | rude, disrespectful, or unreasonable comment that is likely to make people leave a discussion.      |
+| SEVERE\_TOXICITY      | Alpha                               | en, es, fr\*, de\*   | Same deep-CNN algorithm as TOXICITY, but is trained on ‘very toxic’ labels.                         |
+| IDENTITY\_ATTACK      | Experimental toxicity sub-attribute | en, fr\*, de\*, es\* | negative or hateful comments targeting someone because of their identity.                           |
+| INSULT                | Experimental toxicity sub-attribute | en, fr\*, de\*, es\* | insulting, inflammatory, or negative comment towards a person or a group of people.                 |
+| PROFANITY             | Experimental toxicity sub-attribute | en, fr\*, de\*, es\* | swear words, curse words, or other obscene or profane language.                                     |
+| SEXUALLY\_EXPLICIT    | Experimental toxicity sub-attribute | en, fr\*, de\*, es\* | contains references to sexual acts, body parts, or other lewd content.                              |
+| THREAT                | Experimental toxicity sub-attribute | en, fr\*, de\*, es\* | describes an intention to inflict pain, injury, or violence against an individual or group.         |
+| FLIRTATION            | Experimental toxicity sub-attribute | en, fr\*, de\*, es\* | pickup lines, complimenting appearance, subtle sexual innuendos, etc.                               |
+| ATTACK\_ON\_AUTHOR    | NYT moderation models               | en                   | Attack on the author of an article or post.                                                         |
+| ATTACK\_ON\_COMMENTER | NYT moderation models               | en                   | Attack on fellow commenter.                                                                         |
+| INCOHERENT            | NYT moderation models               | en                   | Difficult to understand, nonsensical.                                                               |
+| INFLAMMATORY          | NYT moderation models               | en                   | Intending to provoke or inflame.                                                                    |
+| LIKELY\_TO\_REJECT    | NYT moderation models               | en                   | Overall measure of the likelihood for the comment to be rejected according to the NYT’s moderation. |
+| OBSCENE               | NYT moderation models               | en                   | Obscene or vulgar language such as cursing.                                                         |
+| SPAM                  | NYT moderation models               | en                   | Irrelevant and unsolicited commercial content.                                                      |
+| UNSUBSTANTIAL         | NYT moderation models               | en                   | Trivial or short comments.                                                                          |
 
 A character vector that includes all supported models can be obtained
 like this:
@@ -159,7 +162,7 @@ text_scores %>%
 
 ![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
-Instead of just the entire comments you can also score individual
+Instead of scoring just entire comments you can also score individual
 sentences with `score_sentences = T`. In this case the Perspective API
 will automatically split your text into reasonable sentences and score
 them in addition to an overall score.
@@ -330,51 +333,51 @@ text_sample %>%
 
 Or the (not as pretty) output in Markdown
 
-    ## 11.11% [2019-05-11 23:38:52]: 1 out of 9 (11.11%)
+    ## 11.11% [2019-05-12 00:13:52]: 1 out of 9 (11.11%)
     ## text_id: #efdcxct
     ##  0.67 TOXICITY
     ##  0.31 SEVERE_TOXICITY
     ## 
-    ## 22.22% [2019-05-11 23:38:53]: 2 out of 9 (22.22%)
+    ## 22.22% [2019-05-12 00:13:53]: 2 out of 9 (22.22%)
     ## text_id: #ehfcsct
     ##  0.07 TOXICITY
     ##  0.03 SEVERE_TOXICITY
     ## 
-    ## 33.33% [2019-05-11 23:38:54]: 3 out of 9 (33.33%)
+    ## 33.33% [2019-05-12 00:13:55]: 3 out of 9 (33.33%)
     ## text_id: #ekacxwt
     ## ERROR
     ## Error in .f(...): HTTP 400
     ## INVALID_ARGUMENT: Comment must be non-empty.
     ## NO SCORES
     ## 
-    ## 44.44% [2019-05-11 23:38:55]: 4 out of 9 (44.44%)
+    ## 44.44% [2019-05-12 00:13:56]: 4 out of 9 (44.44%)
     ## text_id: #ewatxad
     ##  0.06 TOXICITY
     ##  0.02 SEVERE_TOXICITY
     ## 
-    ## 55.56% [2019-05-11 23:38:56]: 5 out of 9 (55.56%)
+    ## 55.56% [2019-05-12 00:13:57]: 5 out of 9 (55.56%)
     ## text_id: #ekacswt
     ##  0.67 TOXICITY
     ##  0.31 SEVERE_TOXICITY
     ## 
-    ## 66.67% [2019-05-11 23:38:57]: 6 out of 9 (66.67%)
+    ## 66.67% [2019-05-12 00:13:58]: 6 out of 9 (66.67%)
     ## text_id: #ewftxwd
     ##  0.07 TOXICITY
     ##  0.03 SEVERE_TOXICITY
     ## 
-    ## 77.78% [2019-05-11 23:38:58]: 7 out of 9 (77.78%)
+    ## 77.78% [2019-05-12 00:13:59]: 7 out of 9 (77.78%)
     ## text_id: #ekacbwt
     ## ERROR
     ## Error in .f(...): HTTP 400
     ## INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: is
     ## NO SCORES
     ## 
-    ## 88.89% [2019-05-11 23:39:00]: 8 out of 9 (88.89%)
+    ## 88.89% [2019-05-12 00:14:00]: 8 out of 9 (88.89%)
     ## text_id: #ejatxwd
     ##  0.06 TOXICITY
     ##  0.02 SEVERE_TOXICITY
     ## 
-    ## 100.00% [2019-05-11 23:39:01]: 9 out of 9 (100.00%)
+    ## 100.00% [2019-05-12 00:14:01]: 9 out of 9 (100.00%)
     ## text_id: dfdfgss
     ## ERROR
     ## Error in .f(...): HTTP 400

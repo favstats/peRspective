@@ -9,14 +9,14 @@ knitr::opts_chunk$set(message = F, warning = F)
 
 <!-- [![Travis build status](https://travis-ci.org/favstats/peRspective.svg?branch=master)](https://travis-ci.org/favstats/peRspective) -->
 
-```{r, echo = FALSE, results='asis', eval = F}
+```{r, echo = FALSE, results='asis', eval = T}
 
 library(badger)
 
 git_repo <- "favstats/peRspective"
 
 cat(
-  badge_travis(git_repo),
+  # badge_travis(git_repo),s
 	badge_code_size(git_repo),
 	badge_last_commit(git_repo)
 )
@@ -68,17 +68,17 @@ Here is a list of models currently supported by `peRspective`:
 library(tidyverse)
 
 tibble::tribble(
-  ~`Model Attribute Name`,  ~Version,                                  ~`Supported Languages`,   ~`Shourd Description`,
-             "TOXICITY",     "Alpha",                                  "en, es",                  "rude, disrespectful, or unreasonable comment that is likely to make people leave a discussion.",  
-      "SEVERE_TOXICITY",     "Alpha",                                  "en, es",                  "Same deep-CNN algorithm as TOXICITY, but is trained on 'very toxic' labels.",
-      "IDENTITY_ATTACK",     "Experimental toxicity sub-attribute",    "en",                      "negative or hateful comments targeting someone because of their identity.",
-               "INSULT",     "Experimental toxicity sub-attribute",    "en",                      "insulting, inflammatory, or negative comment towards a person or a group of people.",
-            "PROFANITY",     "Experimental toxicity sub-attribute",    "en",                      "swear words, curse words, or other obscene or profane language.",
-    "SEXUALLY_EXPLICIT",     "Experimental toxicity sub-attribute",    "en",                      "contains references to sexual acts, body parts, or other lewd content.",
-               "THREAT",     "Experimental toxicity sub-attribute",    "en",                      "describes an intention to inflict pain, injury, or violence against an individual or group.",
-           "FLIRTATION",     "Experimental toxicity sub-attribute",    "en",                      "pickup lines, complimenting appearance, subtle sexual innuendos, etc.",
+  ~`Model Attribute Name`,  ~Version,                                  ~`Supported Languages`,   ~`Short Description`,
+             "TOXICITY",     "Alpha",                                  "en, es, fr\\*, de\\*",    "rude, disrespectful, or unreasonable comment that is likely to make people leave a discussion.",  
+      "SEVERE_TOXICITY",     "Alpha",                                  "en, es, fr\\*, de\\*",    "Same deep-CNN algorithm as TOXICITY, but is trained on 'very toxic' labels.",
+      "IDENTITY_ATTACK",     "Experimental toxicity sub-attribute",    "en, fr\\*, de\\*, es\\*", "negative or hateful comments targeting someone because of their identity.",
+               "INSULT",     "Experimental toxicity sub-attribute",    "en, fr\\*, de\\*, es\\*", "insulting, inflammatory, or negative comment towards a person or a group of people.",
+            "PROFANITY",     "Experimental toxicity sub-attribute",    "en, fr\\*, de\\*, es\\*", "swear words, curse words, or other obscene or profane language.",
+    "SEXUALLY_EXPLICIT",     "Experimental toxicity sub-attribute",    "en, fr\\*, de\\*, es\\*", "contains references to sexual acts, body parts, or other lewd content.",
+               "THREAT",     "Experimental toxicity sub-attribute",    "en, fr\\*, de\\*, es\\*", "describes an intention to inflict pain, injury, or violence against an individual or group.",
+           "FLIRTATION",     "Experimental toxicity sub-attribute",    "en, fr\\*, de\\*, es\\*", "pickup lines, complimenting appearance, subtle sexual innuendos, etc.",
      "ATTACK_ON_AUTHOR",     "NYT moderation models",                  "en",                      "Attack on the author of an article or post.",
-  "ATTACK_ON_COMMENTER",    "NYT moderation models",                  "en",                       "Attack on fellow commenter.",
+  "ATTACK_ON_COMMENTER",    "NYT moderation models",                   "en",                      "Attack on fellow commenter.",
            "INCOHERENT",     "NYT moderation models",                  "en",                      "Difficult to understand, nonsensical.",
          "INFLAMMATORY",     "NYT moderation models",                  "en",                      "Intending to provoke or inflame.",
      "LIKELY_TO_REJECT",     "NYT moderation models",                  "en",                      "Overall measure of the likelihood for the comment to be rejected according to the NYT's moderation.",
@@ -90,10 +90,15 @@ tibble::tribble(
 
 ```
 
+\\***Note:** Languages that are annotated with "\\*" are only accessible in the `_EXPERIMENTAL` version of the models. In order to access them just add to the supplied model string like this: `TOXICITY_EXPERIMENTAL`.
+
 A character vector that includes all supported models can be obtained like this:
 
 ```{r}
-peRspective::prsp_models
+c(
+  peRspective::prsp_models,
+  peRspective::prsp_exp_models
+)
 ```
 
 ## Usage
@@ -125,6 +130,7 @@ key <- readr::read_lines("../keys/prsp.txt")
 Sys.setenv(perspective_api_key = key)
 
 # perspective_api_key()
+
 ```
 
 `peRspective` functions will read the API key from environment variable `perspective_api_key`. You can assign an environment object like this in your script:
@@ -176,7 +182,7 @@ text_scores %>%
 ```
 
 
-Instead of just the entire comments you can also score individual sentences with `score_sentences = T`. In this case the Perspective API will automatically split your text into reasonable sentences and score them in addition to an overall score.
+Instead of scoring just entire comments you can also score individual sentences with `score_sentences = T`. In this case the Perspective API will automatically split your text into reasonable sentences and score them in addition to an overall score.
 
 ```{r, eval = T, fig.width=12, fig.height=8}
 trump_tweet <- "The Fake News Media has NEVER been more Dishonest or Corrupt than it is right now. There has never been a time like this in American History. Very exciting but also, very sad! Fake News is the absolute Enemy of the People and our Country itself!"

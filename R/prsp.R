@@ -114,7 +114,7 @@ prsp_score <- function(text, text_id = NULL, languages = NULL, score_sentences =
     stop(stringr::str_glue("No Model type provided in score_model.\n\nShould be one of the following:\n\n{peRspective::prsp_models %>% glue::glue_collapse('\n')}"))
   }
   
-  if (!all(score_model %in% prsp_models)) {
+  if (!all(score_model %in% prsp_models | score_model %in% prsp_exp_models)) {
     stop(stringr::str_glue("Invalid Model type provided.\n\nShould be one of the following:\n\n{peRspective::prsp_models %>% glue::glue_collapse('\n')}"))
   }
   
@@ -128,8 +128,11 @@ prsp_score <- function(text, text_id = NULL, languages = NULL, score_sentences =
   
   # score_model <- c("TOXICITY", "SEVERE_TOXICITY")
   # score_model <- prsp_models
-  # languages <- "es"
+  # languages <- "de"
   # score_sentences <- T
+  
+  # score_model <- "SEVERE_TOXICITY_EXPERIMENTAL"
+  # text <- "ICH HABE WAS GESAGT? das glaube ich ja mal gar nicht!"
 
   model_list <- score_model %>%
     purrr::map(
