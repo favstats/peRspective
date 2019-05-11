@@ -73,19 +73,32 @@ Here is a list of models currently supported by `peRspective`:
 | SPAM                  | NYT moderation models               | en                   | Irrelevant and unsolicited commercial content.                                                      |
 | UNSUBSTANTIAL         | NYT moderation models               | en                   | Trivial or short comments.                                                                          |
 
+\\***Note:** Languages that are annotated with "\\*" are only accessible
+in the `_EXPERIMENTAL` version of the models. In order to access them
+just add to the supplied model string like this:
+`TOXICITY_EXPERIMENTAL`.
+
 A character vector that includes all supported models can be obtained
 like this:
 
 ``` r
-peRspective::prsp_models
+c(
+  peRspective::prsp_models,
+  peRspective::prsp_exp_models
+)
 ```
 
-    ##  [1] "TOXICITY"            "SEVERE_TOXICITY"     "IDENTITY_ATTACK"    
-    ##  [4] "INSULT"              "PROFANITY"           "SEXUALLY_EXPLICIT"  
-    ##  [7] "THREAT"              "FLIRTATION"          "ATTACK_ON_AUTHOR"   
-    ## [10] "ATTACK_ON_COMMENTER" "INCOHERENT"          "INFLAMMATORY"       
-    ## [13] "LIKELY_TO_REJECT"    "OBSCENE"             "SPAM"               
-    ## [16] "UNSUBSTANTIAL"
+    ##  [1] "TOXICITY"                     "SEVERE_TOXICITY"             
+    ##  [3] "IDENTITY_ATTACK"              "INSULT"                      
+    ##  [5] "PROFANITY"                    "SEXUALLY_EXPLICIT"           
+    ##  [7] "THREAT"                       "FLIRTATION"                  
+    ##  [9] "ATTACK_ON_AUTHOR"             "ATTACK_ON_COMMENTER"         
+    ## [11] "INCOHERENT"                   "INFLAMMATORY"                
+    ## [13] "LIKELY_TO_REJECT"             "OBSCENE"                     
+    ## [15] "SPAM"                         "UNSUBSTANTIAL"               
+    ## [17] "TOXICITY_EXPERIMENTAL"        "SEVERE_TOXICITY_EXPERIMENTAL"
+    ## [19] "IDENTITY_ATTACK_EXPERIMENTAL" "INSULT_EXPERIMENTAL"         
+    ## [21] "PROFANITY_EXPERIMENTAL"       "THREAT_EXPERIMENTAL"
 
 ## Usage
 
@@ -333,51 +346,51 @@ text_sample %>%
 
 Or the (not as pretty) output in Markdown
 
-    ## 11.11% [2019-05-12 00:13:52]: 1 out of 9 (11.11%)
+    ## 11.11% [2019-05-12 00:20:35]: 1 out of 9 (11.11%)
     ## text_id: #efdcxct
     ##  0.67 TOXICITY
     ##  0.31 SEVERE_TOXICITY
     ## 
-    ## 22.22% [2019-05-12 00:13:53]: 2 out of 9 (22.22%)
+    ## 22.22% [2019-05-12 00:20:36]: 2 out of 9 (22.22%)
     ## text_id: #ehfcsct
     ##  0.07 TOXICITY
     ##  0.03 SEVERE_TOXICITY
     ## 
-    ## 33.33% [2019-05-12 00:13:55]: 3 out of 9 (33.33%)
+    ## 33.33% [2019-05-12 00:20:37]: 3 out of 9 (33.33%)
     ## text_id: #ekacxwt
     ## ERROR
     ## Error in .f(...): HTTP 400
     ## INVALID_ARGUMENT: Comment must be non-empty.
     ## NO SCORES
     ## 
-    ## 44.44% [2019-05-12 00:13:56]: 4 out of 9 (44.44%)
+    ## 44.44% [2019-05-12 00:20:38]: 4 out of 9 (44.44%)
     ## text_id: #ewatxad
     ##  0.06 TOXICITY
     ##  0.02 SEVERE_TOXICITY
     ## 
-    ## 55.56% [2019-05-12 00:13:57]: 5 out of 9 (55.56%)
+    ## 55.56% [2019-05-12 00:20:40]: 5 out of 9 (55.56%)
     ## text_id: #ekacswt
     ##  0.67 TOXICITY
     ##  0.31 SEVERE_TOXICITY
     ## 
-    ## 66.67% [2019-05-12 00:13:58]: 6 out of 9 (66.67%)
+    ## 66.67% [2019-05-12 00:20:41]: 6 out of 9 (66.67%)
     ## text_id: #ewftxwd
     ##  0.07 TOXICITY
     ##  0.03 SEVERE_TOXICITY
     ## 
-    ## 77.78% [2019-05-12 00:13:59]: 7 out of 9 (77.78%)
+    ## 77.78% [2019-05-12 00:20:42]: 7 out of 9 (77.78%)
     ## text_id: #ekacbwt
     ## ERROR
     ## Error in .f(...): HTTP 400
     ## INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: is
     ## NO SCORES
     ## 
-    ## 88.89% [2019-05-12 00:14:00]: 8 out of 9 (88.89%)
+    ## 88.89% [2019-05-12 00:20:43]: 8 out of 9 (88.89%)
     ## text_id: #ejatxwd
     ##  0.06 TOXICITY
     ##  0.02 SEVERE_TOXICITY
     ## 
-    ## 100.00% [2019-05-12 00:14:01]: 9 out of 9 (100.00%)
+    ## 100.00% [2019-05-12 00:20:44]: 9 out of 9 (100.00%)
     ## text_id: dfdfgss
     ## ERROR
     ## Error in .f(...): HTTP 400
