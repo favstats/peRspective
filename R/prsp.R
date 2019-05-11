@@ -321,11 +321,11 @@ prsp_stream <- function(.data,
   text <- dplyr::enquo(text)
   
   ## some tests to make sure everything is in order
-  if (dplyr::str_detect(rlang::as_label(text), "NULL")) {
+  if (stringr::str_detect(rlang::as_label(text), "NULL")) {
     stop("You need to provide a text column.")
   }
   
-  if (dplyr::str_detect(rlang::as_label(text_id), "NULL")) {
+  if (stringr::str_detect(rlang::as_label(text_id), "NULL")) {
     stop("You need to provide a text_id column.")
   }
   

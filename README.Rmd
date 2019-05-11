@@ -30,25 +30,21 @@ For an excellent documentation of the Perspective API see [here](https://github.
 
 ## Setup
 
-### API authorization
+### Get an API key
 
-In order to get the Perspective API working you need to create a Google Cloud project in your [Google Cloud console](https://console.developers.google.com/). You can also use an existing project, if you have one.
-
-Once you have a project set up go to [Perspective API's overview page](https://console.developers.google.com/apis/api/commentanalyzer.googleapis.com/overview) and click **_Enable_**.
-
-Finally, you need to obtain an API key. You can do this on the [API credentials page](https://console.developers.google.com/apis/credentials), just click **_Create credentials_**, and choose "API Key". Story your API key safely.
+1. Create a Google Cloud project in your [Google Cloud console](https://console.developers.google.com/)
+2. Go to [Perspective API's overview page](https://console.developers.google.com/apis/api/commentanalyzer.googleapis.com/overview) and click **Enable**
+3. Go to the [API credentials page](https://console.developers.google.com/apis/credentials), just click **Create credentials**, and choose "API Key".
 
 Now you are ready to make a request to the Perspective API!
 
 ### Quota and character length Limits
 
-You can check your quota limits by going to [your google cloud project's Perspective API page](https://console.cloud.google.com/apis/api/commentanalyzer.googleapis.com/quotas), and check 
-your projects quota usage at 
-[the cloud console quota usage page](https://console.cloud.google.com/iam-admin/quotas).
+Be sure to check your quota limit! You can find out more about quota limits of the Perspective API by going to [your google cloud project's Perspective API page](https://console.cloud.google.com/apis/api/commentanalyzer.googleapis.com/quotas).
 
 The maximum text size per request is 3000 bytes.
 
-### In R
+### Installation
 
 Install package from GitHub:
 
@@ -169,8 +165,6 @@ key <- readr::read_lines("../keys/prsp.txt")
 
 Sys.setenv(perspective_api_key = key)
 
-library(crayon)
-
 # perspective_api_key()
 ```
 
@@ -247,6 +241,8 @@ text_scores %>%
 
 ```
 
+You can also use Spanish (`es`) for `TOXICITY` and `SEVERE_TOXICITY` scoring.
+
 ```{r}
 spanish_text <- "Con la llegado de internet y de las nuevas tecnologías de la información, la forma de contactar que tenemos entre los seres humanos ha cambiado y lo va a seguir haciendo en un futuro no muy lejano."
 
@@ -268,14 +264,46 @@ text_scores %>%
 
 ## `prsp_stream`
 
+So far we have only seen how to get individual comments or sentences scored. But what if you would like to run the function for an entire dataset full text? This is where `prsp_stream` comes in. At its core `prsp_stream` is a loop implemented within `purrr::map` to iterate over your text column. To use it let's first generate a mock tibble.
+
 ```{r}
 text_sample <- tibble(ctext = c("What the hell is going on?",
                  "Please no what I don't get it.",
+                 "This goes even farther!",
+                 "What the hell is going on?",
+                 "Please no what I don't get it.",
+                 "This goes even farther!"),
+       textid = c("#efdcxct", "#ehfcsct", 
+                  "#ekacxwt",  "#ewatxad", 
+                  "#ekacswt",  "#ewftxwd"))
+```
+
+`prsp_stream` requires a `text` and `text_id column`. It wraps `prsp_score` and takes all its arguments. Let's run the most basic version:
+
+```{r, message=T}
+text_sample %>%
+  prsp_stream(text = ctext,
+              text_id = textid,
+              score_model = c("TOXICITY", "SEVERE_TOXICITY"))
+```
+
+You receive a `tibble` with your desired scorings including the `text_id` to match your score with your original dataframe.
+
+Now, the problem is that sometimes the call might fail at some point. It is therefore suggested to set `safe_output = TRUE`. This will put the function into a `purrr::safely` environment to ensure that your function will keep running even if you encounter errors. 
+
+Let's try it out with a new dataset that contains text that the Perspective API can't score
+
+```{r}
+text_sample <- tibble(ctext = c("What the hell is going on?",
+                 "Please no what I don't get it.",
+                 ## empty string
                  "",
                  "This goes even farther!",
                  "What the hell is going on?",
                  "Please no what I don't get it.",
+                 ## Gibberish
                  "kdlfkmgkdfmgkfmg",
+                 ## Gibberish
                  "This goes even farther!",
                  "Hippi Hoppo"),
        textid = c("#efdcxct", "#ehfcsct", 
@@ -285,13 +313,26 @@ text_sample <- tibble(ctext = c("What the hell is going on?",
                   "dfdfgss"))
 ```
 
+And run the function with `safe_output = TRUE`.
 
 ```{r, message=T}
 text_sample %>%
   prsp_stream(text = ctext,
               text_id = textid,
               score_model = c("TOXICITY", "SEVERE_TOXICITY"),
-              score_sentences  = T,
+              safe_output = T)
+```
+
+`safe_output = T` will also provide us with the error messages that occured so that we can check what went wrong!
+
+Finally, there is one last argument: `verbose = TRUE`. Enable this argument and you will receive beautiful terminal output that guides along the way, showing you errors and text scores as you go.
+
+
+```{r}
+text_sample %>%
+  prsp_stream(text = ctext,
+              text_id = textid,
+              score_model = c("TOXICITY", "SEVERE_TOXICITY"),
               verbose = T,
               safe_output = T)
 ```
