@@ -417,7 +417,7 @@ prsp_stream <- function(.data,
         }
 
         ## when not error
-        if (length(int_results) != 1 & !is.null(prsp_params[["score_sentences"]]) {
+        if (length(int_results) != 1 & !is.null(prsp_params[["score_sentences"]])) {
           ## do a switcheroo because score_sentences argument requires different strategy
           if (!prsp_params[["score_sentences"]]) {
             score_label <- int_results %>%
