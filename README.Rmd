@@ -156,6 +156,8 @@ key <- readr::read_lines("../keys/prsp.txt")
 
 Sys.setenv(perspective_api_key = key)
 
+library(crayon)
+
 # perspective_api_key()
 ```
 

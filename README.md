@@ -164,23 +164,6 @@ peRspective::prsp_models
 
 ## Usage
 
-``` r
-# install.packages("ratelimitr")
-library(ratelimitr)
-f <- function() NULL
-
-# create a version of f that can only be called 10 times per second
-f_lim <- limit_rate(f, rate(n = 10, period = 1))
-
-# time without limiting
-system.time(replicate(11, f()))
-#>    user  system elapsed 
-#>       0       0       0
-
-# time with limiting
-system.time(replicate(11, f_lim()))
-```
-
 First, define your key variable.
 
 `peRspective` functions will read the API key from environment variable
@@ -211,7 +194,7 @@ text_scores %>%
   coord_flip()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 A Trump Tweet
 
@@ -232,7 +215,7 @@ text_scores %>%
   coord_flip()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 Let’s try something else:
 
@@ -258,7 +241,7 @@ text_scores %>%
   geom_hline(yintercept = 0.5, linetype = "dashed")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 ``` r
 spanish_text <- "Con la llegado de internet y de las nuevas tecnologías de la información, la forma de contactar que tenemos entre los seres humanos ha cambiado y lo va a seguir haciendo en un futuro no muy lejano."
@@ -279,4 +262,103 @@ text_scores %>%
   coord_flip()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+
+## `prsp_stream`
+
+``` r
+text_sample <- tibble(ctext = c("What the hell is going on?",
+                 "Please no what I don't get it.",
+                 "",
+                 "This goes even farther!",
+                 "What the hell is going on?",
+                 "Please no what I don't get it.",
+                 "kdlfkmgkdfmgkfmg",
+                 "This goes even farther!",
+                 "Hippi Hoppo"),
+       textid = c("#efdcxct", "#ehfcsct", 
+                  "#ekacxwt",  "#ewatxad", 
+                  "#ekacswt",  "#ewftxwd", 
+                  "#ekacbwt",  "#ejatxwd", 
+                  "dfdfgss"))
+```
+
+``` r
+text_sample %>%
+  prsp_stream(text = ctext,
+              text_id = textid,
+              score_model = c("TOXICITY", "SEVERE_TOXICITY"),
+              score_sentences  = T,
+              verbose = T,
+              safe_output = T)
+```
+
+    ## 11.11% [2019-05-11 20:38:03]: 1 out of 9 (11.11%)
+    ## text_id: #efdcxct
+    ##  0.67 TOXICITY
+    ##  0.31 SEVERE_TOXICITY
+    ## 
+    ## 22.22% [2019-05-11 20:38:04]: 2 out of 9 (22.22%)
+    ## text_id: #ehfcsct
+    ##  0.07 TOXICITY
+    ##  0.03 SEVERE_TOXICITY
+    ## 
+    ## 33.33% [2019-05-11 20:38:05]: 3 out of 9 (33.33%)
+    ## text_id: #ekacxwt
+    ## ERROR
+    ## Error in .f(...): HTTP 400
+    ## INVALID_ARGUMENT: Comment must be non-empty.
+    ## NO SCORES
+    ## 
+    ## 44.44% [2019-05-11 20:38:06]: 4 out of 9 (44.44%)
+    ## text_id: #ewatxad
+    ##  0.06 TOXICITY
+    ##  0.02 SEVERE_TOXICITY
+    ## 
+    ## 55.56% [2019-05-11 20:38:07]: 5 out of 9 (55.56%)
+    ## text_id: #ekacswt
+    ##  0.67 TOXICITY
+    ##  0.31 SEVERE_TOXICITY
+    ## 
+    ## 66.67% [2019-05-11 20:38:08]: 6 out of 9 (66.67%)
+    ## text_id: #ewftxwd
+    ##  0.07 TOXICITY
+    ##  0.03 SEVERE_TOXICITY
+    ## 
+    ## 77.78% [2019-05-11 20:38:10]: 7 out of 9 (77.78%)
+    ## text_id: #ekacbwt
+    ## ERROR
+    ## Error in .f(...): HTTP 400
+    ## INVALID_ARGUMENT: Attribute TOXICITY does not support request languages: is
+    ## NO SCORES
+    ## 
+    ## 88.89% [2019-05-11 20:38:11]: 8 out of 9 (88.89%)
+    ## text_id: #ejatxwd
+    ##  0.06 TOXICITY
+    ##  0.02 SEVERE_TOXICITY
+    ## 
+    ## 100.00% [2019-05-11 20:38:12]: 9 out of 9 (100.00%)
+    ## text_id: dfdfgss
+    ## ERROR
+    ## Error in .f(...): HTTP 400
+    ## INVALID_ARGUMENT: Attribute TOXICITY does not support request languages: ja-Latn
+    ## NO SCORES
+
+    ## # A tibble: 15 x 7
+    ##    text_id  error        summary_score spans type   sentence_scores text   
+    ##    <chr>    <chr>                <dbl> <int> <chr>  <list>          <chr>  
+    ##  1 #efdcxct No Error            0.666      1 TOXIC~ <tibble [1 x 4~ What t~
+    ##  2 #efdcxct No Error            0.309      1 SEVER~ <tibble [1 x 4~ What t~
+    ##  3 #ehfcsct No Error            0.0709     1 TOXIC~ <tibble [1 x 4~ Please~
+    ##  4 #ehfcsct No Error            0.0288     1 SEVER~ <tibble [1 x 4~ Please~
+    ##  5 #ekacxwt "Error in .~       NA         NA <NA>   <NULL>          <NA>   
+    ##  6 #ewatxad No Error            0.0582     1 TOXIC~ <tibble [1 x 4~ This g~
+    ##  7 #ewatxad No Error            0.0221     1 SEVER~ <tibble [1 x 4~ This g~
+    ##  8 #ekacswt No Error            0.666      1 TOXIC~ <tibble [1 x 4~ What t~
+    ##  9 #ekacswt No Error            0.309      1 SEVER~ <tibble [1 x 4~ What t~
+    ## 10 #ewftxwd No Error            0.0709     1 TOXIC~ <tibble [1 x 4~ Please~
+    ## 11 #ewftxwd No Error            0.0288     1 SEVER~ <tibble [1 x 4~ Please~
+    ## 12 #ekacbwt "Error in .~       NA         NA <NA>   <NULL>          <NA>   
+    ## 13 #ejatxwd No Error            0.0582     1 TOXIC~ <tibble [1 x 4~ This g~
+    ## 14 #ejatxwd No Error            0.0221     1 SEVER~ <tibble [1 x 4~ This g~
+    ## 15 dfdfgss  "Error in .~       NA         NA <NA>   <NULL>          <NA>

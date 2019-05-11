@@ -25,5 +25,5 @@ a \code{tibble}
 Provide a character string with your text, your API key and what scores you want to obtain.
 }
 \details{
-For more details see ?peRspective or \href{https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md}{Perspective API documentation}
+For more details see \code{?peRspective} or \href{https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md}{Perspective API documentation}
 }

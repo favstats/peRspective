@@ -2,7 +2,7 @@
 % Please edit documentation in R/prsp.R
 \name{prsp_stream}
 \alias{prsp_stream}
-\title{Analyze comments with Perspective API}
+\title{Stream comment scores with Perspective API}
 \usage{
 prsp_stream(.data, text = NULL, text_id = NULL, ..., safe_output = F,
   verbose = F)
@@ -12,7 +12,7 @@ prsp_stream(.data, text = NULL, text_id = NULL, ..., safe_output = F,
 
 \item{text}{a character vector with text you want to score.}
 
-\item{text_id}{a unique ID for the text that you supply}
+\item{text_id}{a unique ID for the text that you supply (required)}
 
 \item{...}{arguments passed to \code{\link{prsp_score}}.}
 
@@ -24,8 +24,8 @@ prsp_stream(.data, text = NULL, text_id = NULL, ..., safe_output = F,
 a \code{tibble}
 }
 \description{
-Provide a character string with your text, your API key and what scores you want to obtain.
+This function wraps \code{\link{prsp_score}} and loops over your text input. Provide a character string with your text and which scores you want to obtain. Make sure to keep track of your ratelimit with on \href{https://console.cloud.google.com/iam-admin/quotas}{the cloud console quota usage page}.
 }
 \details{
-For more details see ?peRspective or \href{https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md}{Perspective API documentation}
+For more details see \code{?peRspective} or \href{https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md}{Perspective API documentation}
 }

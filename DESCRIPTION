@@ -10,7 +10,9 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
 Imports: 
+    tidyverse,
+    crayon,
     magrittr,
-    openmindR
+    rlist
 Suggests: 
     testthat (>= 2.1.0)
