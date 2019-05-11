@@ -6,9 +6,11 @@
 \alias{peRspective}
 \title{peRspective: Interface to the Perspective API}
 \description{
-Provides access to the Perspective API (\url{http://www.perspectiveapi.com/}).
+Provides access to the Perspective API (\url{http://www.perspectiveapi.com/}). Perspective is an API that uses machine learning models to score the perceived impact a comment might have on a conversation.
+\code{peRspective} provides access to the API using the R programming language.
+For an excellent documentation of the Perspective API see \href{https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md}{here}.
 }
-\section{Setup}{
+\section{Get API Key}{
 
 \enumerate{
 \item Create a Google Cloud project in your \href{https://console.developers.google.com/}{Google Cloud console}
@@ -17,7 +19,7 @@ Provides access to the Perspective API (\url{http://www.perspectiveapi.com/}).
 }
 }
 
-\section{API}{
+\section{Suggested Usage of API Key}{
 
 \pkg{peRspective} functions will read the API key from
 environment variable \code{perspective_api_key}.
@@ -26,7 +28,7 @@ You can specify it like this at the start of your script:
 \code{Sys.setenv(perspective_api_key = "**********")}
 
 To start R session with the
-initialized environvent variable create an \code{.Renviron} file in your R home
+initialized environment variable create an \code{.Renviron} file in your R home
 with a line like this:
 
 \code{perspective_api_key = "**********"}
@@ -41,5 +43,68 @@ your projects quota usage at
 \href{https://console.cloud.google.com/iam-admin/quotas}{the cloud console quota usage page}.
 
 The maximum text size per request is 3000 bytes.
+}
+
+\section{Alpha models}{
+
+
+The following alpha models are \strong{recommended} for use. They have been tested
+across multiple domains and trained on hundreds of thousands of comments tagged
+by thousands of human moderators. These are available in \strong{English (en) and Spanish (es)}.
+\itemize{
+\item \strong{TOXICITY}: rude, disrespectful, or unreasonable comment that is likely to
+make people leave a discussion. This model is a
+\href{https://en.wikipedia.org/wiki/Convolutional_neural_network}{Convolutional Neural Network} (CNN)
+trained with \href{https://www.tensorflow.org/tutorials/word2vec}{word-vector}
+inputs.
+\item \strong{SEVERE_TOXICITY}: This model uses the same deep-CNN algorithm as the
+TOXICITY model, but is trained to recognise examples that were considered
+to be 'very toxic' by crowdworkers. This makes it much less sensitive to
+comments that include positive uses of curse-words for example. A labelled dataset
+and details of the methodolgy can be found in the same \href{https://figshare.com/articles/Wikipedia_Talk_Labels_Toxicity/4563973}{toxicity dataset} that is
+available for the toxicity model.
+}
+}
+
+\section{Experimental models}{
+
+
+The following experimental models give more fine-grained classifications than
+overall toxicity. They were trained on a relatively smaller amount of data
+compared to the primary toxicity models above and have not been tested as
+thoroughly.
+\itemize{
+\item \strong{IDENTITY_ATTACK}: negative or hateful comments targeting someone because of their identity.
+\item \strong{INSULT}: insulting, inflammatory, or negative comment towards a person
+or a group of people.
+\item \strong{PROFANITY}: swear words, curse words, or other obscene or profane
+language.
+\item \strong{THREAT}: describes an intention to inflict pain, injury, or violence
+against an individual or group.
+\item \strong{SEXUALLY_EXPLICIT}: contains references to sexual acts, body parts, or
+other lewd content.
+\item \strong{FLIRTATION}: pickup lines, complimenting appearance, subtle sexual
+innuendos, etc.
+}
+
+For more details on how these were trained, see the \href{https://github.com/conversationai/conversationai.github.io/blob/master/crowdsourcing_annotation_schemes/toxicity_with_subattributes.md}{Toxicity and sub-attribute annotation guidelines}.
+}
+
+\section{New York Times moderation models}{
+
+
+The following experimental models were trained on New York Times data tagged by
+their moderation team.
+\itemize{
+\item \strong{ATTACK_ON_AUTHOR}: Attack on the author of an article or post.
+\item \strong{ATTACK_ON_COMMENTER}: Attack on fellow commenter.
+\item \strong{INCOHERENT}: Difficult to understand, nonsensical.
+\item \strong{INFLAMMATORY}: Intending to provoke or inflame.
+\item \strong{LIKELY_TO_REJECT}: Overall measure of the likelihood for the comment to
+be rejected according to the NYT's moderation.
+\item \strong{OBSCENE}: Obscene or vulgar language such as cursing.
+\item \strong{SPAM}: Irrelevant and unsolicited commercial content.
+\item \strong{UNSUBSTANTIAL}: Trivial or short comments.
+}
 }
 
