@@ -313,8 +313,9 @@ text_sample %>%
 occured so that we can check what went wrong\!
 
 Finally, there is one last argument: `verbose = TRUE`. Enable this
-argument and you will receive beautiful terminal output that guides
-along the way, showing you errors and text scores as you go.
+argument and thanks to [`crayon`](https://github.com/r-lib/crayon) you
+will receive beautiful console output that guides you along the way,
+showing you errors and text scores as you go.
 
 ``` r
 text_sample %>%
@@ -325,37 +326,59 @@ text_sample %>%
               safe_output = T)
 ```
 
-    ## 11.11% [2019-05-11 22:58:14]: 1 out of 9 (11.11%)
+![](images/prsp_stream%20output.png)
+
+Or the (not as pretty) output in Markdown
+
+    ## 11.11% [2019-05-11 23:38:52]: 1 out of 9 (11.11%)
     ## text_id: #efdcxct
-    ## 22.22% [2019-05-11 22:58:15]: 2 out of 9 (22.22%)
+    ##  0.67 TOXICITY
+    ##  0.31 SEVERE_TOXICITY
+    ## 
+    ## 22.22% [2019-05-11 23:38:53]: 2 out of 9 (22.22%)
     ## text_id: #ehfcsct
-    ## 33.33% [2019-05-11 22:58:16]: 3 out of 9 (33.33%)
+    ##  0.07 TOXICITY
+    ##  0.03 SEVERE_TOXICITY
+    ## 
+    ## 33.33% [2019-05-11 23:38:54]: 3 out of 9 (33.33%)
     ## text_id: #ekacxwt
     ## ERROR
     ## Error in .f(...): HTTP 400
     ## INVALID_ARGUMENT: Comment must be non-empty.
     ## NO SCORES
     ## 
-    ## 44.44% [2019-05-11 22:58:17]: 4 out of 9 (44.44%)
+    ## 44.44% [2019-05-11 23:38:55]: 4 out of 9 (44.44%)
     ## text_id: #ewatxad
-    ## 55.56% [2019-05-11 22:58:18]: 5 out of 9 (55.56%)
+    ##  0.06 TOXICITY
+    ##  0.02 SEVERE_TOXICITY
+    ## 
+    ## 55.56% [2019-05-11 23:38:56]: 5 out of 9 (55.56%)
     ## text_id: #ekacswt
-    ## 66.67% [2019-05-11 22:58:19]: 6 out of 9 (66.67%)
+    ##  0.67 TOXICITY
+    ##  0.31 SEVERE_TOXICITY
+    ## 
+    ## 66.67% [2019-05-11 23:38:57]: 6 out of 9 (66.67%)
     ## text_id: #ewftxwd
-    ## 77.78% [2019-05-11 22:58:20]: 7 out of 9 (77.78%)
+    ##  0.07 TOXICITY
+    ##  0.03 SEVERE_TOXICITY
+    ## 
+    ## 77.78% [2019-05-11 23:38:58]: 7 out of 9 (77.78%)
     ## text_id: #ekacbwt
     ## ERROR
     ## Error in .f(...): HTTP 400
     ## INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: is
     ## NO SCORES
     ## 
-    ## 88.89% [2019-05-11 22:58:21]: 8 out of 9 (88.89%)
+    ## 88.89% [2019-05-11 23:39:00]: 8 out of 9 (88.89%)
     ## text_id: #ejatxwd
-    ## 100.00% [2019-05-11 22:58:22]: 9 out of 9 (100.00%)
+    ##  0.06 TOXICITY
+    ##  0.02 SEVERE_TOXICITY
+    ## 
+    ## 100.00% [2019-05-11 23:39:01]: 9 out of 9 (100.00%)
     ## text_id: dfdfgss
     ## ERROR
     ## Error in .f(...): HTTP 400
-    ## INVALID_ARGUMENT: Attribute TOXICITY does not support request languages: ja-Latn
+    ## INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: ja-Latn
     ## NO SCORES
 
     ## # A tibble: 9 x 4
@@ -370,7 +393,3 @@ text_sample %>%
     ## 7 #ekacbwt "Error in .f(...): HTTP 400\nINVALID_A~  NA              NA     
     ## 8 #ejatxwd No Error                                  0.0582          0.0221
     ## 9 dfdfgss  "Error in .f(...): HTTP 400\nINVALID_A~  NA              NA
-
-``` r
-prsp_params <- list(hello = 2)
-```

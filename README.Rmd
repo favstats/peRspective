@@ -286,10 +286,23 @@ text_sample %>%
 
 `safe_output = T` will also provide us with the error messages that occured so that we can check what went wrong!
 
-Finally, there is one last argument: `verbose = TRUE`. Enable this argument and you will receive beautiful terminal output that guides along the way, showing you errors and text scores as you go.
+Finally, there is one last argument: `verbose = TRUE`. Enable this argument and thanks to [`crayon`](https://github.com/r-lib/crayon) you will receive beautiful console output that guides you along the way, showing you errors and text scores as you go.
 
 
-```{r}
+```{r, eval = F}
+text_sample %>%
+  prsp_stream(text = ctext,
+              text_id = textid,
+              score_model = c("TOXICITY", "SEVERE_TOXICITY"),
+              verbose = T,
+              safe_output = T)
+```
+
+![](images/prsp_stream output.png)
+
+Or the (not as pretty) output in Markdown
+
+```{r, echo = F}
 text_sample %>%
   prsp_stream(text = ctext,
               text_id = textid,
@@ -299,4 +312,3 @@ text_sample %>%
 
 
 ```
-
