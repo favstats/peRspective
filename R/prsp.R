@@ -465,7 +465,7 @@ prsp_stream <- function(.data,
       dplyr::bind_rows() %>%
       t() %>%
       tibble::as_tibble(rownames = .[1, ]) %>%
-      dplyr::set_names(c("text_id", "error")) %>%
+      purrr::set_names(c("text_id", "error")) %>%
       dplyr::right_join(final_text %>% purrr::map_dfr("result"), by = "text_id")
     
     return(final_text)
