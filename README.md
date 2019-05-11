@@ -1,6 +1,9 @@
 peRspective
 ================
 
+[![](https://img.shields.io/github/languages/code-size/favstats/peRspective.svg)](https://github.com/favstats/peRspective)
+[![](https://img.shields.io/github/last-commit/favstats/peRspective.svg)](https://github.com/favstats/peRspective/commits/master)
+
 Perspective is an API that uses machine learning models to score the
 perceived impact a comment might have on a conversation.
 [Website](http://www.perspectiveapi.com/).
@@ -194,7 +197,7 @@ text_scores %>%
   coord_flip()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 A Trump Tweet
 
@@ -215,7 +218,7 @@ text_scores %>%
   coord_flip()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 Let’s try something else:
 
@@ -241,7 +244,7 @@ text_scores %>%
   geom_hline(yintercept = 0.5, linetype = "dashed")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 ``` r
 spanish_text <- "Con la llegado de internet y de las nuevas tecnologías de la información, la forma de contactar que tenemos entre los seres humanos ha cambiado y lo va a seguir haciendo en un futuro no muy lejano."
@@ -262,7 +265,7 @@ text_scores %>%
   coord_flip()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
 ## `prsp_stream`
 
@@ -293,55 +296,55 @@ text_sample %>%
               safe_output = T)
 ```
 
-    ## 11.11% [2019-05-11 20:38:03]: 1 out of 9 (11.11%)
+    ## 11.11% [2019-05-11 20:59:50]: 1 out of 9 (11.11%)
     ## text_id: #efdcxct
     ##  0.67 TOXICITY
     ##  0.31 SEVERE_TOXICITY
     ## 
-    ## 22.22% [2019-05-11 20:38:04]: 2 out of 9 (22.22%)
+    ## 22.22% [2019-05-11 20:59:51]: 2 out of 9 (22.22%)
     ## text_id: #ehfcsct
     ##  0.07 TOXICITY
     ##  0.03 SEVERE_TOXICITY
     ## 
-    ## 33.33% [2019-05-11 20:38:05]: 3 out of 9 (33.33%)
+    ## 33.33% [2019-05-11 20:59:53]: 3 out of 9 (33.33%)
     ## text_id: #ekacxwt
     ## ERROR
     ## Error in .f(...): HTTP 400
     ## INVALID_ARGUMENT: Comment must be non-empty.
     ## NO SCORES
     ## 
-    ## 44.44% [2019-05-11 20:38:06]: 4 out of 9 (44.44%)
+    ## 44.44% [2019-05-11 20:59:54]: 4 out of 9 (44.44%)
     ## text_id: #ewatxad
     ##  0.06 TOXICITY
     ##  0.02 SEVERE_TOXICITY
     ## 
-    ## 55.56% [2019-05-11 20:38:07]: 5 out of 9 (55.56%)
+    ## 55.56% [2019-05-11 20:59:55]: 5 out of 9 (55.56%)
     ## text_id: #ekacswt
     ##  0.67 TOXICITY
     ##  0.31 SEVERE_TOXICITY
     ## 
-    ## 66.67% [2019-05-11 20:38:08]: 6 out of 9 (66.67%)
+    ## 66.67% [2019-05-11 20:59:56]: 6 out of 9 (66.67%)
     ## text_id: #ewftxwd
     ##  0.07 TOXICITY
     ##  0.03 SEVERE_TOXICITY
     ## 
-    ## 77.78% [2019-05-11 20:38:10]: 7 out of 9 (77.78%)
+    ## 77.78% [2019-05-11 20:59:57]: 7 out of 9 (77.78%)
     ## text_id: #ekacbwt
     ## ERROR
     ## Error in .f(...): HTTP 400
-    ## INVALID_ARGUMENT: Attribute TOXICITY does not support request languages: is
+    ## INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: is
     ## NO SCORES
     ## 
-    ## 88.89% [2019-05-11 20:38:11]: 8 out of 9 (88.89%)
+    ## 88.89% [2019-05-11 20:59:58]: 8 out of 9 (88.89%)
     ## text_id: #ejatxwd
     ##  0.06 TOXICITY
     ##  0.02 SEVERE_TOXICITY
     ## 
-    ## 100.00% [2019-05-11 20:38:12]: 9 out of 9 (100.00%)
+    ## 100.00% [2019-05-11 20:59:59]: 9 out of 9 (100.00%)
     ## text_id: dfdfgss
     ## ERROR
     ## Error in .f(...): HTTP 400
-    ## INVALID_ARGUMENT: Attribute TOXICITY does not support request languages: ja-Latn
+    ## INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: ja-Latn
     ## NO SCORES
 
     ## # A tibble: 15 x 7

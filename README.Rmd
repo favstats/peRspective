@@ -8,6 +8,18 @@ knitr::opts_chunk$set(message = F, warning = F)
 ```
 
 
+```{r, echo = FALSE, results='asis'}
+
+library(badger)
+
+cat(
+	badge_code_size("favstats/peRspective"),
+	badge_last_commit("favstats/peRspective")
+)
+```
+
+
+
 Perspective is an API that uses machine learning models to score the perceived impact a comment might have on a conversation. [Website](http://www.perspectiveapi.com/).
 
 `peRspective` provides access to the API using the R programming language.
