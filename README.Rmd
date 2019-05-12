@@ -31,7 +31,7 @@ Perspective is an API that uses machine learning models to score the perceived i
 
 For an excellent documentation of the Perspective API see [here](https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md).
 
-> This is a work-in-progress project and I welcome issues and pull requests!
+> This is a work-in-progress project and I welcome feedback and pull requests!
 
 ## Overview
 
@@ -161,7 +161,8 @@ text_scores %>%
   geom_col() +
   coord_flip() +
   ylim(0, 1) +
-  geom_hline(yintercept = 0.5, linetype = "dashed")
+  geom_hline(yintercept = 0.5, linetype = "dashed") +
+  labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
 
 A Trump Tweet:
@@ -182,7 +183,8 @@ text_scores %>%
   geom_col() +
   coord_flip() +
   ylim(0, 1) +
-  geom_hline(yintercept = 0.5, linetype = "dashed")
+  geom_hline(yintercept = 0.5, linetype = "dashed") +
+  labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
 
 
@@ -207,7 +209,8 @@ text_scores %>%
   coord_flip() +
   facet_wrap(~sentences, ncol = 2) +
   theme_minimal() +
-  geom_hline(yintercept = 0.5, linetype = "dashed")
+  geom_hline(yintercept = 0.5, linetype = "dashed") +
+  labs(x = "Model", y = "Probability", title = "Perspective API Results")
 
 
 ```
@@ -231,7 +234,8 @@ text_scores %>%
   ggplot(aes(key, value)) +
   geom_col() +
   coord_flip() +
-  geom_hline(yintercept = 0.5, linetype = "dashed")
+  geom_hline(yintercept = 0.5, linetype = "dashed")  +
+  labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
 
 ### `prsp_stream`
