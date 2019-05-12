@@ -6,8 +6,6 @@ output: github_document
 knitr::opts_chunk$set(message = F, warning = F)
 ```
 
-<!-- [![Travis build status](https://travis-ci.org/favstats/peRspective.svg?branch=master)](https://travis-ci.org/favstats/peRspective) -->
-
 # peRspective <img src="images/perspective2.png" width="160px" align="right" />
 
 
@@ -19,6 +17,8 @@ git_repo <- "favstats/peRspective"
 
 cat(
   badge_travis(git_repo),
+  # badge_(git_repo),
+  "[![Codecov test coverage](https://codecov.io/gh/favstats/peRspective/branch/master/graph/badge.svg)](https://codecov.io/gh/favstats/peRspective?branch=master)",
 	badge_code_size(git_repo),
 	badge_last_commit(git_repo)
 )
