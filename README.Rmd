@@ -16,8 +16,8 @@ library(badger)
 git_repo <- "favstats/peRspective"
 
 cat(
+  badge_custom("My 1st Package", "Ever", "magenta"),
   badge_travis(git_repo),
-  # badge_(git_repo),
   "[![Codecov test coverage](https://codecov.io/gh/favstats/peRspective/branch/master/graph/badge.svg)](https://codecov.io/gh/favstats/peRspective?branch=master)",
 	badge_code_size(git_repo),
 	badge_last_commit(git_repo)
