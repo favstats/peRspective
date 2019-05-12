@@ -496,6 +496,24 @@ prsp_stream <- function(.data,
 
 
 
+#' SQL Database Append
+#'
+#' This is a helper function that will write a dataframe to a SQL database
+#'
+#'
+#' @export
+db_append <- function(path, tbl, data) {
+  con <- dbConnect(RSQLite::SQLite(), path)
+  
+  if(!is.null(DBI::dbListTables(con))) {
+    DBI::dbWriteTable(con, tbl, data, append = T)
+  } else {
+    DBI::dbWriteTable(con, tbl, data)
+  }
+  DBI::dbDisconnect(con)
+  
+}
+
 # TODO: Write tests 
 # ss <- 
   # tibble(ctext = "kdlfkmgkdfmgjgkfmg", textid = "#ewqyccfr") #%>%
