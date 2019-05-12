@@ -18,7 +18,7 @@ library(badger)
 git_repo <- "favstats/peRspective"
 
 cat(
-  # badge_travis(git_repo),s
+  badge_travis(git_repo),
 	badge_code_size(git_repo),
 	badge_last_commit(git_repo)
 )
