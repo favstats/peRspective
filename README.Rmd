@@ -240,7 +240,7 @@ text_scores %>%
 
 ### `prsp_stream`
 
-So far we have only seen how to get individual comments or sentences scored. But what if you would like to run the function for an entire dataset full text? This is where `prsp_stream` comes in. At its core `prsp_stream` is a loop implemented within `purrr::map` to iterate over your text column. To use it let's first generate a mock tibble.
+So far we have only seen how to get individual comments or sentences scored. But what if you would like to run the function for an entire dataset with a text column? This is where `prsp_stream` comes in. At its core `prsp_stream` is a loop implemented within `purrr::map` to iterate over your text column. To use it let's first generate a mock tibble.
 
 ```{r}
 text_sample <- tibble(
