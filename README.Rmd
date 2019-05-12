@@ -25,7 +25,6 @@ cat(
 ```
 
 
-
 Perspective is an API that uses machine learning models to score the perceived impact a comment might have on a conversation. [Website](http://www.perspectiveapi.com/).
 
 `peRspective` provides access to the API using the R programming language.
