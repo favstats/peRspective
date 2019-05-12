@@ -32,8 +32,9 @@ Perspective is an API that uses machine learning models to score the perceived i
 
 For an excellent documentation of the Perspective API see [here](https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md).
 
+> This is a work-in-progress project and I welcome issues and pull requests!
 
-## README Overview
+## Overview
 
 + [Setup](https://github.com/favstats/peRspective#setup)
 + [Models](https://github.com/favstats/peRspective#models)
