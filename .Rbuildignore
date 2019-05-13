@@ -2,3 +2,9 @@
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^codecov\.yml$
+^prsp\.txt$
+^LICENSE\.md$
+^README\.Rmd$
+^README_files
+^docs
+^images

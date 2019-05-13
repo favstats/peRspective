@@ -102,9 +102,11 @@ NULL
 #'
 #' @md
 #' @param text a character string.
+#' @param text_id a unique ID for the text that you supply (required).
 #' @param languages A vector of [ISO 631-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) two-letter language codes specifying the language(s) that comment is in (for example, "en", "es", "fr", "de", etc). If unspecified, the API will autodetect the comment language. If language detection fails, the API returns an error.
 #' @param score_sentences A boolean value that indicates if the request should return spans that describe the scores for each part of the text (currently done at per sentence level). Defaults to `FALSE`.
 #' @param key Your API key ([see here](https://github.com/conversationai/perspectiveapi/blob/master/quickstart.md) to set up an API key).
+#' @param sleep how long should `prsp_score` wait between each call
 #' @param score_model Specify what model do you want to use (for example `TOXICITY` and/or `SEVERE_TOXICITY`). Specify a character vector if you want more than one score. See `peRspective::prsp_models`.
 #' @return a `tibble`
 #' @export
@@ -156,7 +158,7 @@ prsp_score <- function(text, text_id = NULL, languages = NULL, score_sentences =
     jsonlite::toJSON(auto_unbox = T)
   
   if (is.null(key)) {
-    key <- peRspective:::perspective_api_key()
+    key <- perspective_api_key()
   }
   
   result <- httr::POST(stringr::str_glue("https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key={key}"),
@@ -254,56 +256,7 @@ prsp_score <- function(text, text_id = NULL, languages = NULL, score_sentences =
 }
 
 
-#' Specify a decimal
-#'
-#' @param x a number to be rounded
-#' @param k round to which position after the comma
-#' @export
-specify_decimal <- function(x, k) trimws(format(round(x, k), nsmall=k))
 
-
-
-#' Print progress in purrr::imap environment
-#'
-#' Provide iterator number and total length of items to be iterated over
-#'
-#' @md
-#' @param x interator number.
-#' @param total length of items to be iterated over.
-#' @param print_prct only print percentage progress (defaults to `FALSE`).
-#' @return a `chr`
-#' @export
-print_progress <- function(x, total, print_prct = F) {
-  iterator <- x %>% as.numeric()
-  perc <- specify_decimal((iterator/total)*100, 2)
-  
-  if (print_prct) {
-    return(stringr::str_glue("{perc}%"))
-  }
-  
-  progress_text <- stringr::str_glue("{iterator} out of {total} ({perc}%)\n\n")
-  return(progress_text)
-}
-
-
-
-perspective_api_key <- function () {
-  key <- Sys.getenv("perspective_api_key")
-  if (key == "") {
-    stop("perspective_api_key environment variable is empty. See ?peRspective for help.")
-  }
-  key
-}
-
-msg <- function(type, type_style = crayon::make_style('red4'), msg) {
-  
-  cat(stringr::str_glue("{type_style(type)} [{crayon::italic(Sys.time())}]: {crayon::make_style('gray90')(msg)}"))
-
-}
-
-# crayon::make_style('red4')("hell")
-
-# msg("WHAT", msg = "hatsap")
 
 #' Stream comment scores with Perspective API
 #'
@@ -373,10 +326,10 @@ prsp_stream <- function(.data,
     purrr::imap(~{
       ## Print Progress
       if (verbose) {
-        peRspective:::msg(
-          type = peRspective::print_progress(.y, nrow(.data), print_prct = T),
+        msg(
+          type = print_progress(.y, nrow(.data), print_prct = T),
           type_style = crayon::green,
-          msg = peRspective::print_progress(.y, nrow(.data))
+          msg = print_progress(.y, nrow(.data))
         )
       }
 
@@ -449,7 +402,7 @@ prsp_stream <- function(.data,
           ## get score labels
           score_label <- score_label %>%
             dplyr::arrange(dplyr::desc(value)) %>%
-            dplyr::mutate(value = peRspective:::specify_decimal(value, 2)) %>%
+            dplyr::mutate(value = specify_decimal(value, 2)) %>%
             dplyr::mutate(label = stringr::str_glue("{value} {name}")) %>%
             dplyr::select(label) %>%
             dplyr::slice(1:3) %>%
@@ -496,23 +449,21 @@ prsp_stream <- function(.data,
 
 
 
-#' SQL Database Append
-#'
-#' This is a helper function that will write a dataframe to a SQL database
-#'
-#'
-#' @export
-db_append <- function(path, tbl, data) {
-  con <- dbConnect(RSQLite::SQLite(), path)
-  
-  if(!is.null(DBI::dbListTables(con))) {
-    DBI::dbWriteTable(con, tbl, data, append = T)
-  } else {
-    DBI::dbWriteTable(con, tbl, data)
-  }
-  DBI::dbDisconnect(con)
-  
-}
+#' All valid (non-experimental) Perspective API models
+#' 
+#' @docType data
+#' @keywords datasets
+#' @name prsp_models
+NULL
+
+
+#' All valid experimental Perspective API models
+#' 
+#' @docType data
+#' @keywords datasets
+#' @name prsp_exp_models
+NULL
+
 
 # TODO: Write tests 
 # ss <- 

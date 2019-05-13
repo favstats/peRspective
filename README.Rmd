@@ -317,7 +317,7 @@ text_sample %>%
               safe_output = T)
 ```
 
-![](images/prsp_stream output.png)
+![](images/prsp_stream_output.png)
 
 Or the (not as pretty) output in Markdown
 

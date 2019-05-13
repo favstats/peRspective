@@ -6,16 +6,18 @@ cache: packages
 jobs:
   include:
   - r: 3.5
-    warnings_are_errors: false
+    warnings_are_errors: true
   - r: 3.6
-    warnings_are_errors: false
+    warnings_are_errors: true
   - r: release
-    warnings_are_errors: false
+    warnings_are_errors: true
   - r: devel
-    warnings_are_errors: false
+    warnings_are_errors: true
 
 r_packages:
   - covr
 
 after_success:
   - Rscript -e 'library(covr); codecov()'
+  
+  

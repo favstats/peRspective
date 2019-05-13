@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">peRspective</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9001</span>
       </span>
     </div>
 
@@ -69,18 +69,20 @@
 
     
     
-<!-- [![Travis build status](https://travis-ci.org/favstats/peRspective.svg?branch=master)](https://travis-ci.org/favstats/peRspective) -->
 <div id="perspective" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#perspective" class="anchor"></a>peRspective <img src="images/perspective2.png" width="160px" align="right">
 </h1></div>
-
+<p><img src="https://img.shields.io/badge/My%201st%20Package-Ever-magenta.svg"><a href="https://travis-ci.org/favstats/peRspective"><img src="https://travis-ci.org/favstats/peRspective.svg?branch=master"></a> <a href="https://codecov.io/gh/favstats/peRspective?branch=master"><img src="https://codecov.io/gh/favstats/peRspective/branch/master/graph/badge.svg" alt="Codecov test coverage"></a> <a href="https://github.com/favstats/peRspective"><img src="https://img.shields.io/github/languages/code-size/favstats/peRspective.svg"></a> <a href="https://github.com/favstats/peRspective/commits/master"><img src="https://img.shields.io/github/last-commit/favstats/peRspective.svg"></a></p>
 <p>Perspective is an API that uses machine learning models to score the perceived impact a comment might have on a conversation. <a href="http://www.perspectiveapi.com/">Website</a>.</p>
 <p><code>peRspective</code> provides access to the API using the R programming language.</p>
 <p>For an excellent documentation of the Perspective API see <a href="https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md">here</a>.</p>
-<div id="readme-overview" class="section level2">
+<blockquote>
+<p>This is a work-in-progress project and I welcome feedback and pull requests!</p>
+</blockquote>
+<div id="overview" class="section level2">
 <h2 class="hasAnchor">
-<a href="#readme-overview" class="anchor"></a>README Overview</h2>
+<a href="#overview" class="anchor"></a>Overview</h2>
 <ul>
 <li><a href="https://github.com/favstats/peRspective#setup">Setup</a></li>
 <li><a href="https://github.com/favstats/peRspective#models">Models</a></li>
@@ -276,7 +278,8 @@
 <a class="sourceLine" id="cb7-13" title="13"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb7-14" title="14"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb7-15" title="15"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.window.html">ylim</a></span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-16" title="16"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.5</span>, <span class="dt">linetype =</span> <span class="st">"dashed"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb7-16" title="16"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.5</span>, <span class="dt">linetype =</span> <span class="st">"dashed"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-17" title="17"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">"Model"</span>, <span class="dt">y =</span> <span class="st">"Probability"</span>, <span class="dt">title =</span> <span class="st">"Perspective API Results"</span>)</a></code></pre></div>
 <p><img src="index_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 <p>A Trump Tweet:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">trump_tweet &lt;-<span class="st"> "The Fake News Media has NEVER been more Dishonest or Corrupt than it is right now. There has never been a time like this in American History. Very exciting but also, very sad! Fake News is the absolute Enemy of the People and our Country itself!"</span></a>
@@ -294,7 +297,8 @@
 <a class="sourceLine" id="cb8-13" title="13"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb8-14" title="14"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb8-15" title="15"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.window.html">ylim</a></span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb8-16" title="16"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.5</span>, <span class="dt">linetype =</span> <span class="st">"dashed"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb8-16" title="16"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.5</span>, <span class="dt">linetype =</span> <span class="st">"dashed"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-17" title="17"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">"Model"</span>, <span class="dt">y =</span> <span class="st">"Probability"</span>, <span class="dt">title =</span> <span class="st">"Perspective API Results"</span>)</a></code></pre></div>
 <p><img src="index_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 <p>Instead of scoring just entire comments you can also score individual sentences with <code>score_sentences = T</code>. In this case the Perspective API will automatically split your text into reasonable sentences and score them in addition to an overall score.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">trump_tweet &lt;-<span class="st"> "The Fake News Media has NEVER been more Dishonest or Corrupt than it is right now. There has never been a time like this in American History. Very exciting but also, very sad! Fake News is the absolute Enemy of the People and our Country itself!"</span></a>
@@ -315,7 +319,8 @@
 <a class="sourceLine" id="cb9-16" title="16"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb9-17" title="17"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>sentences, <span class="dt">ncol =</span> <span class="dv">2</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb9-18" title="18"><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb9-19" title="19"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.5</span>, <span class="dt">linetype =</span> <span class="st">"dashed"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb9-19" title="19"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.5</span>, <span class="dt">linetype =</span> <span class="st">"dashed"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-20" title="20"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">"Model"</span>, <span class="dt">y =</span> <span class="st">"Probability"</span>, <span class="dt">title =</span> <span class="st">"Perspective API Results"</span>)</a></code></pre></div>
 <p><img src="index_files/figure-html/unnamed-chunk-11-1.png" width="1152"></p>
 <p>You can also use Spanish (<code>es</code>) for <code>TOXICITY</code> and <code>SEVERE_TOXICITY</code> and <code>_EXPERIMENTAL</code>scoring.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">spanish_text &lt;-<span class="st"> "gastan en cosas que de nada sirven-nunca tratan de saber la verdad del funcionalismo de nuestro sistema solar y origen del cosmos-falso por Kepler. LAS UNIVERSIDADES DEL MUNDO NO SABEN ANALIZAR VERDAD O MENTIRA-LO QUE DICE KEPLER"</span></a>
@@ -334,14 +339,15 @@
 <a class="sourceLine" id="cb10-14" title="14"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(key, value)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb10-15" title="15"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb10-16" title="16"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb10-17" title="17"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.5</span>, <span class="dt">linetype =</span> <span class="st">"dashed"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb10-17" title="17"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.5</span>, <span class="dt">linetype =</span> <span class="st">"dashed"</span>)  <span class="op">+</span></a>
+<a class="sourceLine" id="cb10-18" title="18"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">"Model"</span>, <span class="dt">y =</span> <span class="st">"Probability"</span>, <span class="dt">title =</span> <span class="st">"Perspective API Results"</span>)</a></code></pre></div>
 <p><img src="index_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
 </div>
 <div id="prsp_stream" class="section level3">
 <h3 class="hasAnchor">
 <a href="#prsp_stream" class="anchor"></a><code>prsp_stream</code>
 </h3>
-<p>So far we have only seen how to get individual comments or sentences scored. But what if you would like to run the function for an entire dataset full text? This is where <code>prsp_stream</code> comes in. At its core <code>prsp_stream</code> is a loop implemented within <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map</a></code> to iterate over your text column. To use it let’s first generate a mock tibble.</p>
+<p>So far we have only seen how to get individual comments or sentences scored. But what if you would like to run the function for an entire dataset with a text column? This is where <code>prsp_stream</code> comes in. At its core <code>prsp_stream</code> is a loop implemented within <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map</a></code> to iterate over your text column. To use it let’s first generate a mock tibble.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">text_sample &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
 <a class="sourceLine" id="cb11-2" title="2">       <span class="dt">ctext =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"You wrote this? Wow. This is dumb and childish, please go f**** yourself."</span>,</a>
 <a class="sourceLine" id="cb11-3" title="3">                 <span class="st">"I don't know what to say about this but it's not good. The commenter is just an idiot"</span>,</a>
@@ -416,53 +422,53 @@
 <a class="sourceLine" id="cb18-4" title="4">              <span class="dt">score_model =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"TOXICITY"</span>, <span class="st">"SEVERE_TOXICITY"</span>),</a>
 <a class="sourceLine" id="cb18-5" title="5">              <span class="dt">verbose =</span> T,</a>
 <a class="sourceLine" id="cb18-6" title="6">              <span class="dt">safe_output =</span> T)</a></code></pre></div>
-<p><img src="images/prsp_stream%20output.png"></p>
+<p><img src="images/prsp_stream_output.png"></p>
 <p>Or the (not as pretty) output in Markdown</p>
-<pre><code>## 11.11% [2019-05-12 02:47:46]: 1 out of 9 (11.11%)
+<pre><code>## 11.11% [2019-05-13 22:20:15]: 1 out of 9 (11.11%)
 ## text_id: #efdcxct
 ##  0.96 TOXICITY
 ##  0.79 SEVERE_TOXICITY
 ## 
-## 22.22% [2019-05-12 02:47:47]: 2 out of 9 (22.22%)
+## 22.22% [2019-05-13 22:20:16]: 2 out of 9 (22.22%)
 ## text_id: #ehfcsct
 ##  0.93 TOXICITY
 ##  0.44 SEVERE_TOXICITY
 ## 
-## 33.33% [2019-05-12 02:47:48]: 3 out of 9 (33.33%)
+## 33.33% [2019-05-13 22:20:17]: 3 out of 9 (33.33%)
 ## text_id: #ekacxwt
 ## ERROR
 ## Error in .f(...): HTTP 400
 ## INVALID_ARGUMENT: Comment must be non-empty.
 ## NO SCORES
 ## 
-## 44.44% [2019-05-12 02:47:49]: 4 out of 9 (44.44%)
+## 44.44% [2019-05-13 22:20:18]: 4 out of 9 (44.44%)
 ## text_id: #ewatxad
 ##  0.06 TOXICITY
 ##  0.02 SEVERE_TOXICITY
 ## 
-## 55.56% [2019-05-12 02:47:50]: 5 out of 9 (55.56%)
+## 55.56% [2019-05-13 22:20:19]: 5 out of 9 (55.56%)
 ## text_id: #ekacswt
 ##  0.67 TOXICITY
 ##  0.31 SEVERE_TOXICITY
 ## 
-## 66.67% [2019-05-12 02:47:51]: 6 out of 9 (66.67%)
+## 66.67% [2019-05-13 22:20:20]: 6 out of 9 (66.67%)
 ## text_id: #ewftxwd
 ##  0.07 TOXICITY
 ##  0.03 SEVERE_TOXICITY
 ## 
-## 77.78% [2019-05-12 02:47:53]: 7 out of 9 (77.78%)
+## 77.78% [2019-05-13 22:20:21]: 7 out of 9 (77.78%)
 ## text_id: #eeadswt
 ## ERROR
 ## Error in .f(...): HTTP 400
 ## INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: is
 ## NO SCORES
 ## 
-## 88.89% [2019-05-12 02:47:54]: 8 out of 9 (88.89%)
+## 88.89% [2019-05-13 22:20:22]: 8 out of 9 (88.89%)
 ## text_id: #enfhxed
 ##  0.44 TOXICITY
 ##  0.22 SEVERE_TOXICITY
 ## 
-## 100.00% [2019-05-12 02:47:55]: 9 out of 9 (100.00%)
+## 100.00% [2019-05-13 22:20:23]: 9 out of 9 (100.00%)
 ## text_id: #efdmjd
 ## ERROR
 ## Error in .f(...): HTTP 400
@@ -508,15 +514,7 @@
 </ul>
 </div>
 
-      <div class="dev-status">
-<h2>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://travis-ci.org/favstats/peRspective"><img src="https://travis-ci.org/favstats/peRspective.svg?branch=master"></a></li>
-<li><a href="https://github.com/favstats/peRspective"><img src="https://img.shields.io/github/languages/code-size/favstats/peRspective.svg"></a></li>
-<li><a href="https://github.com/favstats/peRspective/commits/master"><img src="https://img.shields.io/github/last-commit/favstats/peRspective.svg"></a></li>
-</ul>
-</div>
-</div>
+      </div>
 
 </div>
 
