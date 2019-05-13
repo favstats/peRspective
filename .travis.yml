@@ -11,7 +11,7 @@ after_success:
 
 jobs: 
   include:
-  - r 3.6 
+  - r: 3.6 
   warnings_are_errors = false
   - r: release
   warnings_are_errors = false
