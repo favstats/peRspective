@@ -15,6 +15,8 @@ jobs:
     warnings_are_errors: false
   - r: 3.5
     warnings_are_errors: false
+  - r: 3.6
+    warnings_are_errors: false
   - r: release
     warnings_are_errors: false
   - r: devel
