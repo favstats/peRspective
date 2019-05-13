@@ -3,6 +3,15 @@
 language: R
 cache: packages
 
+jobs: 
+  include:
+  - r 3.6 
+  warnings_are_errors = false
+  - r: release
+  warnings_are_errors = false
+  - r: devel
+  warnings_are_errors = false
+
 r_packages:
   - covr
 
