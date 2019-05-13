@@ -3,6 +3,12 @@
 language: R
 cache: packages
 
+r_packages:
+  - covr
+
+after_success:
+  - Rscript -e 'library(covr); codecov()'
+
 jobs: 
   include:
   - r 3.6 
@@ -11,9 +17,3 @@ jobs:
   warnings_are_errors = false
   - r: devel
   warnings_are_errors = false
-
-r_packages:
-  - covr
-
-after_success:
-  - Rscript -e 'library(covr); codecov()'
