@@ -158,7 +158,7 @@ test_that("errors are thrown when invalid text is supplied", {
 
 })
 
-test_that("errors are thrown when invalid text is supplied", {
+test_that("errors are thrown when invalid text is supplied with safe_output true", {
 
   text_sample <- tibble::tibble(
     ctext = c("You wrote this? Wow. This is dumb and childish, please go f**** yourself.",
@@ -181,12 +181,13 @@ test_that("errors are thrown when invalid text is supplied", {
   )
 
 
-  score <- text_sample %>%
+  score <- text_sample[1:3,] %>%
     prsp_stream(text = ctext,
                 text_id = textid,
                 score_model = c("TOXICITY", "SEVERE_TOXICITY", "INSULT"),
                 safe_output = T)
 
+  
   expect_equal(length(score), 5)
 
 })
@@ -215,7 +216,7 @@ test_that("verbose and safe_output work together", {
   )
 
 
-  score <- text_sample %>%
+  score <- text_sample[1:3,] %>%
     prsp_stream(text = ctext,
                 text_id = textid,
                 score_model = c("TOXICITY", "SEVERE_TOXICITY"),
@@ -250,7 +251,7 @@ test_that("verbose, score_sentences and safe_output work together", {
   )
 
 
-  score <- text_sample %>%
+  score <- text_sample[1:3,] %>%
     prsp_stream(text = ctext,
                 text_id = textid,
                 score_model = c("TOXICITY", "SEVERE_TOXICITY"),
@@ -298,3 +299,4 @@ test_that("verbose, score_sentences but no safe_output work together", {
   expect_equal(length(score), 6)
 
 })
+

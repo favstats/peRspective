@@ -363,51 +363,51 @@ text_sample %>%
 
 Or the (not as pretty) output in Markdown
 
-    ## 11.11% [2019-05-14 01:38:16]: 1 out of 9 (11.11%)
+    ## 11.11% [2019-05-14 21:01:49]: 1 out of 9 (11.11%)
     ## text_id: #efdcxct
     ##  0.96 TOXICITY
     ##  0.79 SEVERE_TOXICITY
     ## 
-    ## 22.22% [2019-05-14 01:38:17]: 2 out of 9 (22.22%)
+    ## 22.22% [2019-05-14 21:01:50]: 2 out of 9 (22.22%)
     ## text_id: #ehfcsct
     ##  0.93 TOXICITY
     ##  0.44 SEVERE_TOXICITY
     ## 
-    ## 33.33% [2019-05-14 01:38:18]: 3 out of 9 (33.33%)
+    ## 33.33% [2019-05-14 21:01:51]: 3 out of 9 (33.33%)
     ## text_id: #ekacxwt
     ## ERROR
     ## Error in .f(...): HTTP 400
     ## INVALID_ARGUMENT: Comment must be non-empty.
     ## NO SCORES
     ## 
-    ## 44.44% [2019-05-14 01:38:19]: 4 out of 9 (44.44%)
+    ## 44.44% [2019-05-14 21:01:52]: 4 out of 9 (44.44%)
     ## text_id: #ewatxad
     ##  0.06 TOXICITY
     ##  0.02 SEVERE_TOXICITY
     ## 
-    ## 55.56% [2019-05-14 01:38:20]: 5 out of 9 (55.56%)
+    ## 55.56% [2019-05-14 21:01:54]: 5 out of 9 (55.56%)
     ## text_id: #ekacswt
     ##  0.67 TOXICITY
     ##  0.31 SEVERE_TOXICITY
     ## 
-    ## 66.67% [2019-05-14 01:38:21]: 6 out of 9 (66.67%)
+    ## 66.67% [2019-05-14 21:01:55]: 6 out of 9 (66.67%)
     ## text_id: #ewftxwd
     ##  0.07 TOXICITY
     ##  0.03 SEVERE_TOXICITY
     ## 
-    ## 77.78% [2019-05-14 01:38:23]: 7 out of 9 (77.78%)
+    ## 77.78% [2019-05-14 21:01:56]: 7 out of 9 (77.78%)
     ## text_id: #eeadswt
     ## ERROR
     ## Error in .f(...): HTTP 400
-    ## INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: is
+    ## INVALID_ARGUMENT: Attribute TOXICITY does not support request languages: is
     ## NO SCORES
     ## 
-    ## 88.89% [2019-05-14 01:38:24]: 8 out of 9 (88.89%)
+    ## 88.89% [2019-05-14 21:01:57]: 8 out of 9 (88.89%)
     ## text_id: #enfhxed
     ##  0.44 TOXICITY
     ##  0.22 SEVERE_TOXICITY
     ## 
-    ## 100.00% [2019-05-14 01:38:25]: 9 out of 9 (100.00%)
+    ## 100.00% [2019-05-14 21:01:58]: 9 out of 9 (100.00%)
     ## text_id: #efdmjd
     ## ERROR
     ## Error in .f(...): HTTP 400

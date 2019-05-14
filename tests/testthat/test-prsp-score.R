@@ -4,6 +4,8 @@ test_that("score_model has been supplied", {
 
 })
 
+Sys.sleep(1)
+
 
 test_that("invalid score_model throws error", {
 
@@ -11,6 +13,7 @@ test_that("invalid score_model throws error", {
 
 })
 
+Sys.sleep(1)
 
 test_that("specifying a valid model works", {
 
@@ -20,6 +23,7 @@ test_that("specifying a valid model works", {
   expect_equal(length(tox), 1)
 })
 
+Sys.sleep(1)
 
 test_that("you can't specify a faster rate limit than 0.7 per second", {
 
@@ -29,6 +33,7 @@ test_that("you can't specify a faster rate limit than 0.7 per second", {
 
 })
 
+Sys.sleep(1)
 
 test_that("you can't specify a faster rate limit than 0.7 per second", {
 
@@ -39,6 +44,7 @@ test_that("you can't specify a faster rate limit than 0.7 per second", {
   expect_equal(length(score), 1)
 })
 
+Sys.sleep(1)
 
 
 test_that("an error is thrown when no valid text", {
@@ -49,6 +55,7 @@ test_that("an error is thrown when no valid text", {
 })
 
 
+Sys.sleep(1)
 
 test_that("text_id is valid", {
 
@@ -58,5 +65,18 @@ test_that("text_id is valid", {
 
 
 
+  expect_true(any(colnames(score) == "text_id"))
+})
+
+
+test_that("score_sentences works", {
+  
+  score <- peRspective::prsp_score("Hello, I am a testbot",
+                                   score_model = "TOXICITY",
+                                   score_sentences = T,
+                                   text_id = "my_text_id")
+  
+  
+  ## TODO: Change Test
   expect_true(any(colnames(score) == "text_id"))
 })
