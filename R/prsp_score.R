@@ -7,14 +7,18 @@
 #' @md
 #' @param text a character string.
 #' @param text_id a unique ID for the text that you supply (required).
-#' @param languages A vector of [ISO 631-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) two-letter language codes specifying the language(s) that comment is in (for example, "en", "es", "fr", "de", etc). If unspecified, the API will autodetect the comment language. If language detection fails, the API returns an error.
-#' @param score_sentences A boolean value that indicates if the request should return spans that describe the scores for each part of the text (currently done at per sentence level). Defaults to `FALSE`.
-#' @param key Your API key ([see here](https://github.com/conversationai/perspectiveapi/blob/master/quickstart.md) to set up an API key).
-#' @param sleep how long should `prsp_score` wait between each call
 #' @param score_model Specify what model do you want to use (for example `TOXICITY` and/or `SEVERE_TOXICITY`). Specify a character vector if you want more than one score. See `peRspective::prsp_models`.
+#' @param score_sentences A boolean value that indicates if the request should return spans that describe the scores for each part of the text (currently done at per sentence level). Defaults to `FALSE`.
+#' @param languages A vector of [ISO 631-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) two-letter language codes specifying the language(s) that comment is in (for example, "en", "es", "fr", "de", etc). If unspecified, the API will autodetect the comment language. If language detection fails, the API returns an error.
+#' @param sleep how long should `prsp_score` wait between each call
+#' @param doNotStore Whether the API is permitted to store comment from this request. Stored comments will be used for future research and community model building purposes to improve the API over time. Perspective API also plans to provide dashboards and automated analysis of the comments submitted, which will apply only to those stored. Defaults to `FALSE` (request data may be stored). Important note: This should be set to true if data being submitted is private (i.e. not publicly accessible), or if the data submitted contains content written by someone under 13 years old.
+#' @param key Your API key ([see here](https://github.com/conversationai/perspectiveapi/blob/master/quickstart.md) to set up an API key).
 #' @return a `tibble`
 #' @export
-prsp_score <- function(text, text_id = NULL, languages = NULL, score_sentences = F, score_model, sleep = 1, key = NULL) {
+prsp_score <- function(text, text_id = NULL, 
+                       languages = NULL, score_sentences = F, 
+                       score_model, sleep = 1, doNotStore = F, 
+                       key = NULL) {
   
   if (is.null(score_model)) {
     stop(stringr::str_glue("No Model type provided in score_model.\n\nShould be one of the following:\n\n{peRspective::prsp_models %>% glue::glue_collapse('\n')}"))
@@ -158,7 +162,8 @@ unnest_scores <- function(Output, score_model, score_sentences, text){
 form_request <- function(score_model, 
                          text, 
                          score_sentences, 
-                         languages) {
+                         languages,
+                         doNotStore = F) {
   
   model_list <- score_model %>%
     purrr::map(
@@ -171,21 +176,26 @@ form_request <- function(score_model,
   analyze_request <- list(
     comment = list(text = text),
     spanAnnotations = score_sentences,
-    requestedAttributes = model_list
+    requestedAttributes = model_list,
+    doNotStore = doNotStore
   ) 
   
   if (!is.null(languages)) {
     analyze_request <- rlist::list.append(analyze_request, languages = languages)
   }
   
+  
   analyze_request <- analyze_request %>%
     jsonlite::toJSON(auto_unbox = T)   
   
   return(analyze_request)
 }
+
+# form_request("TOXICITY", "hall", score_sentences = F, languages = "EN", T)
+
 # library(peRspective)
 
 
 # prsp_score("Hello, I am a testbot",
 #            score_sentences = T,
-#            score_model = "TOXICITY") 
+#            score_model = "TOXICITY", doNotStore = F)

@@ -5,7 +5,8 @@
 \title{Analyze comments with Perspective API}
 \usage{
 prsp_score(text, text_id = NULL, languages = NULL,
-  score_sentences = F, score_model, sleep = 1, key = NULL)
+  score_sentences = F, score_model, sleep = 1, doNotStore = F,
+  key = NULL)
 }
 \arguments{
 \item{text}{a character string.}
@@ -19,6 +20,8 @@ prsp_score(text, text_id = NULL, languages = NULL,
 \item{score_model}{Specify what model do you want to use (for example \code{TOXICITY} and/or \code{SEVERE_TOXICITY}). Specify a character vector if you want more than one score. See \code{peRspective::prsp_models}.}
 
 \item{sleep}{how long should \code{prsp_score} wait between each call}
+
+\item{doNotStore}{Whether the API is permitted to store comment from this request. Stored comments will be used for future research and community model building purposes to improve the API over time. Perspective API also plans to provide dashboards and automated analysis of the comments submitted, which will apply only to those stored. Defaults to \code{FALSE} (request data may be stored). Important note: This should be set to true if data being submitted is private (i.e. not publicly accessible), or if the data submitted contains content written by someone under 13 years old.}
 
 \item{key}{Your API key (\href{https://github.com/conversationai/perspectiveapi/blob/master/quickstart.md}{see here} to set up an API key).}
 }

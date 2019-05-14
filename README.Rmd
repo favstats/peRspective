@@ -238,6 +238,8 @@ text_scores %>%
   labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
 
+**NOTE:** Your provided text will be stored by the Perspective API for future research. This option is the default. If the supplied texts are private or any of the authors of the texts are below 13 years old, `doNotStore` should be set to `TRUE.`
+
 ### `prsp_stream`
 
 So far we have only seen how to get individual comments or sentences scored. But what if you would like to run the function for an entire dataset with a text column? This is where `prsp_stream` comes in. At its core `prsp_stream` is a loop implemented within `purrr::map` to iterate over your text column. To use it let's first generate a mock tibble.
