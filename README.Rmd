@@ -127,7 +127,8 @@ library(tidyverse)
 Define your key variable.
 
 ```{r, echo = F}
-key <- readr::read_lines("prsp.txt")
+key <- readr::read_lines("../keys/prsp_simon.txt")
+
 
 Sys.setenv(perspective_api_key = key)
 
@@ -165,6 +166,11 @@ text_scores %>%
   labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
 
+```{r, echo=F}
+Sys.sleep(1)
+```
+
+
 A Trump Tweet:
 
 ```{r}
@@ -187,6 +193,9 @@ text_scores %>%
   labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
 
+```{r, echo=F}
+Sys.sleep(1)
+```
 
 Instead of scoring just entire comments you can also score individual sentences with `score_sentences = T`. In this case the Perspective API will automatically split your text into reasonable sentences and score them in addition to an overall score.
 
@@ -215,7 +224,11 @@ text_scores %>%
 
 ```
 
-You can also use Spanish (`es`) for `TOXICITY` and `SEVERE_TOXICITY` and `_EXPERIMENTAL`scoring.
+```{r, echo=F}
+Sys.sleep(1)
+```
+
+You can also use Spanish (`es`) for `TOXICITY`, `SEVERE_TOXICITY` and `_EXPERIMENTAL` models.
 
 ```{r}
 spanish_text <- "gastan en cosas que de nada sirven-nunca tratan de saber la verdad del funcionalismo de nuestro sistema solar y origen del cosmos-falso por Kepler. LAS UNIVERSIDADES DEL MUNDO NO SABEN ANALIZAR VERDAD O MENTIRA-LO QUE DICE KEPLER"
@@ -242,6 +255,10 @@ text_scores %>%
 
 ### `prsp_stream`
 
+```{r, echo=F}
+Sys.sleep(1)
+```
+
 So far we have only seen how to get individual comments or sentences scored. But what if you would like to run the function for an entire dataset with a text column? This is where `prsp_stream` comes in. At its core `prsp_stream` is a loop implemented within `purrr::map` to iterate over your text column. To use it let's first generate a mock tibble.
 
 ```{r}
@@ -258,6 +275,11 @@ text_sample <- tibble(
        )
 ```
 
+
+```{r, echo=F}
+Sys.sleep(1)
+```
+
 `prsp_stream` requires a `text` and `text_id column`. It wraps `prsp_score` and takes all its arguments. Let's run the most basic version:
 
 ```{r, message=T}
@@ -272,6 +294,10 @@ You receive a `tibble` with your desired scorings including the `text_id` to mat
 Now, the problem is that sometimes the call might fail at some point. It is therefore suggested to set `safe_output = TRUE`. This will put the function into a `purrr::safely` environment to ensure that your function will keep running even if you encounter errors. 
 
 Let's try it out with a new dataset that contains text that the Perspective API can't score
+
+```{r, echo=F}
+Sys.sleep(1)
+```
 
 ```{r}
 text_sample <- tibble(
@@ -297,6 +323,10 @@ text_sample <- tibble(
 
 And run the function with `safe_output = TRUE`.
 
+```{r, echo=F}
+Sys.sleep(1)
+```
+
 ```{r, message=T}
 text_sample %>%
   prsp_stream(text = ctext,
@@ -308,6 +338,10 @@ text_sample %>%
 `safe_output = T` will also provide us with the error messages that occured so that we can check what went wrong!
 
 Finally, there is one last argument: `verbose = TRUE`. Enable this argument and thanks to [`crayon`](https://github.com/r-lib/crayon) you will receive beautiful console output that guides you along the way, showing you errors and text scores as you go.
+
+```{r, echo=F}
+Sys.sleep(1)
+```
 
 
 ```{r, eval = F}
@@ -333,3 +367,8 @@ text_sample %>%
 
 
 ```
+
+
+
+
+<div>Icons made by <a href="https://www.freepik.com/?__hstc=57440181.1504a979705d81fb44d4169a0ccdf2ae.1558036002089.1558036002089.1558036002089.1&__hssc=57440181.4.1558036002090&__hsfp=2902986854" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>

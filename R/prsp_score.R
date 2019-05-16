@@ -14,6 +14,21 @@
 #' @param doNotStore Whether the API is permitted to store comment from this request. Stored comments will be used for future research and community model building purposes to improve the API over time. Perspective API also plans to provide dashboards and automated analysis of the comments submitted, which will apply only to those stored. Defaults to `FALSE` (request data may be stored). Important note: This should be set to true if data being submitted is private (i.e. not publicly accessible), or if the data submitted contains content written by someone under 13 years old.
 #' @param key Your API key ([see here](https://github.com/conversationai/perspectiveapi/blob/master/quickstart.md) to set up an API key).
 #' @return a `tibble`
+#' @examples
+#' \dontrun{
+#' ## GET TOXICITY SCORES for a comment
+#' prsp_score("Hello, I am a test comment!",
+#'            score_model = "TOXICITY")
+#'            
+#' ## GET TOXICITY and SEVERE_TOXICITY Scores for a comment
+#' prsp_score("Hello, I am a test comment!",
+#'            score_model = c("TOXICITY", "SEVERE_TOXICITY))
+#'   
+#' ## GET TOXICITY and SEVERE_TOXICITY Scores for each sentence of a comment
+#' prsp_score("Hello, I am a test comment! I am a second sentence and I will (hopefully) be scored seperately",
+#'            score_model = c("TOXICITY", "SEVERE_TOXICITY),
+#'            score_sentences = T)
+#' }
 #' @export
 prsp_score <- function(text, text_id = NULL, 
                        languages = NULL, score_sentences = F, 

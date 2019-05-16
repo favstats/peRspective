@@ -34,3 +34,19 @@ Provide a character string with your text, your API key and what scores you want
 \details{
 For more details see \code{?peRspective} or \href{https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md}{Perspective API documentation}
 }
+\examples{
+\dontrun{
+## GET TOXICITY SCORES for a comment
+prsp_score("Hello, I am a test comment!",
+           score_model = "TOXICITY")
+           
+## GET TOXICITY and SEVERE_TOXICITY Scores for a comment
+prsp_score("Hello, I am a test comment!",
+           score_model = c("TOXICITY", "SEVERE_TOXICITY))
+  
+## GET TOXICITY and SEVERE_TOXICITY Scores for each sentence of a comment
+prsp_score("Hello, I am a test comment! I am a second sentence and I will (hopefully) be scored seperately",
+           score_model = c("TOXICITY", "SEVERE_TOXICITY),
+           score_sentences = T)
+}
+}

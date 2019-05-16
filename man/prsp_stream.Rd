@@ -29,3 +29,39 @@ This function wraps \code{\link{prsp_score}} and loops over your text input. Pro
 \details{
 For more details see \code{?peRspective} or \href{https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md}{Perspective API documentation}
 }
+\examples{
+\dontrun{
+## Create a mock tibble
+text_sample <- tibble(
+ctext = c("You wrote this? Wow. This is dumb and childish, please go f**** yourself.",
+          "I don't know what to say about this but it's not good. The commenter is just an idiot",
+          "This goes even further!",
+          "What the hell is going on?",
+          "Please. I don't get it. Explain it again",
+          "Annoying and irrelevant! I'd rather watch the paint drying on the wall!"),
+textid = c("#efdcxct", "#ehfcsct", 
+           "#ekacxwt",  "#ewatxad", 
+           "#ekacswt",  "#ewftxwd")
+)
+           
+## GET TOXICITY and SEVERE_TOXICITY Scores for a dataset with a text column
+text_sample \%>\%
+prsp_stream(text = ctext,
+            text_id = textid,
+            score_model = c("TOXICITY", "SEVERE_TOXICITY"))
+  
+## Safe Output argument means will not stop on error
+prsp_stream(text = ctext,
+           text_id = textid,
+           score_model = c("TOXICITY", "SEVERE_TOXICITY"),
+           safe_output = T)
+           
+           
+## verbose = T means you get pretty narration of your scoring procedure
+prsp_stream(text = ctext,
+           text_id = textid,
+           score_model = c("TOXICITY", "SEVERE_TOXICITY"),
+           safe_output = T,
+           verbose = T)
+}
+}
