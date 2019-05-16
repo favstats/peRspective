@@ -13,6 +13,8 @@ knitr::opts_chunk$set(
   message = F,
   warning = F
 )
+
+ggplot2::theme_set(ggplot2::theme_minimal())
 ```
 
 
@@ -224,7 +226,6 @@ text_scores %>%
   geom_col() +
   coord_flip() +
   facet_wrap(~sentences, ncol = 2) +
-  theme_minimal() +
   geom_hline(yintercept = 0.5, linetype = "dashed") +
   labs(x = "Model", y = "Probability", title = "Perspective API Results")
 

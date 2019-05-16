@@ -219,7 +219,6 @@ text_scores %>%
   geom_col() +
   coord_flip() +
   facet_wrap(~sentences, ncol = 2) +
-  theme_minimal() +
   geom_hline(yintercept = 0.5, linetype = "dashed") +
   labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
@@ -375,51 +374,51 @@ text_sample %>%
 
 Or the (not as pretty) output in Markdown
 
-    #> 11.11% [2019-05-17 01:42:43]: 1 out of 9 (11.11%)
+    #> 11.11% [2019-05-17 01:50:03]: 1 out of 9 (11.11%)
     #> text_id: #efdcxct
     #>  0.96 TOXICITY
     #>  0.79 SEVERE_TOXICITY
     #> 
-    #> 22.22% [2019-05-17 01:42:44]: 2 out of 9 (22.22%)
+    #> 22.22% [2019-05-17 01:50:04]: 2 out of 9 (22.22%)
     #> text_id: #ehfcsct
     #>  0.93 TOXICITY
     #>  0.44 SEVERE_TOXICITY
     #> 
-    #> 33.33% [2019-05-17 01:42:45]: 3 out of 9 (33.33%)
+    #> 33.33% [2019-05-17 01:50:05]: 3 out of 9 (33.33%)
     #> text_id: #ekacxwt
     #> ERROR
     #> Error in .f(...): HTTP 400
     #> INVALID_ARGUMENT: Comment must be non-empty.
     #> NO SCORES
     #> 
-    #> 44.44% [2019-05-17 01:42:46]: 4 out of 9 (44.44%)
+    #> 44.44% [2019-05-17 01:50:06]: 4 out of 9 (44.44%)
     #> text_id: #ewatxad
     #>  0.06 TOXICITY
     #>  0.02 SEVERE_TOXICITY
     #> 
-    #> 55.56% [2019-05-17 01:42:47]: 5 out of 9 (55.56%)
+    #> 55.56% [2019-05-17 01:50:07]: 5 out of 9 (55.56%)
     #> text_id: #ekacswt
     #>  0.67 TOXICITY
     #>  0.31 SEVERE_TOXICITY
     #> 
-    #> 66.67% [2019-05-17 01:42:48]: 6 out of 9 (66.67%)
+    #> 66.67% [2019-05-17 01:50:08]: 6 out of 9 (66.67%)
     #> text_id: #ewftxwd
     #>  0.07 TOXICITY
     #>  0.03 SEVERE_TOXICITY
     #> 
-    #> 77.78% [2019-05-17 01:42:49]: 7 out of 9 (77.78%)
+    #> 77.78% [2019-05-17 01:50:09]: 7 out of 9 (77.78%)
     #> text_id: #eeadswt
     #> ERROR
     #> Error in .f(...): HTTP 400
     #> INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: is
     #> NO SCORES
     #> 
-    #> 88.89% [2019-05-17 01:42:50]: 8 out of 9 (88.89%)
+    #> 88.89% [2019-05-17 01:50:10]: 8 out of 9 (88.89%)
     #> text_id: #enfhxed
     #>  0.44 TOXICITY
     #>  0.22 SEVERE_TOXICITY
     #> 
-    #> 100.00% [2019-05-17 01:42:51]: 9 out of 9 (100.00%)
+    #> 100.00% [2019-05-17 01:50:11]: 9 out of 9 (100.00%)
     #> text_id: #efdmjd
     #> ERROR
     #> Error in .f(...): HTTP 400
@@ -465,7 +464,7 @@ sessionInfo()
 #>  [4] lattice_0.20-38    vctrs_0.1.0        colorspace_1.4-1  
 #>  [7] generics_0.0.2     htmltools_0.3.6    yaml_2.2.0        
 #> [10] utf8_1.1.4         rlang_0.3.4        pillar_1.4.0      
-#> [13] glue_1.3.1         withr_2.1.2        RColorBrewer_1.1-2
+#> [13] withr_2.1.2        glue_1.3.1         RColorBrewer_1.1-2
 #> [16] modelr_0.1.4       readxl_1.3.1       rvcheck_0.1.3     
 #> [19] plyr_1.8.4         dlstats_0.1.0      munsell_0.5.0     
 #> [22] gtable_0.3.0       cellranger_1.1.0   rvest_0.3.3       
