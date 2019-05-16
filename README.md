@@ -1,4 +1,6 @@
 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
 # peRspective <img src="images/perspective2.png" width="160px" align="right" />
 
 ![](https://img.shields.io/badge/My%201st%20Package-Ever-magenta.svg)
@@ -90,19 +92,18 @@ c(
   peRspective::prsp_models,
   peRspective::prsp_exp_models
 )
+#>  [1] "TOXICITY"                     "SEVERE_TOXICITY"             
+#>  [3] "IDENTITY_ATTACK"              "INSULT"                      
+#>  [5] "PROFANITY"                    "SEXUALLY_EXPLICIT"           
+#>  [7] "THREAT"                       "FLIRTATION"                  
+#>  [9] "ATTACK_ON_AUTHOR"             "ATTACK_ON_COMMENTER"         
+#> [11] "INCOHERENT"                   "INFLAMMATORY"                
+#> [13] "LIKELY_TO_REJECT"             "OBSCENE"                     
+#> [15] "SPAM"                         "UNSUBSTANTIAL"               
+#> [17] "TOXICITY_EXPERIMENTAL"        "SEVERE_TOXICITY_EXPERIMENTAL"
+#> [19] "IDENTITY_ATTACK_EXPERIMENTAL" "INSULT_EXPERIMENTAL"         
+#> [21] "PROFANITY_EXPERIMENTAL"       "THREAT_EXPERIMENTAL"
 ```
-
-    ##  [1] "TOXICITY"                     "SEVERE_TOXICITY"             
-    ##  [3] "IDENTITY_ATTACK"              "INSULT"                      
-    ##  [5] "PROFANITY"                    "SEXUALLY_EXPLICIT"           
-    ##  [7] "THREAT"                       "FLIRTATION"                  
-    ##  [9] "ATTACK_ON_AUTHOR"             "ATTACK_ON_COMMENTER"         
-    ## [11] "INCOHERENT"                   "INFLAMMATORY"                
-    ## [13] "LIKELY_TO_REJECT"             "OBSCENE"                     
-    ## [15] "SPAM"                         "UNSUBSTANTIAL"               
-    ## [17] "TOXICITY_EXPERIMENTAL"        "SEVERE_TOXICITY_EXPERIMENTAL"
-    ## [19] "IDENTITY_ATTACK_EXPERIMENTAL" "INSULT_EXPERIMENTAL"         
-    ## [21] "PROFANITY_EXPERIMENTAL"       "THREAT_EXPERIMENTAL"
 
 ## Usage
 
@@ -124,15 +125,24 @@ Also the `tidyverse` for examples.
 library(tidyverse)
 ```
 
-Define your key variable.
+**Define your key variable.**
 
 `peRspective` functions will read the API key from environment variable
-`perspective_api_key`. You can assign an environment object like this in
-your script:
+`perspective_api_key`. In order to add your key to your environment
+file, you can use the function `edit_r_environ()` from the [`usethis`
+package](https://usethis.r-lib.org/).
+
+This will open your .Renviron file in your text editor. Now, you can add
+the following line to it:
 
 ``` r
-Sys.setenv(perspective_api_key = "YOUR_API_KEY")
+perspective_api_key="YOUR_API_KEY"
 ```
+
+Save the file and restart R for the changes to take effect.
+
+Alternatively, you can provide an explicit definition of your API key
+with each function call using the `key` argument.
 
 ### `prsp_score`
 
@@ -140,6 +150,7 @@ Now you can use `prsp_score` to score your comments with various models
 provided by the Perspective API.
 
 ``` r
+
 my_text <- "You wrote this? Wow. This is dumb and childish, please go f**** yourself."
 
 text_scores <- prsp_score(
@@ -159,7 +170,7 @@ text_scores %>%
   labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
 
 A Trump Tweet:
 
@@ -183,7 +194,7 @@ text_scores %>%
   labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
 
 Instead of scoring just entire comments you can also score individual
 sentences with `score_sentences = T`. In this case the Perspective API
@@ -213,7 +224,7 @@ text_scores %>%
   labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
 
 You can also use Spanish (`es`) for `TOXICITY`, `SEVERE_TOXICITY` and
 `_EXPERIMENTAL` models.
@@ -225,7 +236,6 @@ spanish_text <- "gastan en cosas que de nada sirven-nunca tratan de saber la ver
 text_scores <- prsp_score(
            text = spanish_text, 
            languages = "es",
-           key = key,
            score_model = c("TOXICITY", "SEVERE_TOXICITY", "INSULT_EXPERIMENTAL")
            )
 
@@ -239,7 +249,7 @@ text_scores %>%
   labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
 
 **NOTE:** Your provided text will be stored by the Perspective API for
 future research. This option is the default. If the supplied texts are
@@ -277,19 +287,17 @@ text_sample %>%
   prsp_stream(text = ctext,
               text_id = textid,
               score_model = c("TOXICITY", "SEVERE_TOXICITY"))
+#> Binding rows...
+#> # A tibble: 6 x 3
+#>   text_id  TOXICITY SEVERE_TOXICITY
+#>   <chr>       <dbl>           <dbl>
+#> 1 #efdcxct   0.955           0.794 
+#> 2 #ehfcsct   0.927           0.436 
+#> 3 #ekacxwt   0.0562          0.0224
+#> 4 #ewatxad   0.666           0.309 
+#> 5 #ekacswt   0.0694          0.0290
+#> 6 #ewftxwd   0.442           0.224
 ```
-
-    ## Binding rows...
-
-    ## # A tibble: 6 x 3
-    ##   text_id  TOXICITY SEVERE_TOXICITY
-    ##   <chr>       <dbl>           <dbl>
-    ## 1 #efdcxct   0.955           0.794 
-    ## 2 #ehfcsct   0.927           0.436 
-    ## 3 #ekacxwt   0.0562          0.0224
-    ## 4 #ewatxad   0.666           0.309 
-    ## 5 #ekacswt   0.0694          0.0290
-    ## 6 #ewftxwd   0.442           0.224
 
 You receive a `tibble` with your desired scorings including the
 `text_id` to match your score with your original dataframe.
@@ -332,20 +340,19 @@ text_sample %>%
               text_id = textid,
               score_model = c("TOXICITY", "SEVERE_TOXICITY", "INSULT"),
               safe_output = T)
+#> # A tibble: 9 x 5
+#>   text_id  error                           TOXICITY SEVERE_TOXICITY  INSULT
+#>   <chr>    <chr>                              <dbl>           <dbl>   <dbl>
+#> 1 #efdcxct No Error                          0.955           0.794   0.923 
+#> 2 #ehfcsct No Error                          0.927           0.436   0.947 
+#> 3 #ekacxwt "Error in .f(...): HTTP 400\nI…  NA              NA      NA     
+#> 4 #ewatxad No Error                          0.0562          0.0224  0.0315
+#> 5 #ekacswt No Error                          0.666           0.309   0.331 
+#> 6 #ewftxwd No Error                          0.0694          0.0290  0.0499
+#> 7 #eeadswt "Error in .f(...): HTTP 400\nI…  NA              NA      NA     
+#> 8 #enfhxed No Error                          0.442           0.224   0.321 
+#> 9 #efdmjd  "Error in .f(...): HTTP 400\nI…  NA              NA      NA
 ```
-
-    ## # A tibble: 9 x 5
-    ##   text_id  error                           TOXICITY SEVERE_TOXICITY  INSULT
-    ##   <chr>    <chr>                              <dbl>           <dbl>   <dbl>
-    ## 1 #efdcxct No Error                          0.955           0.794   0.923 
-    ## 2 #ehfcsct No Error                          0.927           0.436   0.947 
-    ## 3 #ekacxwt "Error in .f(...): HTTP 400\nI~  NA              NA      NA     
-    ## 4 #ewatxad No Error                          0.0562          0.0224  0.0315
-    ## 5 #ekacswt No Error                          0.666           0.309   0.331 
-    ## 6 #ewftxwd No Error                          0.0694          0.0290  0.0499
-    ## 7 #eeadswt "Error in .f(...): HTTP 400\nI~  NA              NA      NA     
-    ## 8 #enfhxed No Error                          0.442           0.224   0.321 
-    ## 9 #efdmjd  "Error in .f(...): HTTP 400\nI~  NA              NA      NA
 
 `safe_output = T` will also provide us with the error messages that
 occured so that we can check what went wrong\!
@@ -368,69 +375,113 @@ text_sample %>%
 
 Or the (not as pretty) output in Markdown
 
-    ## 11.11% [2019-05-17 00:30:03]: 1 out of 9 (11.11%)
-    ## text_id: #efdcxct
-    ##  0.96 TOXICITY
-    ##  0.79 SEVERE_TOXICITY
-    ## 
-    ## 22.22% [2019-05-17 00:30:04]: 2 out of 9 (22.22%)
-    ## text_id: #ehfcsct
-    ##  0.93 TOXICITY
-    ##  0.44 SEVERE_TOXICITY
-    ## 
-    ## 33.33% [2019-05-17 00:30:05]: 3 out of 9 (33.33%)
-    ## text_id: #ekacxwt
-    ## ERROR
-    ## Error in .f(...): HTTP 400
-    ## INVALID_ARGUMENT: Comment must be non-empty.
-    ## NO SCORES
-    ## 
-    ## 44.44% [2019-05-17 00:30:06]: 4 out of 9 (44.44%)
-    ## text_id: #ewatxad
-    ##  0.06 TOXICITY
-    ##  0.02 SEVERE_TOXICITY
-    ## 
-    ## 55.56% [2019-05-17 00:30:07]: 5 out of 9 (55.56%)
-    ## text_id: #ekacswt
-    ##  0.67 TOXICITY
-    ##  0.31 SEVERE_TOXICITY
-    ## 
-    ## 66.67% [2019-05-17 00:30:09]: 6 out of 9 (66.67%)
-    ## text_id: #ewftxwd
-    ##  0.07 TOXICITY
-    ##  0.03 SEVERE_TOXICITY
-    ## 
-    ## 77.78% [2019-05-17 00:30:10]: 7 out of 9 (77.78%)
-    ## text_id: #eeadswt
-    ## ERROR
-    ## Error in .f(...): HTTP 400
-    ## INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: is
-    ## NO SCORES
-    ## 
-    ## 88.89% [2019-05-17 00:30:11]: 8 out of 9 (88.89%)
-    ## text_id: #enfhxed
-    ##  0.44 TOXICITY
-    ##  0.22 SEVERE_TOXICITY
-    ## 
-    ## 100.00% [2019-05-17 00:30:12]: 9 out of 9 (100.00%)
-    ## text_id: #efdmjd
-    ## ERROR
-    ## Error in .f(...): HTTP 400
-    ## INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: ja-Latn
-    ## NO SCORES
+    #> 11.11% [2019-05-17 01:42:43]: 1 out of 9 (11.11%)
+    #> text_id: #efdcxct
+    #>  0.96 TOXICITY
+    #>  0.79 SEVERE_TOXICITY
+    #> 
+    #> 22.22% [2019-05-17 01:42:44]: 2 out of 9 (22.22%)
+    #> text_id: #ehfcsct
+    #>  0.93 TOXICITY
+    #>  0.44 SEVERE_TOXICITY
+    #> 
+    #> 33.33% [2019-05-17 01:42:45]: 3 out of 9 (33.33%)
+    #> text_id: #ekacxwt
+    #> ERROR
+    #> Error in .f(...): HTTP 400
+    #> INVALID_ARGUMENT: Comment must be non-empty.
+    #> NO SCORES
+    #> 
+    #> 44.44% [2019-05-17 01:42:46]: 4 out of 9 (44.44%)
+    #> text_id: #ewatxad
+    #>  0.06 TOXICITY
+    #>  0.02 SEVERE_TOXICITY
+    #> 
+    #> 55.56% [2019-05-17 01:42:47]: 5 out of 9 (55.56%)
+    #> text_id: #ekacswt
+    #>  0.67 TOXICITY
+    #>  0.31 SEVERE_TOXICITY
+    #> 
+    #> 66.67% [2019-05-17 01:42:48]: 6 out of 9 (66.67%)
+    #> text_id: #ewftxwd
+    #>  0.07 TOXICITY
+    #>  0.03 SEVERE_TOXICITY
+    #> 
+    #> 77.78% [2019-05-17 01:42:49]: 7 out of 9 (77.78%)
+    #> text_id: #eeadswt
+    #> ERROR
+    #> Error in .f(...): HTTP 400
+    #> INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: is
+    #> NO SCORES
+    #> 
+    #> 88.89% [2019-05-17 01:42:50]: 8 out of 9 (88.89%)
+    #> text_id: #enfhxed
+    #>  0.44 TOXICITY
+    #>  0.22 SEVERE_TOXICITY
+    #> 
+    #> 100.00% [2019-05-17 01:42:51]: 9 out of 9 (100.00%)
+    #> text_id: #efdmjd
+    #> ERROR
+    #> Error in .f(...): HTTP 400
+    #> INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: ja-Latn
+    #> NO SCORES
+    #> # A tibble: 9 x 4
+    #>   text_id  error                                   TOXICITY SEVERE_TOXICITY
+    #>   <chr>    <chr>                                      <dbl>           <dbl>
+    #> 1 #efdcxct No Error                                  0.955           0.794 
+    #> 2 #ehfcsct No Error                                  0.927           0.436 
+    #> 3 #ekacxwt "Error in .f(...): HTTP 400\nINVALID_A…  NA              NA     
+    #> 4 #ewatxad No Error                                  0.0562          0.0224
+    #> 5 #ekacswt No Error                                  0.666           0.309 
+    #> 6 #ewftxwd No Error                                  0.0694          0.0290
+    #> 7 #eeadswt "Error in .f(...): HTTP 400\nINVALID_A…  NA              NA     
+    #> 8 #enfhxed No Error                                  0.442           0.224 
+    #> 9 #efdmjd  "Error in .f(...): HTTP 400\nINVALID_A…  NA              NA
 
-    ## # A tibble: 9 x 4
-    ##   text_id  error                                   TOXICITY SEVERE_TOXICITY
-    ##   <chr>    <chr>                                      <dbl>           <dbl>
-    ## 1 #efdcxct No Error                                  0.955           0.794 
-    ## 2 #ehfcsct No Error                                  0.927           0.436 
-    ## 3 #ekacxwt "Error in .f(...): HTTP 400\nINVALID_A~  NA              NA     
-    ## 4 #ewatxad No Error                                  0.0562          0.0224
-    ## 5 #ekacswt No Error                                  0.666           0.309 
-    ## 6 #ewftxwd No Error                                  0.0694          0.0290
-    ## 7 #eeadswt "Error in .f(...): HTTP 400\nINVALID_A~  NA              NA     
-    ## 8 #enfhxed No Error                                  0.442           0.224 
-    ## 9 #efdmjd  "Error in .f(...): HTTP 400\nINVALID_A~  NA              NA
+``` r
+sessionInfo()
+#> R version 3.6.0 (2019-04-26)
+#> Platform: x86_64-w64-mingw32/x64 (64-bit)
+#> Running under: Windows 10 x64 (build 17134)
+#> 
+#> Matrix products: default
+#> 
+#> locale:
+#> [1] LC_COLLATE=English_Germany.1252  LC_CTYPE=English_Germany.1252   
+#> [3] LC_MONETARY=English_Germany.1252 LC_NUMERIC=C                    
+#> [5] LC_TIME=English_Germany.1252    
+#> 
+#> attached base packages:
+#> [1] stats     graphics  grDevices utils     datasets  methods   base     
+#> 
+#> other attached packages:
+#>  [1] peRspective_0.0.0.9000 forcats_0.4.0          stringr_1.4.0         
+#>  [4] dplyr_0.8.0.1          purrr_0.3.2            readr_1.3.1           
+#>  [7] tidyr_0.8.3            tibble_2.1.1           ggplot2_3.1.1         
+#> [10] tidyverse_1.2.1        badger_0.0.4          
+#> 
+#> loaded via a namespace (and not attached):
+#>  [1] tidyselect_0.2.5   xfun_0.7           haven_2.1.0       
+#>  [4] lattice_0.20-38    vctrs_0.1.0        colorspace_1.4-1  
+#>  [7] generics_0.0.2     htmltools_0.3.6    yaml_2.2.0        
+#> [10] utf8_1.1.4         rlang_0.3.4        pillar_1.4.0      
+#> [13] glue_1.3.1         withr_2.1.2        RColorBrewer_1.1-2
+#> [16] modelr_0.1.4       readxl_1.3.1       rvcheck_0.1.3     
+#> [19] plyr_1.8.4         dlstats_0.1.0      munsell_0.5.0     
+#> [22] gtable_0.3.0       cellranger_1.1.0   rvest_0.3.3       
+#> [25] evaluate_0.13      labeling_0.3       knitr_1.22        
+#> [28] curl_3.3           fansi_0.4.0        highr_0.8         
+#> [31] broom_0.5.2        Rcpp_1.0.1         scales_1.0.0      
+#> [34] backports_1.1.4    jsonlite_1.6       hms_0.4.2         
+#> [37] digest_0.6.18      stringi_1.4.3      rlist_0.4.6.1     
+#> [40] grid_3.6.0         cli_1.1.0          tools_3.6.0       
+#> [43] magrittr_1.5       lazyeval_0.2.2     zeallot_0.1.0     
+#> [46] crayon_1.3.4       pkgconfig_2.0.2    ellipsis_0.1.0    
+#> [49] data.table_1.12.2  xml2_1.2.0         lubridate_1.7.4   
+#> [52] assertthat_0.2.1   rmarkdown_1.12.6   httr_1.4.0        
+#> [55] rstudioapi_0.10    R6_2.4.0           nlme_3.1-139      
+#> [58] compiler_3.6.0
+```
 
 <div>
 

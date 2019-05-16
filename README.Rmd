@@ -2,9 +2,19 @@
 output: github_document
 ---
 
-```{r, setup, echo = F}
-knitr::opts_chunk$set(message = F, warning = F)
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%",
+  message = F,
+  warning = F
+)
 ```
+
 
 # peRspective <img src="images/perspective2.png" width="160px" align="right" />
 
@@ -124,15 +134,7 @@ library(tidyverse)
 ```
 
 
-Define your key variable.
-
-```{r, echo = F, eval = F}
-key <- readr::read_lines("../keys/prsp_simon.txt")
-
-
-Sys.setenv(perspective_api_key = key)
-
-```
+**Define your key variable.**
 
 `peRspective` functions will read the API key from environment variable `perspective_api_key`. In order to add your key to your environment file, you can use the function `edit_r_environ()` from the [`usethis` package](https://usethis.r-lib.org/).
 
@@ -242,7 +244,6 @@ spanish_text <- "gastan en cosas que de nada sirven-nunca tratan de saber la ver
 text_scores <- prsp_score(
            text = spanish_text, 
            languages = "es",
-           key = key,
            score_model = c("TOXICITY", "SEVERE_TOXICITY", "INSULT_EXPERIMENTAL")
            )
 
@@ -374,6 +375,9 @@ text_sample %>%
 ```
 
 
+```{r}
+sessionInfo()
+```
 
 
 <div>Icons made by <a href="https://www.freepik.com/?__hstc=57440181.1504a979705d81fb44d4169a0ccdf2ae.1558036002089.1558036002089.1558036002089.1&__hssc=57440181.4.1558036002090&__hsfp=2902986854" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
