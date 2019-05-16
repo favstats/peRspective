@@ -126,7 +126,7 @@ library(tidyverse)
 
 Define your key variable.
 
-```{r, echo = F}
+```{r, echo = F, eval = F}
 key <- readr::read_lines("../keys/prsp_simon.txt")
 
 
@@ -134,12 +134,17 @@ Sys.setenv(perspective_api_key = key)
 
 ```
 
-`peRspective` functions will read the API key from environment variable `perspective_api_key`. You can assign an environment object like this in your script:
+`peRspective` functions will read the API key from environment variable `perspective_api_key`. In order to add your key to your environment file, you can use the function `edit_r_environ()` from the [`usethis` package](https://usethis.r-lib.org/).
 
+This will open your .Renviron file in your text editor. Now, you can add the following line to it:
 
-```{r, eval = F}
-Sys.setenv(perspective_api_key = "YOUR_API_KEY")
+```{r}
+perspective_api_key="YOUR_API_KEY"
 ```
+
+Save the file and restart R for the changes to take effect.
+
+Alternatively, you can provide an explicit definition of your API key with each function call using the `key` argument.
 
 ### `prsp_score`
 

@@ -1,9 +1,13 @@
 #' Check if API key is present
 #'
 #' 
-#'
-perspective_api_key <- function () {
-  key <- Sys.getenv("perspective_api_key")
+#' @param test necessary when in a test environment. Defaults to `FALSE`.
+perspective_api_key <- function(test = F) {
+  if (test) {
+    key <- Sys.getenv("perspective_api_key_test")
+  } else if (!test) {
+    key <- Sys.getenv("perspective_api_key")
+  }
   if (key == "") {
     stop("perspective_api_key environment variable is empty. See ?peRspective for help.")
   }
