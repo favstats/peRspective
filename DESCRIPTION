@@ -24,5 +24,3 @@ Imports:
 Suggests: 
     testthat (>= 2.1.0),
     covr,
-    RSQLite,
-    DBI

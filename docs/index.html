@@ -299,7 +299,7 @@
 <a class="sourceLine" id="cb8-15" title="15"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.window.html">ylim</a></span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb8-16" title="16"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.5</span>, <span class="dt">linetype =</span> <span class="st">"dashed"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb8-17" title="17"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">"Model"</span>, <span class="dt">y =</span> <span class="st">"Probability"</span>, <span class="dt">title =</span> <span class="st">"Perspective API Results"</span>)</a></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
 <p>Instead of scoring just entire comments you can also score individual sentences with <code>score_sentences = T</code>. In this case the Perspective API will automatically split your text into reasonable sentences and score them in addition to an overall score.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">trump_tweet &lt;-<span class="st"> "The Fake News Media has NEVER been more Dishonest or Corrupt than it is right now. There has never been a time like this in American History. Very exciting but also, very sad! Fake News is the absolute Enemy of the People and our Country itself!"</span></a>
 <a class="sourceLine" id="cb9-2" title="2"></a>
@@ -321,8 +321,8 @@
 <a class="sourceLine" id="cb9-18" title="18"><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb9-19" title="19"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.5</span>, <span class="dt">linetype =</span> <span class="st">"dashed"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb9-20" title="20"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">"Model"</span>, <span class="dt">y =</span> <span class="st">"Probability"</span>, <span class="dt">title =</span> <span class="st">"Perspective API Results"</span>)</a></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" width="1152"></p>
-<p>You can also use Spanish (<code>es</code>) for <code>TOXICITY</code> and <code>SEVERE_TOXICITY</code> and <code>_EXPERIMENTAL</code>scoring.</p>
+<p><img src="index_files/figure-html/unnamed-chunk-13-1.png" width="1152"></p>
+<p>You can also use Spanish (<code>es</code>) for <code>TOXICITY</code>, <code>SEVERE_TOXICITY</code> and <code>_EXPERIMENTAL</code> models.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">spanish_text &lt;-<span class="st"> "gastan en cosas que de nada sirven-nunca tratan de saber la verdad del funcionalismo de nuestro sistema solar y origen del cosmos-falso por Kepler. LAS UNIVERSIDADES DEL MUNDO NO SABEN ANALIZAR VERDAD O MENTIRA-LO QUE DICE KEPLER"</span></a>
 <a class="sourceLine" id="cb10-2" title="2"></a>
 <a class="sourceLine" id="cb10-3" title="3"></a>
@@ -341,7 +341,8 @@
 <a class="sourceLine" id="cb10-16" title="16"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb10-17" title="17"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.5</span>, <span class="dt">linetype =</span> <span class="st">"dashed"</span>)  <span class="op">+</span></a>
 <a class="sourceLine" id="cb10-18" title="18"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">"Model"</span>, <span class="dt">y =</span> <span class="st">"Probability"</span>, <span class="dt">title =</span> <span class="st">"Perspective API Results"</span>)</a></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
+<p><strong>NOTE:</strong> Your provided text will be stored by the Perspective API for future research. This option is the default. If the supplied texts are private or any of the authors of the texts are below 13 years old, <code>doNotStore</code> should be set to <code>TRUE.</code></p>
 </div>
 <div id="prsp_stream" class="section level3">
 <h3 class="hasAnchor">
@@ -424,51 +425,51 @@
 <a class="sourceLine" id="cb18-6" title="6">              <span class="dt">safe_output =</span> T)</a></code></pre></div>
 <p><img src="images/prsp_stream_output.png"></p>
 <p>Or the (not as pretty) output in Markdown</p>
-<pre><code>## 11.11% [2019-05-13 22:20:15]: 1 out of 9 (11.11%)
+<pre><code>## 11.11% [2019-05-16 23:24:37]: 1 out of 9 (11.11%)
 ## text_id: #efdcxct
 ##  0.96 TOXICITY
 ##  0.79 SEVERE_TOXICITY
 ## 
-## 22.22% [2019-05-13 22:20:16]: 2 out of 9 (22.22%)
+## 22.22% [2019-05-16 23:24:38]: 2 out of 9 (22.22%)
 ## text_id: #ehfcsct
 ##  0.93 TOXICITY
 ##  0.44 SEVERE_TOXICITY
 ## 
-## 33.33% [2019-05-13 22:20:17]: 3 out of 9 (33.33%)
+## 33.33% [2019-05-16 23:24:39]: 3 out of 9 (33.33%)
 ## text_id: #ekacxwt
 ## ERROR
 ## Error in .f(...): HTTP 400
 ## INVALID_ARGUMENT: Comment must be non-empty.
 ## NO SCORES
 ## 
-## 44.44% [2019-05-13 22:20:18]: 4 out of 9 (44.44%)
+## 44.44% [2019-05-16 23:24:40]: 4 out of 9 (44.44%)
 ## text_id: #ewatxad
 ##  0.06 TOXICITY
 ##  0.02 SEVERE_TOXICITY
 ## 
-## 55.56% [2019-05-13 22:20:19]: 5 out of 9 (55.56%)
+## 55.56% [2019-05-16 23:24:42]: 5 out of 9 (55.56%)
 ## text_id: #ekacswt
 ##  0.67 TOXICITY
 ##  0.31 SEVERE_TOXICITY
 ## 
-## 66.67% [2019-05-13 22:20:20]: 6 out of 9 (66.67%)
+## 66.67% [2019-05-16 23:24:43]: 6 out of 9 (66.67%)
 ## text_id: #ewftxwd
 ##  0.07 TOXICITY
 ##  0.03 SEVERE_TOXICITY
 ## 
-## 77.78% [2019-05-13 22:20:21]: 7 out of 9 (77.78%)
+## 77.78% [2019-05-16 23:24:44]: 7 out of 9 (77.78%)
 ## text_id: #eeadswt
 ## ERROR
 ## Error in .f(...): HTTP 400
 ## INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: is
 ## NO SCORES
 ## 
-## 88.89% [2019-05-13 22:20:22]: 8 out of 9 (88.89%)
+## 88.89% [2019-05-16 23:24:45]: 8 out of 9 (88.89%)
 ## text_id: #enfhxed
 ##  0.44 TOXICITY
 ##  0.22 SEVERE_TOXICITY
 ## 
-## 100.00% [2019-05-13 22:20:23]: 9 out of 9 (100.00%)
+## 100.00% [2019-05-16 23:24:46]: 9 out of 9 (100.00%)
 ## text_id: #efdmjd
 ## ERROR
 ## Error in .f(...): HTTP 400
@@ -486,6 +487,9 @@
 ## 7 #eeadswt "Error in .f(...): HTTP 400\nINVALID_A~  NA              NA     
 ## 8 #enfhxed No Error                                  0.442           0.224 
 ## 9 #efdmjd  "Error in .f(...): HTTP 400\nINVALID_A~  NA              NA</code></pre>
+<div>
+Icons made by <a href="https://www.freepik.com/?__hstc=57440181.1504a979705d81fb44d4169a0ccdf2ae.1558036002089.1558036002089.1558036002089.1&amp;__hssc=57440181.4.1558036002090&amp;__hsfp=2902986854" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+</div>
 </div>
 </div>
 </div>
@@ -502,9 +506,8 @@
 <div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
-<li>
-<a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
-</li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 <div class="developers">

@@ -14,3 +14,7 @@ specify_decimal(x, k)
 \description{
 Specify a decimal
 }
+\examples{
+## specify 2 decimals of a number
+specify_decimal(1.0434, 2)
+}

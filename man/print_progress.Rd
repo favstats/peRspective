@@ -19,3 +19,10 @@ a \code{chr}
 \description{
 Provide iterator number and total length of items to be iterated over
 }
+\examples{
+## Print progress (1 out of 100)
+print_progress(1, 100)
+
+## Only print percentage
+print_progress(1, 100, print_prct = TRUE)
+}

@@ -101,7 +101,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Analyze comments with Perspective API</h1>
-    <small class="dont-index">Source: <a href='https://github.com/favstats/peRspective/blob/master/R/prsp.R'><code>R/prsp.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/favstats/peRspective/blob/master/R/prsp_score.R'><code>R/prsp_score.R</code></a></small>
     <div class="hidden name"><code>prsp_score.Rd</code></div>
     </div>
 
@@ -112,7 +112,8 @@
     </div>
 
     <pre class="usage"><span class='fu'>prsp_score</span>(<span class='no'>text</span>, <span class='kw'>text_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>languages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>score_sentences</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='no'>score_model</span>, <span class='kw'>sleep</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>score_sentences</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='no'>score_model</span>, <span class='kw'>sleep</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>doNotStore</span> <span class='kw'>=</span> <span class='no'>F</span>,
+  <span class='kw'>key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -135,11 +136,15 @@
     </tr>
     <tr>
       <th>score_model</th>
-      <td><p>Specify what model do you want to use (for example <code>TOXICITY</code> and/or <code>SEVERE_TOXICITY</code>). Specify a character vector if you want more than one score. See <code>peRspective::prsp_models</code>.</p></td>
+      <td><p>Specify what model do you want to use (for example <code>TOXICITY</code> and/or <code>SEVERE_TOXICITY</code>). Specify a character vector if you want more than one score. See <code><a href='prsp_models.html'>peRspective::prsp_models</a></code>.</p></td>
     </tr>
     <tr>
       <th>sleep</th>
       <td><p>how long should <code>prsp_score</code> wait between each call</p></td>
+    </tr>
+    <tr>
+      <th>doNotStore</th>
+      <td><p>Whether the API is permitted to store comment from this request. Stored comments will be used for future research and community model building purposes to improve the API over time. Perspective API also plans to provide dashboards and automated analysis of the comments submitted, which will apply only to those stored. Defaults to <code>FALSE</code> (request data may be stored). Important note: This should be set to true if data being submitted is private (i.e. not publicly accessible), or if the data submitted contains content written by someone under 13 years old.</p></td>
     </tr>
     <tr>
       <th>key</th>
@@ -156,6 +161,23 @@
     <p>For more details see <code><a href='perspective-package.html'>?peRspective</a></code> or <a href='https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md'>Perspective API documentation</a></p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"># NOT RUN {
+## GET TOXICITY SCORES for a comment
+prsp_score("Hello, I am a test comment!",
+           score_model = "TOXICITY")
+           
+## GET TOXICITY and SEVERE_TOXICITY Scores for a comment
+prsp_score("Hello, I am a test comment!",
+           score_model = c("TOXICITY", "SEVERE_TOXICITY))
+  
+## GET TOXICITY and SEVERE_TOXICITY Scores for each sentence of a comment
+prsp_score("Hello, I am a test comment! 
+           I am a second sentence and I will (hopefully) be scored seperately",
+           score_model = c("TOXICITY", "SEVERE_TOXICITY),
+           score_sentences = T)
+# }
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -165,7 +187,9 @@
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

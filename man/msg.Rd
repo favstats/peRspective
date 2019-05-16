@@ -14,5 +14,9 @@ msg(type, type_style = crayon::make_style("red4"), msg)
 \item{msg}{what message should be printed}
 }
 \description{
-Print a beautiful message in the terminal
+Print a beautiful message in the console
+}
+\examples{
+## Send a message to the world
+msg("MESSAGE", crayon::make_style('blue4'), "This is a message to the world")
 }

@@ -1,3 +1,10 @@
+globalVariables("text_id")
+globalVariables("value")
+globalVariables("type")
+globalVariables("summary_score")
+globalVariables("label")
+globalVariables(".")
+
 #' Stream comment scores with Perspective API
 #'
 #' This function wraps \code{\link{prsp_score}} and loops over your text input. Provide a character string with your text and which scores you want to obtain. Make sure to keep track of your ratelimit with on [the cloud console quota usage page](https://console.cloud.google.com/iam-admin/quotas).
@@ -220,7 +227,7 @@ NULL
   #             safe_output = F)
 
 
-print_score_labels <- function(prsp_params, int_results) {
+print_score_labels <- function(prsp_params = NULL, int_results = NULL) {
   ## when not error
   if (length(int_results) != 1) {
     

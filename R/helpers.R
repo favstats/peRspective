@@ -12,11 +12,15 @@ perspective_api_key <- function () {
 
 #' Send a fancy message
 #'
-#' Print a beautiful message in the terminal
+#' Print a beautiful message in the console
 #'
 #' @param type what message should be displayed in the beginning
 #' @param type_style crayon color or style
 #' @param msg what message should be printed
+#' @examples 
+#' ## Send a message to the world
+#' msg("MESSAGE", crayon::make_style('blue4'), "This is a message to the world")
+#' @export
 msg <- function(type, type_style = crayon::make_style('red4'), msg) {
   
   cat(stringr::str_glue("{type_style(type)} [{crayon::italic(Sys.time())}]: {crayon::make_style('gray90')(msg)}"))
@@ -28,32 +32,14 @@ msg <- function(type, type_style = crayon::make_style('red4'), msg) {
 # msg("WHAT", msg = "hatsap")
 
 
-#' SQL Database Append
-#'
-#' This is a helper function that will write a dataframe to a SQL database
-#'
-#' @param path path to SQL database
-#' @param tbl specify a tibble name within the SQL database
-#' @param data the dataframe to be saved
-db_append <- function(path, tbl, data) {
-  con <- dbConnect(RSQLite::SQLite(), path)
-  
-  if(!is.null(DBI::dbListTables(con))) {
-    DBI::dbWriteTable(con, tbl, data, append = T)
-  } else {
-    DBI::dbWriteTable(con, tbl, data)
-  }
-  DBI::dbDisconnect(con)
-  
-}
-
-
-
 #' Specify a decimal
 #'
 #' @param x a number to be rounded
 #' @param k round to which position after the comma
 #' @export
+#' @examples
+#' ## specify 2 decimals of a number
+#' specify_decimal(1.0434, 2)
 specify_decimal <- function(x, k) trimws(format(round(x, k), nsmall=k))
 
 
@@ -68,6 +54,12 @@ specify_decimal <- function(x, k) trimws(format(round(x, k), nsmall=k))
 #' @param print_prct only print percentage progress (defaults to `FALSE`).
 #' @return a `chr`
 #' @export
+#' @examples
+#' ## Print progress (1 out of 100)
+#' print_progress(1, 100)
+#' 
+#' ## Only print percentage
+#' print_progress(1, 100, print_prct = TRUE)
 print_progress <- function(x, total, print_prct = F) {
   iterator <- x %>% as.numeric()
   perc <- specify_decimal((iterator/total)*100, 2)
