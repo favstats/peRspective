@@ -9,3 +9,4 @@
 ^docs
 ^revdep$
 ^cran-comments\.md$
+^CRAN-RELEASE$

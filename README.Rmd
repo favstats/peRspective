@@ -30,6 +30,7 @@ git_repo <- "favstats/peRspective"
 cat(
   badge_custom("My 1st Package", "Ever", "magenta"),
   badge_travis(git_repo),
+  # badge_cran_release(git_repo, "blue"),
   "[![Codecov test coverage](https://codecov.io/gh/favstats/peRspective/branch/master/graph/badge.svg)](https://codecov.io/gh/favstats/peRspective?branch=master)",
 	badge_code_size(git_repo),
 	badge_last_commit(git_repo)
@@ -147,9 +148,14 @@ Sys.setenv(perspective_api_key = key)
 
 `peRspective` functions will read the API key from environment variable `perspective_api_key`. In order to add your key to your environment file, you can use the function `edit_r_environ()` from the [`usethis` package](https://usethis.r-lib.org/).
 
+```{r, eval = F}
+usethis::edit_r_environ()
+```
+
+
 This will open your .Renviron file in your text editor. Now, you can add the following line to it:
 
-```{r}
+```{r, eval = F}
 perspective_api_key="YOUR_API_KEY"
 ```
 
