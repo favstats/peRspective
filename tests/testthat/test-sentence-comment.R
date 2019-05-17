@@ -2,6 +2,9 @@
 
 test_that("sentence choice works", {
 
+  testthat::skip_if(Sys.getenv("perspective_api_key") == "", 
+                    message = "perspective_api_key not available in environment. Skipping test.")
+  
 
   scored_text <- peRspective::prsp_score("I wanna test this real good.",
                           score_sentences = T,
@@ -13,6 +16,11 @@ test_that("sentence choice works", {
 
 test_that("text choice works", {
 
+  
+  testthat::skip_if(Sys.getenv("perspective_api_key") == "", 
+                    message = "perspective_api_key not available in environment. Skipping test.")
+  
+  
   scored_text <- peRspective::prsp_score("I wanna test this real good.",
                                          score_sentences = F,
                                          score_model = peRspective::prsp_models)
@@ -23,6 +31,11 @@ test_that("text choice works", {
 
 test_that("when sentence valid models", {
 
+  
+  testthat::skip_if(Sys.getenv("perspective_api_key") == "", 
+                    message = "perspective_api_key not available in environment. Skipping test.")
+  
+  
   scored_text <- peRspective::prsp_score("I wanna test this real good.",
                                          score_sentences = T,
                                          score_model = peRspective::prsp_models)
@@ -35,6 +48,11 @@ test_that("when sentence valid models", {
 
 test_that("when text valid models", {
 
+  
+  testthat::skip_if(Sys.getenv("perspective_api_key") == "", 
+                    message = "perspective_api_key not available in environment. Skipping test.")
+  
+  
   scored_text <- peRspective::prsp_score("I wanna test this real good.",
                                          score_sentences = F,
                                          score_model = peRspective::prsp_models)

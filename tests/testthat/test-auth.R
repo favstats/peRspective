@@ -3,7 +3,10 @@
 # Sys.setenv(perspective_api_key = key)
 
 test_that("sentence key authorization works without specifying key", {
-
+  
+  testthat::skip_if(Sys.getenv("perspective_api_key") == "", 
+                    message = "perspective_api_key not available in environment. Skipping test.")
+  
   scored_text <- peRspective::prsp_score("I wanna test this real good.",
                                          score_sentences = T,
                                          score_model = peRspective::prsp_models)
@@ -14,7 +17,10 @@ test_that("sentence key authorization works without specifying key", {
 })
 
 test_that("text key authorization works without specifying key", {
-
+  
+  testthat::skip_if(Sys.getenv("perspective_api_key") == "", 
+                    message = "perspective_api_key not available in environment. Skipping test.")
+  
   scored_text <- peRspective::prsp_score("I wanna test this real good.",
                                          score_sentences = F,
                                          score_model = peRspective::prsp_models)

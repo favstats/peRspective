@@ -1,4 +1,8 @@
 test_that("key assignment works", {
+  
+  testthat::skip_if(Sys.getenv("perspective_api_key") == "", 
+                    message = "perspective_api_key not available in environment. Skipping test.")
+  
 
   key <- perspective_api_key()
 
@@ -7,6 +11,7 @@ test_that("key assignment works", {
 
 
 test_that("key assignment throws error when invalid key supplied", {
+  
   testthat::skip_if(Sys.getenv("perspective_api_key") == "", 
                     message = "perspective_api_key not available in environment. Skipping test.")
 
@@ -24,6 +29,5 @@ test_that("key assignment throws error when empty", {
 
 
 })
-
 
 #
