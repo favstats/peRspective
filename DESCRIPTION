@@ -23,4 +23,5 @@ Imports:
     tibble
 Suggests: 
     testthat (>= 2.1.0),
-    covr
+    covr,
+    badger
