@@ -7,7 +7,7 @@
 print_progress(x, total, print_prct = F)
 }
 \arguments{
-\item{x}{interator number.}
+\item{x}{iterator number.}
 
 \item{total}{length of items to be iterated over.}
 

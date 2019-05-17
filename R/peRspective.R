@@ -45,10 +45,10 @@
 #' trained with [word-vector](https://www.tensorflow.org/tutorials/word2vec)
 #' inputs.
 #' *   **SEVERE_TOXICITY**: This model uses the same deep-CNN algorithm as the
-#' TOXICITY model, but is trained to recognise examples that were considered
+#' TOXICITY model, but is trained to recognize examples that were considered
 #' to be 'very toxic' by crowdworkers. This makes it much less sensitive to
 #' comments that include positive uses of curse-words for example. A labelled dataset
-#' and details of the methodolgy can be found in the same [toxicity dataset](https://figshare.com/articles/Wikipedia_Talk_Labels_Toxicity/4563973) that is
+#' and details of the methodology can be found in the same [toxicity dataset](https://figshare.com/articles/Wikipedia_Talk_Labels_Toxicity/4563973) that is
 #' available for the toxicity model.
 #' 
 #' @section Experimental models:

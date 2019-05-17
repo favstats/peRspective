@@ -7,6 +7,5 @@
 ^README\.Rmd$
 ^README_files
 ^docs
-^images
 ^revdep$
 ^cran-comments\.md$

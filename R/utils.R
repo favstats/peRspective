@@ -53,7 +53,7 @@ specify_decimal <- function(x, k) trimws(format(round(x, k), nsmall=k))
 #' Provide iterator number and total length of items to be iterated over
 #'
 #' @md
-#' @param x interator number.
+#' @param x iterator number.
 #' @param total length of items to be iterated over.
 #' @param print_prct only print percentage progress (defaults to `FALSE`).
 #' @return a `chr`

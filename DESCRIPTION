@@ -1,6 +1,6 @@
 Package: peRspective
 Title: Interface to the Perspective API
-Version: 0.0.0.9001
+Version: 0.1.0
 Authors@R: person("Fabio", "Votta", email = "fabio.votta@gmail.com", role = c("aut", "cre"))
 Description: Provides access to the Perspective API.
 URL: https://github.com/favstats/peRspective
@@ -10,17 +10,17 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
 Imports: 
+    crayon,
     dplyr,
     glue,
     httr,
     jsonlite,
+    magrittr,
     purrr,
     rlang,
+    rlist,
     stringr,
-    tibble,
-    crayon,
-    magrittr,
-    rlist
+    tibble
 Suggests: 
     testthat (>= 2.1.0),
-    covr,
+    covr

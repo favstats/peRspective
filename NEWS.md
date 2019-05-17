@@ -1,3 +1,7 @@
+# peRspective 0.1.0 (2019-05-17)
+
+* Submit to CRAN
+
 # peRspective 0.0.0.9001 (2019-05-17)
 
 * Added a `NEWS.md` file to track changes to the package

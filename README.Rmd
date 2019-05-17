@@ -18,7 +18,7 @@ ggplot2::theme_set(ggplot2::theme_minimal())
 ```
 
 
-# peRspective <img src="images/perspective2.png" width="160px" align="right" />
+# peRspective <img src="man/figures/perspective.png" width="160px" align="right" />
 
 
 ```{r, echo = FALSE, results='asis', eval = T}
@@ -134,6 +134,13 @@ Also the `tidyverse` for examples.
 ```{r}
 library(tidyverse)
 ```
+
+```{r, eval = F, echo=F}
+key <- readr::read_lines("../keys/prsp_simon.txt")
+
+Sys.setenv(perspective_api_key = key)
+```
+
 
 
 **Define your key variable.**
@@ -360,7 +367,7 @@ text_sample %>%
               safe_output = T)
 ```
 
-![](images/prsp_stream_output.png)
+![](man/figures/prsp_stream_output.png)
 
 Or the (not as pretty) output in Markdown
 
