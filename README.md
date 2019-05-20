@@ -3,8 +3,9 @@
 
 # peRspective <img src="man/figures/perspective.png" width="160px" align="right" />
 
-![](https://img.shields.io/badge/My%201st%20Package-Ever-magenta.svg)
+![](https://img.shields.io/badge/My%201st%20Package-Ever-blue.svg)
 [![](https://travis-ci.org/favstats/peRspective.svg?branch=master)](https://travis-ci.org/favstats/peRspective)
+[![](https://www.r-pkg.org/badges/version/peRspective?color=blue)](https://cran.r-project.org/package=peRspective)
 [![Codecov test
 coverage](https://codecov.io/gh/favstats/peRspective/branch/master/graph/badge.svg)](https://codecov.io/gh/favstats/peRspective?branch=master)
 [![](https://img.shields.io/github/languages/code-size/favstats/peRspective.svg)](https://github.com/favstats/peRspective)
@@ -378,51 +379,51 @@ text_sample %>%
 
 Or the (not as pretty) output in Markdown
 
-    #> 11.11% [2019-05-17 05:36:53]: 1 out of 9 (11.11%)
+    #> 11.11% [2019-05-20 14:24:16]: 1 out of 9 (11.11%)
     #> text_id: #efdcxct
     #>  0.96 TOXICITY
     #>  0.79 SEVERE_TOXICITY
     #> 
-    #> 22.22% [2019-05-17 05:36:54]: 2 out of 9 (22.22%)
+    #> 22.22% [2019-05-20 14:24:17]: 2 out of 9 (22.22%)
     #> text_id: #ehfcsct
     #>  0.93 TOXICITY
     #>  0.44 SEVERE_TOXICITY
     #> 
-    #> 33.33% [2019-05-17 05:36:55]: 3 out of 9 (33.33%)
+    #> 33.33% [2019-05-20 14:24:19]: 3 out of 9 (33.33%)
     #> text_id: #ekacxwt
     #> ERROR
     #> Error in .f(...): HTTP 400
     #> INVALID_ARGUMENT: Comment must be non-empty.
     #> NO SCORES
     #> 
-    #> 44.44% [2019-05-17 05:36:56]: 4 out of 9 (44.44%)
+    #> 44.44% [2019-05-20 14:24:20]: 4 out of 9 (44.44%)
     #> text_id: #ewatxad
     #>  0.06 TOXICITY
     #>  0.02 SEVERE_TOXICITY
     #> 
-    #> 55.56% [2019-05-17 05:36:57]: 5 out of 9 (55.56%)
+    #> 55.56% [2019-05-20 14:24:21]: 5 out of 9 (55.56%)
     #> text_id: #ekacswt
     #>  0.67 TOXICITY
     #>  0.31 SEVERE_TOXICITY
     #> 
-    #> 66.67% [2019-05-17 05:36:58]: 6 out of 9 (66.67%)
+    #> 66.67% [2019-05-20 14:24:22]: 6 out of 9 (66.67%)
     #> text_id: #ewftxwd
     #>  0.07 TOXICITY
     #>  0.03 SEVERE_TOXICITY
     #> 
-    #> 77.78% [2019-05-17 05:36:59]: 7 out of 9 (77.78%)
+    #> 77.78% [2019-05-20 14:24:23]: 7 out of 9 (77.78%)
     #> text_id: #eeadswt
     #> ERROR
     #> Error in .f(...): HTTP 400
     #> INVALID_ARGUMENT: Attribute TOXICITY does not support request languages: is
     #> NO SCORES
     #> 
-    #> 88.89% [2019-05-17 05:37:00]: 8 out of 9 (88.89%)
+    #> 88.89% [2019-05-20 14:24:24]: 8 out of 9 (88.89%)
     #> text_id: #enfhxed
     #>  0.44 TOXICITY
     #>  0.22 SEVERE_TOXICITY
     #> 
-    #> 100.00% [2019-05-17 05:37:01]: 9 out of 9 (100.00%)
+    #> 100.00% [2019-05-20 14:24:25]: 9 out of 9 (100.00%)
     #> text_id: #efdmjd
     #> ERROR
     #> Error in .f(...): HTTP 400
@@ -458,10 +459,10 @@ sessionInfo()
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#>  [1] peRspective_0.0.0.9000 forcats_0.4.0          stringr_1.4.0         
-#>  [4] dplyr_0.8.0.1          purrr_0.3.2            readr_1.3.1           
-#>  [7] tidyr_0.8.3            tibble_2.1.1           ggplot2_3.1.1         
-#> [10] tidyverse_1.2.1        badger_0.0.4          
+#>  [1] peRspective_0.1.0 forcats_0.4.0     stringr_1.4.0    
+#>  [4] dplyr_0.8.0.1     purrr_0.3.2       readr_1.3.1      
+#>  [7] tidyr_0.8.3       tibble_2.1.1      ggplot2_3.1.1    
+#> [10] tidyverse_1.2.1   badger_0.0.4     
 #> 
 #> loaded via a namespace (and not attached):
 #>  [1] tidyselect_0.2.5   xfun_0.7           haven_2.1.0       

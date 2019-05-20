@@ -42,12 +42,12 @@ prsp_score("Hello, I am a test comment!",
            
 ## GET TOXICITY and SEVERE_TOXICITY Scores for a comment
 prsp_score("Hello, I am a test comment!",
-           score_model = c("TOXICITY", "SEVERE_TOXICITY))
+           score_model = c("TOXICITY", "SEVERE_TOXICITY"))
   
 ## GET TOXICITY and SEVERE_TOXICITY Scores for each sentence of a comment
 prsp_score("Hello, I am a test comment! 
            I am a second sentence and I will (hopefully) be scored seperately",
-           score_model = c("TOXICITY", "SEVERE_TOXICITY),
+           score_model = c("TOXICITY", "SEVERE_TOXICITY"),
            score_sentences = T)
 }
 }

@@ -17,4 +17,14 @@ New submission
 ## Downstream dependencies
 There are currently no downstream dependencies for this package. 
 
-* This is a new release.
+## Resubmission
+This is a resubmission. In this version I have:
+
+* Added single quotes to mentioned package names and API names (e.g. 'Perspective') in Title and Description (DESCRIPTION file).
+
+* Added an URL for the used API ('Perspective') in the Description text (DESCRIPTION file).
+
+* Added more details about the package functionality and the 'Perspective' API functionality in the Description text (DESCRIPTION file).
+
+* Added missing quotation marks in the examples of man/prsp_score.Rd
+
