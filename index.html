@@ -5,12 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interface to the Perspective API • peRspective</title>
+<title>Interface to the 'Perspective' API • peRspective</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Interface to the Perspective API">
-<meta property="og:description" content="Provides access to the Perspective API.">
+<script src="pkgdown.js"></script><meta property="og:title" content="Interface to the 'Perspective' API">
+<meta property="og:description" content="Interface to the 'Perspective' API, which can be found at the following URL: &lt;https://github.com/conversationai/perspectiveapi#perspective-comment-analyzer-api&gt;. 
+    The 'Perspective' API uses machine learning models to score the perceived impact a comment might have on a conversation (i.e. TOXICITY, INFLAMMATORY, etc.).     
+    'peRspective' provides access to the API and returns tidy data frames with results of the specified machine learning model(s).">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -76,7 +78,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#perspective" class="anchor"></a>peRspective <img src="reference/figures/perspective.png" width="160px" align="right">
 </h1></div>
-<p><img src="https://img.shields.io/badge/My%201st%20Package-Ever-magenta.svg"><a href="https://travis-ci.org/favstats/peRspective"><img src="https://travis-ci.org/favstats/peRspective.svg?branch=master"></a> <a href="https://codecov.io/gh/favstats/peRspective?branch=master"><img src="https://codecov.io/gh/favstats/peRspective/branch/master/graph/badge.svg" alt="Codecov test coverage"></a> <a href="https://github.com/favstats/peRspective"><img src="https://img.shields.io/github/languages/code-size/favstats/peRspective.svg"></a> <a href="https://github.com/favstats/peRspective/commits/master"><img src="https://img.shields.io/github/last-commit/favstats/peRspective.svg"></a></p>
+<p><img src="https://img.shields.io/badge/My%201st%20Package-Ever-blue.svg"><a href="https://travis-ci.org/favstats/peRspective"><img src="https://travis-ci.org/favstats/peRspective.svg?branch=master"></a> <a href="https://cran.r-project.org/package=peRspective"><img src="https://www.r-pkg.org/badges/version/peRspective?color=blue"></a> <a href="https://codecov.io/gh/favstats/peRspective?branch=master"><img src="https://codecov.io/gh/favstats/peRspective/branch/master/graph/badge.svg" alt="Codecov test coverage"></a> <a href="https://github.com/favstats/peRspective"><img src="https://img.shields.io/github/languages/code-size/favstats/peRspective.svg"></a> <a href="https://github.com/favstats/peRspective/commits/master"><img src="https://img.shields.io/github/last-commit/favstats/peRspective.svg"></a></p>
 <p>Perspective is an API that uses machine learning models to score the perceived impact a comment might have on a conversation. <a href="http://www.perspectiveapi.com/">Website</a>.</p>
 <p><code>peRspective</code> provides access to the API using the R programming language.</p>
 <p>For an excellent documentation of the Perspective API see <a href="https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md">here</a>.</p>
@@ -431,51 +433,51 @@
 <a class="sourceLine" id="cb15-6" data-line-number="6">              <span class="dt">safe_output =</span> T)</a></code></pre></div>
 <p><img src="reference/figures/prsp_stream_output.png"></p>
 <p>Or the (not as pretty) output in Markdown</p>
-<pre><code>#&gt; 11.11% [2019-05-17 13:20:49]: 1 out of 9 (11.11%)
+<pre><code>#&gt; 11.11% [2019-05-20 12:32:54]: 1 out of 9 (11.11%)
 #&gt; text_id: #efdcxct
 #&gt;  0.96 TOXICITY
 #&gt;  0.79 SEVERE_TOXICITY
 #&gt; 
-#&gt; 22.22% [2019-05-17 13:20:50]: 2 out of 9 (22.22%)
+#&gt; 22.22% [2019-05-20 12:32:55]: 2 out of 9 (22.22%)
 #&gt; text_id: #ehfcsct
 #&gt;  0.93 TOXICITY
 #&gt;  0.44 SEVERE_TOXICITY
 #&gt; 
-#&gt; 33.33% [2019-05-17 13:20:51]: 3 out of 9 (33.33%)
+#&gt; 33.33% [2019-05-20 12:32:57]: 3 out of 9 (33.33%)
 #&gt; text_id: #ekacxwt
 #&gt; ERROR
 #&gt; Error in .f(...): HTTP 400
 #&gt; INVALID_ARGUMENT: Comment must be non-empty.
 #&gt; NO SCORES
 #&gt; 
-#&gt; 44.44% [2019-05-17 13:20:52]: 4 out of 9 (44.44%)
+#&gt; 44.44% [2019-05-20 12:32:58]: 4 out of 9 (44.44%)
 #&gt; text_id: #ewatxad
 #&gt;  0.06 TOXICITY
 #&gt;  0.02 SEVERE_TOXICITY
 #&gt; 
-#&gt; 55.56% [2019-05-17 13:20:53]: 5 out of 9 (55.56%)
+#&gt; 55.56% [2019-05-20 12:32:59]: 5 out of 9 (55.56%)
 #&gt; text_id: #ekacswt
 #&gt;  0.67 TOXICITY
 #&gt;  0.31 SEVERE_TOXICITY
 #&gt; 
-#&gt; 66.67% [2019-05-17 13:20:54]: 6 out of 9 (66.67%)
+#&gt; 66.67% [2019-05-20 12:33:00]: 6 out of 9 (66.67%)
 #&gt; text_id: #ewftxwd
 #&gt;  0.07 TOXICITY
 #&gt;  0.03 SEVERE_TOXICITY
 #&gt; 
-#&gt; 77.78% [2019-05-17 13:20:55]: 7 out of 9 (77.78%)
+#&gt; 77.78% [2019-05-20 12:33:01]: 7 out of 9 (77.78%)
 #&gt; text_id: #eeadswt
 #&gt; ERROR
 #&gt; Error in .f(...): HTTP 400
 #&gt; INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: is
 #&gt; NO SCORES
 #&gt; 
-#&gt; 88.89% [2019-05-17 13:20:56]: 8 out of 9 (88.89%)
+#&gt; 88.89% [2019-05-20 12:33:02]: 8 out of 9 (88.89%)
 #&gt; text_id: #enfhxed
 #&gt;  0.44 TOXICITY
 #&gt;  0.22 SEVERE_TOXICITY
 #&gt; 
-#&gt; 100.00% [2019-05-17 13:20:57]: 9 out of 9 (100.00%)
+#&gt; 100.00% [2019-05-20 12:33:03]: 9 out of 9 (100.00%)
 #&gt; text_id: #efdmjd
 #&gt; ERROR
 #&gt; Error in .f(...): HTTP 400
@@ -494,7 +496,7 @@
 #&gt; 8 #enfhxed No Error                                  0.442           0.224 
 #&gt; 9 #efdmjd  "Error in .f(...): HTTP 400\nINVALID_A…  NA              NA</code></pre>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/sessionInfo">sessionInfo</a></span>()</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">#&gt; R version 3.6.0 (2017-01-27)</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">#&gt; R Under development (unstable) (2019-05-20 r76548)</span></a>
 <a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span></a>
 <a class="sourceLine" id="cb17-4" data-line-number="4"><span class="co">#&gt; Running under: Ubuntu 14.04.5 LTS</span></a>
 <a class="sourceLine" id="cb17-5" data-line-number="5"><span class="co">#&gt; </span></a>
@@ -522,24 +524,24 @@
 <a class="sourceLine" id="cb17-27" data-line-number="27"><span class="co">#&gt; loaded via a namespace (and not attached):</span></a>
 <a class="sourceLine" id="cb17-28" data-line-number="28"><span class="co">#&gt;  [1] Rcpp_1.0.1         lubridate_1.7.4    lattice_0.20-38   </span></a>
 <a class="sourceLine" id="cb17-29" data-line-number="29"><span class="co">#&gt;  [4] zeallot_0.1.0      utf8_1.1.4         assertthat_0.2.1  </span></a>
-<a class="sourceLine" id="cb17-30" data-line-number="30"><span class="co">#&gt;  [7] rprojroot_1.3-2    digest_0.6.18      R6_2.4.0          </span></a>
+<a class="sourceLine" id="cb17-30" data-line-number="30"><span class="co">#&gt;  [7] rprojroot_1.3-2    digest_0.6.19      R6_2.4.0          </span></a>
 <a class="sourceLine" id="cb17-31" data-line-number="31"><span class="co">#&gt; [10] cellranger_1.1.0   plyr_1.8.4         backports_1.1.4   </span></a>
 <a class="sourceLine" id="cb17-32" data-line-number="32"><span class="co">#&gt; [13] evaluate_0.13      httr_1.4.0         highr_0.8         </span></a>
 <a class="sourceLine" id="cb17-33" data-line-number="33"><span class="co">#&gt; [16] pillar_1.4.0       rlang_0.3.4        lazyeval_0.2.2    </span></a>
 <a class="sourceLine" id="cb17-34" data-line-number="34"><span class="co">#&gt; [19] curl_3.3           readxl_1.3.1       rstudioapi_0.10   </span></a>
 <a class="sourceLine" id="cb17-35" data-line-number="35"><span class="co">#&gt; [22] data.table_1.12.2  rmarkdown_1.12     pkgdown_1.3.0     </span></a>
 <a class="sourceLine" id="cb17-36" data-line-number="36"><span class="co">#&gt; [25] desc_1.2.0         labeling_0.3       dlstats_0.1.0     </span></a>
-<a class="sourceLine" id="cb17-37" data-line-number="37"><span class="co">#&gt; [28] munsell_0.5.0      broom_0.5.2        compiler_3.6.0    </span></a>
+<a class="sourceLine" id="cb17-37" data-line-number="37"><span class="co">#&gt; [28] munsell_0.5.0      broom_0.5.2        compiler_3.7.0    </span></a>
 <a class="sourceLine" id="cb17-38" data-line-number="38"><span class="co">#&gt; [31] modelr_0.1.4       xfun_0.6           pkgconfig_2.0.2   </span></a>
 <a class="sourceLine" id="cb17-39" data-line-number="39"><span class="co">#&gt; [34] htmltools_0.3.6    tidyselect_0.2.5   roxygen2_6.1.1    </span></a>
 <a class="sourceLine" id="cb17-40" data-line-number="40"><span class="co">#&gt; [37] fansi_0.4.0        crayon_1.3.4       withr_2.1.2       </span></a>
-<a class="sourceLine" id="cb17-41" data-line-number="41"><span class="co">#&gt; [40] MASS_7.3-51.4      commonmark_1.7     grid_3.6.0        </span></a>
-<a class="sourceLine" id="cb17-42" data-line-number="42"><span class="co">#&gt; [43] nlme_3.1-139       jsonlite_1.6       gtable_0.3.0      </span></a>
+<a class="sourceLine" id="cb17-41" data-line-number="41"><span class="co">#&gt; [40] MASS_7.3-51.4      commonmark_1.7     grid_3.7.0        </span></a>
+<a class="sourceLine" id="cb17-42" data-line-number="42"><span class="co">#&gt; [43] nlme_3.1-140       jsonlite_1.6       gtable_0.3.0      </span></a>
 <a class="sourceLine" id="cb17-43" data-line-number="43"><span class="co">#&gt; [46] magrittr_1.5       scales_1.0.0       rlist_0.4.6.1     </span></a>
 <a class="sourceLine" id="cb17-44" data-line-number="44"><span class="co">#&gt; [49] cli_1.1.0          stringi_1.4.3      fs_1.3.1          </span></a>
 <a class="sourceLine" id="cb17-45" data-line-number="45"><span class="co">#&gt; [52] xml2_1.2.0         vctrs_0.1.0        ellipsis_0.1.0    </span></a>
 <a class="sourceLine" id="cb17-46" data-line-number="46"><span class="co">#&gt; [55] rvcheck_0.1.3      generics_0.0.2     RColorBrewer_1.1-2</span></a>
-<a class="sourceLine" id="cb17-47" data-line-number="47"><span class="co">#&gt; [58] tools_3.6.0        glue_1.3.1         hms_0.4.2         </span></a>
+<a class="sourceLine" id="cb17-47" data-line-number="47"><span class="co">#&gt; [58] tools_3.7.0        glue_1.3.1         hms_0.4.2         </span></a>
 <a class="sourceLine" id="cb17-48" data-line-number="48"><span class="co">#&gt; [61] yaml_2.2.0         colorspace_1.4-1   rvest_0.3.3       </span></a>
 <a class="sourceLine" id="cb17-49" data-line-number="49"><span class="co">#&gt; [64] memoise_1.1.0      knitr_1.22         haven_2.1.0</span></a></code></pre></div>
 <div>
@@ -554,7 +556,11 @@ Icons made by <a href="https://www.freepik.com/?__hstc=57440181.1504a979705d81fb
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=peRspective">https://​cloud.r-project.org/​package=peRspective</a>
+</li>
 <li>Browse source code at <br><a href="https://github.com/favstats/peRspective">https://​github.com/​favstats/​peRspective</a>
+</li>
+<li>Report a bug at <br><a href="https://github.com/favstats/peRspective">https://​github.com/​favstats/​peRspective</a>
 </li>
 </ul>
 </div>

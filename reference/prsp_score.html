@@ -164,22 +164,21 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"># NOT RUN {
-## GET TOXICITY SCORES for a comment
-prsp_score("Hello, I am a test comment!",
-           score_model = "TOXICITY")
-           
-## GET TOXICITY and SEVERE_TOXICITY Scores for a comment
-prsp_score("Hello, I am a test comment!",
-           score_model = c("TOXICITY", "SEVERE_TOXICITY))
-  
-## GET TOXICITY and SEVERE_TOXICITY Scores for each sentence of a comment
-prsp_score("Hello, I am a test comment! 
-           I am a second sentence and I will (hopefully) be scored seperately",
-           score_model = c("TOXICITY", "SEVERE_TOXICITY),
-           score_sentences = T)
-# }
-</pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'>## GET TOXICITY SCORES for a comment</span>
+<span class='fu'>prsp_score</span>(<span class='st'>"Hello, I am a test comment!"</span>,
+           <span class='kw'>score_model</span> <span class='kw'>=</span> <span class='st'>"TOXICITY"</span>)
+
+<span class='co'>## GET TOXICITY and SEVERE_TOXICITY Scores for a comment</span>
+<span class='fu'>prsp_score</span>(<span class='st'>"Hello, I am a test comment!"</span>,
+           <span class='kw'>score_model</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"TOXICITY"</span>, <span class='st'>"SEVERE_TOXICITY"</span>))
+
+<span class='co'>## GET TOXICITY and SEVERE_TOXICITY Scores for each sentence of a comment</span>
+<span class='fu'>prsp_score</span>(<span class='st'>"Hello, I am a test comment! 
+           I am a second sentence and I will (hopefully) be scored seperately"</span>,
+           <span class='kw'>score_model</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"TOXICITY"</span>, <span class='st'>"SEVERE_TOXICITY"</span>),
+           <span class='kw'>score_sentences</span> <span class='kw'>=</span> <span class='no'>T</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
