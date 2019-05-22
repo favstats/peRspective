@@ -1,4 +1,4 @@
-test_that("you can print progress", {
+testthat::test_that("you can print progress", {
   
   score <- print_progress(1, 100)
   
