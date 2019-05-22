@@ -6,7 +6,7 @@ test_that("you can print progress", {
 })
 
 
-test_that("you can print percentage", {
+testthat::test_that("you can print percentage", {
   
   score <- print_progress(1, 100, print_prct = T)
   
