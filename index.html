@@ -433,55 +433,55 @@
 <a class="sourceLine" id="cb15-6" data-line-number="6">              <span class="dt">safe_output =</span> T)</a></code></pre></div>
 <p><img src="reference/figures/prsp_stream_output.png"></p>
 <p>Or the (not as pretty) output in Markdown</p>
-<pre><code>#&gt; 11.11% [2019-05-22 02:41:37]: 1 out of 9 (11.11%)
+<pre><code>#&gt; 11.11% [2019-05-22 02:42:36]: 1 out of 9 (11.11%)
 #&gt; text_id: #efdcxct
 #&gt;  0.96 TOXICITY
 #&gt;  0.79 SEVERE_TOXICITY
 #&gt; 
-#&gt; 22.22% [2019-05-22 02:41:38]: 2 out of 9 (22.22%)
+#&gt; 22.22% [2019-05-22 02:42:37]: 2 out of 9 (22.22%)
 #&gt; text_id: #ehfcsct
 #&gt;  0.93 TOXICITY
 #&gt;  0.44 SEVERE_TOXICITY
 #&gt; 
-#&gt; 33.33% [2019-05-22 02:41:40]: 3 out of 9 (33.33%)
+#&gt; 33.33% [2019-05-22 02:42:38]: 3 out of 9 (33.33%)
 #&gt; text_id: #ekacxwt
 #&gt; ERROR
 #&gt; Error in .f(...): HTTP 400
 #&gt; INVALID_ARGUMENT: Comment must be non-empty.
 #&gt; NO SCORES
 #&gt; 
-#&gt; 44.44% [2019-05-22 02:41:41]: 4 out of 9 (44.44%)
+#&gt; 44.44% [2019-05-22 02:42:40]: 4 out of 9 (44.44%)
 #&gt; text_id: #ewatxad
 #&gt;  0.06 TOXICITY
 #&gt;  0.02 SEVERE_TOXICITY
 #&gt; 
-#&gt; 55.56% [2019-05-22 02:41:42]: 5 out of 9 (55.56%)
+#&gt; 55.56% [2019-05-22 02:42:41]: 5 out of 9 (55.56%)
 #&gt; text_id: #ekacswt
 #&gt;  0.67 TOXICITY
 #&gt;  0.31 SEVERE_TOXICITY
 #&gt; 
-#&gt; 66.67% [2019-05-22 02:41:43]: 6 out of 9 (66.67%)
+#&gt; 66.67% [2019-05-22 02:42:42]: 6 out of 9 (66.67%)
 #&gt; text_id: #ewftxwd
 #&gt;  0.07 TOXICITY
 #&gt;  0.03 SEVERE_TOXICITY
 #&gt; 
-#&gt; 77.78% [2019-05-22 02:41:44]: 7 out of 9 (77.78%)
+#&gt; 77.78% [2019-05-22 02:42:43]: 7 out of 9 (77.78%)
 #&gt; text_id: #eeadswt
 #&gt; ERROR
 #&gt; Error in .f(...): HTTP 400
 #&gt; INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: is
 #&gt; NO SCORES
 #&gt; 
-#&gt; 88.89% [2019-05-22 02:41:45]: 8 out of 9 (88.89%)
+#&gt; 88.89% [2019-05-22 02:42:44]: 8 out of 9 (88.89%)
 #&gt; text_id: #enfhxed
 #&gt;  0.44 TOXICITY
 #&gt;  0.22 SEVERE_TOXICITY
 #&gt; 
-#&gt; 100.00% [2019-05-22 02:41:46]: 9 out of 9 (100.00%)
+#&gt; 100.00% [2019-05-22 02:42:45]: 9 out of 9 (100.00%)
 #&gt; text_id: #efdmjd
 #&gt; ERROR
 #&gt; Error in .f(...): HTTP 400
-#&gt; INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: ja-Latn
+#&gt; INVALID_ARGUMENT: Attribute TOXICITY does not support request languages: ja-Latn
 #&gt; NO SCORES
 #&gt; # A tibble: 9 x 4
 #&gt;   text_id  error                                   TOXICITY SEVERE_TOXICITY
@@ -496,7 +496,7 @@
 #&gt; 8 #enfhxed No Error                                  0.442           0.224 
 #&gt; 9 #efdmjd  "Error in .f(...): HTTP 400\nINVALID_A…  NA              NA</code></pre>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/sessionInfo">sessionInfo</a></span>()</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">#&gt; R version 3.6.0 (2017-01-27)</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">#&gt; R Under development (unstable) (2019-05-21 r76565)</span></a>
 <a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span></a>
 <a class="sourceLine" id="cb17-4" data-line-number="4"><span class="co">#&gt; Running under: Ubuntu 14.04.5 LTS</span></a>
 <a class="sourceLine" id="cb17-5" data-line-number="5"><span class="co">#&gt; </span></a>
@@ -531,17 +531,17 @@
 <a class="sourceLine" id="cb17-34" data-line-number="34"><span class="co">#&gt; [19] curl_3.3           readxl_1.3.1       rstudioapi_0.10   </span></a>
 <a class="sourceLine" id="cb17-35" data-line-number="35"><span class="co">#&gt; [22] data.table_1.12.2  rmarkdown_1.12     pkgdown_1.3.0     </span></a>
 <a class="sourceLine" id="cb17-36" data-line-number="36"><span class="co">#&gt; [25] desc_1.2.0         labeling_0.3       dlstats_0.1.0     </span></a>
-<a class="sourceLine" id="cb17-37" data-line-number="37"><span class="co">#&gt; [28] munsell_0.5.0      broom_0.5.2        compiler_3.6.0    </span></a>
+<a class="sourceLine" id="cb17-37" data-line-number="37"><span class="co">#&gt; [28] munsell_0.5.0      broom_0.5.2        compiler_3.7.0    </span></a>
 <a class="sourceLine" id="cb17-38" data-line-number="38"><span class="co">#&gt; [31] modelr_0.1.4       xfun_0.6           pkgconfig_2.0.2   </span></a>
 <a class="sourceLine" id="cb17-39" data-line-number="39"><span class="co">#&gt; [34] htmltools_0.3.6    tidyselect_0.2.5   roxygen2_6.1.1    </span></a>
 <a class="sourceLine" id="cb17-40" data-line-number="40"><span class="co">#&gt; [37] fansi_0.4.0        crayon_1.3.4       withr_2.1.2       </span></a>
-<a class="sourceLine" id="cb17-41" data-line-number="41"><span class="co">#&gt; [40] MASS_7.3-51.4      commonmark_1.7     grid_3.6.0        </span></a>
-<a class="sourceLine" id="cb17-42" data-line-number="42"><span class="co">#&gt; [43] nlme_3.1-139       jsonlite_1.6       gtable_0.3.0      </span></a>
+<a class="sourceLine" id="cb17-41" data-line-number="41"><span class="co">#&gt; [40] MASS_7.3-51.4      commonmark_1.7     grid_3.7.0        </span></a>
+<a class="sourceLine" id="cb17-42" data-line-number="42"><span class="co">#&gt; [43] nlme_3.1-140       jsonlite_1.6       gtable_0.3.0      </span></a>
 <a class="sourceLine" id="cb17-43" data-line-number="43"><span class="co">#&gt; [46] magrittr_1.5       scales_1.0.0       rlist_0.4.6.1     </span></a>
 <a class="sourceLine" id="cb17-44" data-line-number="44"><span class="co">#&gt; [49] cli_1.1.0          stringi_1.4.3      fs_1.3.1          </span></a>
 <a class="sourceLine" id="cb17-45" data-line-number="45"><span class="co">#&gt; [52] xml2_1.2.0         vctrs_0.1.0        ellipsis_0.1.0    </span></a>
 <a class="sourceLine" id="cb17-46" data-line-number="46"><span class="co">#&gt; [55] rvcheck_0.1.3      generics_0.0.2     RColorBrewer_1.1-2</span></a>
-<a class="sourceLine" id="cb17-47" data-line-number="47"><span class="co">#&gt; [58] tools_3.6.0        glue_1.3.1         hms_0.4.2         </span></a>
+<a class="sourceLine" id="cb17-47" data-line-number="47"><span class="co">#&gt; [58] tools_3.7.0        glue_1.3.1         hms_0.4.2         </span></a>
 <a class="sourceLine" id="cb17-48" data-line-number="48"><span class="co">#&gt; [61] yaml_2.2.0         colorspace_1.4-1   rvest_0.3.3       </span></a>
 <a class="sourceLine" id="cb17-49" data-line-number="49"><span class="co">#&gt; [64] memoise_1.1.0      knitr_1.22         haven_2.1.0</span></a></code></pre></div>
 <div>
