@@ -28,7 +28,8 @@ library(badger)
 git_repo <- "favstats/peRspective"
 
 cat(
-  badge_custom("My 1st Package", "Ever", "blue"),
+  "[![](https://cranlogs.r-pkg.org/badges/grand-total/peRspective)](https://cran.rstudio.com/web/packages/peRspective/index.html)",
+  # badge_custom("My 1st Package", "Ever", "blue"),
   badge_travis(git_repo),
   badge_cran_release("peRspective", "blue"),
   "[![Codecov test coverage](https://codecov.io/gh/favstats/peRspective/branch/master/graph/badge.svg)](https://codecov.io/gh/favstats/peRspective?branch=master)",

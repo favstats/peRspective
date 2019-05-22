@@ -3,7 +3,7 @@
 
 # peRspective <img src="man/figures/perspective.png" width="160px" align="right" />
 
-![](https://img.shields.io/badge/My%201st%20Package-Ever-blue.svg)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/peRspective)](https://cran.rstudio.com/web/packages/peRspective/index.html)
 [![](https://travis-ci.org/favstats/peRspective.svg?branch=master)](https://travis-ci.org/favstats/peRspective)
 [![](https://www.r-pkg.org/badges/version/peRspective?color=blue)](https://cran.r-project.org/package=peRspective)
 [![Codecov test
@@ -379,51 +379,51 @@ text_sample %>%
 
 Or the (not as pretty) output in Markdown
 
-    #> 11.11% [2019-05-20 14:24:16]: 1 out of 9 (11.11%)
+    #> 11.11% [2019-05-22 04:28:30]: 1 out of 9 (11.11%)
     #> text_id: #efdcxct
     #>  0.96 TOXICITY
     #>  0.79 SEVERE_TOXICITY
     #> 
-    #> 22.22% [2019-05-20 14:24:17]: 2 out of 9 (22.22%)
+    #> 22.22% [2019-05-22 04:28:31]: 2 out of 9 (22.22%)
     #> text_id: #ehfcsct
     #>  0.93 TOXICITY
     #>  0.44 SEVERE_TOXICITY
     #> 
-    #> 33.33% [2019-05-20 14:24:19]: 3 out of 9 (33.33%)
+    #> 33.33% [2019-05-22 04:28:32]: 3 out of 9 (33.33%)
     #> text_id: #ekacxwt
     #> ERROR
     #> Error in .f(...): HTTP 400
     #> INVALID_ARGUMENT: Comment must be non-empty.
     #> NO SCORES
     #> 
-    #> 44.44% [2019-05-20 14:24:20]: 4 out of 9 (44.44%)
+    #> 44.44% [2019-05-22 04:28:33]: 4 out of 9 (44.44%)
     #> text_id: #ewatxad
     #>  0.06 TOXICITY
     #>  0.02 SEVERE_TOXICITY
     #> 
-    #> 55.56% [2019-05-20 14:24:21]: 5 out of 9 (55.56%)
+    #> 55.56% [2019-05-22 04:28:34]: 5 out of 9 (55.56%)
     #> text_id: #ekacswt
     #>  0.67 TOXICITY
     #>  0.31 SEVERE_TOXICITY
     #> 
-    #> 66.67% [2019-05-20 14:24:22]: 6 out of 9 (66.67%)
+    #> 66.67% [2019-05-22 04:28:35]: 6 out of 9 (66.67%)
     #> text_id: #ewftxwd
     #>  0.07 TOXICITY
     #>  0.03 SEVERE_TOXICITY
     #> 
-    #> 77.78% [2019-05-20 14:24:23]: 7 out of 9 (77.78%)
+    #> 77.78% [2019-05-22 04:28:36]: 7 out of 9 (77.78%)
     #> text_id: #eeadswt
     #> ERROR
     #> Error in .f(...): HTTP 400
-    #> INVALID_ARGUMENT: Attribute TOXICITY does not support request languages: is
+    #> INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: is
     #> NO SCORES
     #> 
-    #> 88.89% [2019-05-20 14:24:24]: 8 out of 9 (88.89%)
+    #> 88.89% [2019-05-22 04:28:37]: 8 out of 9 (88.89%)
     #> text_id: #enfhxed
     #>  0.44 TOXICITY
     #>  0.22 SEVERE_TOXICITY
     #> 
-    #> 100.00% [2019-05-20 14:24:25]: 9 out of 9 (100.00%)
+    #> 100.00% [2019-05-22 04:28:38]: 9 out of 9 (100.00%)
     #> text_id: #efdmjd
     #> ERROR
     #> Error in .f(...): HTTP 400
@@ -472,12 +472,12 @@ sessionInfo()
 #> [13] withr_2.1.2        glue_1.3.1         RColorBrewer_1.1-2
 #> [16] modelr_0.1.4       readxl_1.3.1       rvcheck_0.1.3     
 #> [19] plyr_1.8.4         dlstats_0.1.0      munsell_0.5.0     
-#> [22] gtable_0.3.0       cellranger_1.1.0   rvest_0.3.3       
-#> [25] evaluate_0.13      labeling_0.3       knitr_1.22        
+#> [22] gtable_0.3.0       cellranger_1.1.0   rvest_0.3.4       
+#> [25] evaluate_0.13      labeling_0.3       knitr_1.23        
 #> [28] curl_3.3           fansi_0.4.0        highr_0.8         
 #> [31] broom_0.5.2        Rcpp_1.0.1         scales_1.0.0      
 #> [34] backports_1.1.4    jsonlite_1.6       hms_0.4.2         
-#> [37] digest_0.6.18      stringi_1.4.3      rlist_0.4.6.1     
+#> [37] digest_0.6.19      stringi_1.4.3      rlist_0.4.6.1     
 #> [40] grid_3.6.0         cli_1.1.0          tools_3.6.0       
 #> [43] magrittr_1.5       lazyeval_0.2.2     zeallot_0.1.0     
 #> [46] crayon_1.3.4       pkgconfig_2.0.2    ellipsis_0.1.0    
