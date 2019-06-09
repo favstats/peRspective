@@ -301,7 +301,7 @@ text_sample <- tibble(
 Sys.sleep(1)
 ```
 
-`prsp_stream` requires a `text` and `text_id column`. It wraps `prsp_score` and takes all its arguments. Let's run the most basic version:
+`prsp_stream` requires a `text` and `text_id` column. It wraps `prsp_score` and takes all its arguments. Let's run the most basic version:
 
 ```{r, message=T}
 text_sample %>%
