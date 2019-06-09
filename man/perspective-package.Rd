@@ -108,3 +108,11 @@ be rejected according to the NYT's moderation.
 }
 }
 
+\section{Don't forget to regain your spirits}{
+
+
+Analyzing toxic comments can be disheartening sometimes. Feel free to look at this picture of cute kittens whenever you need to:
+
+\figure{kittens.jpg}{}
+}
+

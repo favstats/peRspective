@@ -7,7 +7,7 @@
 perspective_api_key(test = F)
 }
 \arguments{
-\item{test}{necessary when in a test environment. Defaults to `FALSE`.}
+\item{test}{necessary when in a test environment. Defaults to \code{FALSE}.}
 }
 \description{
 Check if API key is present

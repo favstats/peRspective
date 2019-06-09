@@ -51,6 +51,7 @@ specify_decimal <- function(x, k) trimws(format(round(x, k), nsmall=k))
 #' Print progress in purrr::imap environment
 #'
 #' Provide iterator number and total length of items to be iterated over
+#' 
 #'
 #' @md
 #' @param x iterator number.

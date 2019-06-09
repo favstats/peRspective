@@ -87,6 +87,14 @@
 #' *   **SPAM**: Irrelevant and unsolicited commercial content.
 #' *   **UNSUBSTANTIAL**: Trivial or short comments.
 #'  
+#'  
+#'  
+#' @section Don't forget to regain your spirits:
+#'  
+#'  Analyzing toxic comments can be disheartening sometimes. Feel free to look at this picture of cute kittens whenever you need to:
+#'  
+#'  ![kittens](kittens.jpg)
+#'  
 #' @md
 #' @docType package
 #' @name perspective-package
