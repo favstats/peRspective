@@ -113,6 +113,7 @@ be rejected according to the NYT's moderation.
 
 Analyzing toxic comments can be disheartening sometimes. Feel free to look at this picture of cute kittens whenever you need to:
 
-\figure{kittens.jpg}{}
+\if{html}{\figure{kittens.jpg}{Kittens}}
+\if{latex}{\figure{kittens.jpg}{options: width=0.5in}}
 }
 

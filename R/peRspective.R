@@ -93,7 +93,9 @@
 #'  
 #'  Analyzing toxic comments can be disheartening sometimes. Feel free to look at this picture of cute kittens whenever you need to:
 #'  
-#'  ![kittens](kittens.jpg)
+#'  
+#'   \if{html}{\figure{kittens.jpg}{Kittens}}
+#'   \if{latex}{\figure{kittens.jpg}{options: width=0.5in}}
 #'  
 #' @md
 #' @docType package
