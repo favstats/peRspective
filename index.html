@@ -368,7 +368,7 @@
 <a class="sourceLine" id="cb11-9" data-line-number="9">                  <span class="st">"#ekacxwt"</span>,  <span class="st">"#ewatxad"</span>, </a>
 <a class="sourceLine" id="cb11-10" data-line-number="10">                  <span class="st">"#ekacswt"</span>,  <span class="st">"#ewftxwd"</span>)</a>
 <a class="sourceLine" id="cb11-11" data-line-number="11">       )</a></code></pre></div>
-<p><code>prsp_stream</code> requires a <code>text</code> and <code>text_id column</code>. It wraps <code>prsp_score</code> and takes all its arguments. Let’s run the most basic version:</p>
+<p><code>prsp_stream</code> requires a <code>text</code> and <code>text_id</code> column. It wraps <code>prsp_score</code> and takes all its arguments. Let’s run the most basic version:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">text_sample <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb12-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/prsp_stream.html">prsp_stream</a></span>(<span class="dt">text =</span> ctext,</a>
 <a class="sourceLine" id="cb12-3" data-line-number="3">              <span class="dt">text_id =</span> textid,</a>
@@ -433,51 +433,51 @@
 <a class="sourceLine" id="cb15-6" data-line-number="6">              <span class="dt">safe_output =</span> T)</a></code></pre></div>
 <p><img src="reference/figures/prsp_stream_output.png"></p>
 <p>Or the (not as pretty) output in Markdown</p>
-<pre><code>#&gt; 11.11% [2019-06-09 18:00:12]: 1 out of 9 (11.11%)
+<pre><code>#&gt; 11.11% [2019-06-09 20:46:38]: 1 out of 9 (11.11%)
 #&gt; text_id: #efdcxct
 #&gt;  0.96 TOXICITY
 #&gt;  0.79 SEVERE_TOXICITY
 #&gt; 
-#&gt; 22.22% [2019-06-09 18:00:13]: 2 out of 9 (22.22%)
+#&gt; 22.22% [2019-06-09 20:46:39]: 2 out of 9 (22.22%)
 #&gt; text_id: #ehfcsct
 #&gt;  0.93 TOXICITY
 #&gt;  0.44 SEVERE_TOXICITY
 #&gt; 
-#&gt; 33.33% [2019-06-09 18:00:14]: 3 out of 9 (33.33%)
+#&gt; 33.33% [2019-06-09 20:46:40]: 3 out of 9 (33.33%)
 #&gt; text_id: #ekacxwt
 #&gt; ERROR
 #&gt; Error in .f(...): HTTP 400
 #&gt; INVALID_ARGUMENT: Comment must be non-empty.
 #&gt; NO SCORES
 #&gt; 
-#&gt; 44.44% [2019-06-09 18:00:15]: 4 out of 9 (44.44%)
+#&gt; 44.44% [2019-06-09 20:46:41]: 4 out of 9 (44.44%)
 #&gt; text_id: #ewatxad
 #&gt;  0.06 TOXICITY
 #&gt;  0.02 SEVERE_TOXICITY
 #&gt; 
-#&gt; 55.56% [2019-06-09 18:00:16]: 5 out of 9 (55.56%)
+#&gt; 55.56% [2019-06-09 20:46:42]: 5 out of 9 (55.56%)
 #&gt; text_id: #ekacswt
 #&gt;  0.67 TOXICITY
 #&gt;  0.31 SEVERE_TOXICITY
 #&gt; 
-#&gt; 66.67% [2019-06-09 18:00:17]: 6 out of 9 (66.67%)
+#&gt; 66.67% [2019-06-09 20:46:43]: 6 out of 9 (66.67%)
 #&gt; text_id: #ewftxwd
 #&gt;  0.07 TOXICITY
 #&gt;  0.03 SEVERE_TOXICITY
 #&gt; 
-#&gt; 77.78% [2019-06-09 18:00:18]: 7 out of 9 (77.78%)
+#&gt; 77.78% [2019-06-09 20:46:44]: 7 out of 9 (77.78%)
 #&gt; text_id: #eeadswt
 #&gt; ERROR
 #&gt; Error in .f(...): HTTP 400
-#&gt; INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: is
+#&gt; INVALID_ARGUMENT: Attribute TOXICITY does not support request languages: is
 #&gt; NO SCORES
 #&gt; 
-#&gt; 88.89% [2019-06-09 18:00:19]: 8 out of 9 (88.89%)
+#&gt; 88.89% [2019-06-09 20:46:45]: 8 out of 9 (88.89%)
 #&gt; text_id: #enfhxed
 #&gt;  0.44 TOXICITY
 #&gt;  0.22 SEVERE_TOXICITY
 #&gt; 
-#&gt; 100.00% [2019-06-09 18:00:20]: 9 out of 9 (100.00%)
+#&gt; 100.00% [2019-06-09 20:46:46]: 9 out of 9 (100.00%)
 #&gt; text_id: #efdmjd
 #&gt; ERROR
 #&gt; Error in .f(...): HTTP 400
