@@ -81,7 +81,7 @@ For detailed overview of the used models [see here](https://github.com/conversat
 Here is a list of models currently supported by `peRspective`:
 
 ```{r, echo=F}
-library(tidyverse)
+library(dplyr)
 
 tibble::tribble(
   ~`Model Attribute Name`,  ~Version,                                  ~`Supported Languages`,   ~`Short Description`,

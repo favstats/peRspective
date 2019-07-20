@@ -379,51 +379,51 @@ text_sample %>%
 
 Or the (not as pretty) output in Markdown
 
-    #> 11.11% [2019-07-20 22:49:18]: 1 out of 9 (11.11%)
+    #> 11.11% [2019-07-20 23:36:01]: 1 out of 9 (11.11%)
     #> text_id: #efdcxct
     #>  0.96 TOXICITY
     #>  0.79 SEVERE_TOXICITY
     #> 
-    #> 22.22% [2019-07-20 22:49:19]: 2 out of 9 (22.22%)
+    #> 22.22% [2019-07-20 23:36:02]: 2 out of 9 (22.22%)
     #> text_id: #ehfcsct
     #>  0.93 TOXICITY
     #>  0.44 SEVERE_TOXICITY
     #> 
-    #> 33.33% [2019-07-20 22:49:20]: 3 out of 9 (33.33%)
+    #> 33.33% [2019-07-20 23:36:03]: 3 out of 9 (33.33%)
     #> text_id: #ekacxwt
     #> ERROR
     #> Error in .f(...): HTTP 400
     #> INVALID_ARGUMENT: Comment must be non-empty.
     #> NO SCORES
     #> 
-    #> 44.44% [2019-07-20 22:49:23]: 4 out of 9 (44.44%)
+    #> 44.44% [2019-07-20 23:36:05]: 4 out of 9 (44.44%)
     #> text_id: #ewatxad
     #>  0.06 TOXICITY
     #>  0.02 SEVERE_TOXICITY
     #> 
-    #> 55.56% [2019-07-20 22:49:24]: 5 out of 9 (55.56%)
+    #> 55.56% [2019-07-20 23:36:06]: 5 out of 9 (55.56%)
     #> text_id: #ekacswt
     #>  0.67 TOXICITY
     #>  0.31 SEVERE_TOXICITY
     #> 
-    #> 66.67% [2019-07-20 22:49:25]: 6 out of 9 (66.67%)
+    #> 66.67% [2019-07-20 23:36:07]: 6 out of 9 (66.67%)
     #> text_id: #ewftxwd
     #>  0.07 TOXICITY
     #>  0.03 SEVERE_TOXICITY
     #> 
-    #> 77.78% [2019-07-20 22:49:26]: 7 out of 9 (77.78%)
+    #> 77.78% [2019-07-20 23:36:08]: 7 out of 9 (77.78%)
     #> text_id: #eeadswt
     #> ERROR
     #> Error in .f(...): HTTP 400
     #> INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: is
     #> NO SCORES
     #> 
-    #> 88.89% [2019-07-20 22:49:27]: 8 out of 9 (88.89%)
+    #> 88.89% [2019-07-20 23:36:09]: 8 out of 9 (88.89%)
     #> text_id: #enfhxed
     #>  0.44 TOXICITY
     #>  0.22 SEVERE_TOXICITY
     #> 
-    #> 100.00% [2019-07-20 22:49:29]: 9 out of 9 (100.00%)
+    #> 100.00% [2019-07-20 23:36:10]: 9 out of 9 (100.00%)
     #> text_id: #efdmjd
     #> ERROR
     #> Error in .f(...): HTTP 400
