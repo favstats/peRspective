@@ -379,55 +379,55 @@ text_sample %>%
 
 Or the (not as pretty) output in Markdown
 
-    #> 11.11% [2019-06-09 22:38:51]: 1 out of 9 (11.11%)
+    #> 11.11% [2019-07-20 22:49:18]: 1 out of 9 (11.11%)
     #> text_id: #efdcxct
     #>  0.96 TOXICITY
     #>  0.79 SEVERE_TOXICITY
     #> 
-    #> 22.22% [2019-06-09 22:38:52]: 2 out of 9 (22.22%)
+    #> 22.22% [2019-07-20 22:49:19]: 2 out of 9 (22.22%)
     #> text_id: #ehfcsct
     #>  0.93 TOXICITY
     #>  0.44 SEVERE_TOXICITY
     #> 
-    #> 33.33% [2019-06-09 22:38:53]: 3 out of 9 (33.33%)
+    #> 33.33% [2019-07-20 22:49:20]: 3 out of 9 (33.33%)
     #> text_id: #ekacxwt
     #> ERROR
     #> Error in .f(...): HTTP 400
     #> INVALID_ARGUMENT: Comment must be non-empty.
     #> NO SCORES
     #> 
-    #> 44.44% [2019-06-09 22:38:54]: 4 out of 9 (44.44%)
+    #> 44.44% [2019-07-20 22:49:23]: 4 out of 9 (44.44%)
     #> text_id: #ewatxad
     #>  0.06 TOXICITY
     #>  0.02 SEVERE_TOXICITY
     #> 
-    #> 55.56% [2019-06-09 22:38:55]: 5 out of 9 (55.56%)
+    #> 55.56% [2019-07-20 22:49:24]: 5 out of 9 (55.56%)
     #> text_id: #ekacswt
     #>  0.67 TOXICITY
     #>  0.31 SEVERE_TOXICITY
     #> 
-    #> 66.67% [2019-06-09 22:38:56]: 6 out of 9 (66.67%)
+    #> 66.67% [2019-07-20 22:49:25]: 6 out of 9 (66.67%)
     #> text_id: #ewftxwd
     #>  0.07 TOXICITY
     #>  0.03 SEVERE_TOXICITY
     #> 
-    #> 77.78% [2019-06-09 22:38:57]: 7 out of 9 (77.78%)
+    #> 77.78% [2019-07-20 22:49:26]: 7 out of 9 (77.78%)
     #> text_id: #eeadswt
     #> ERROR
     #> Error in .f(...): HTTP 400
     #> INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: is
     #> NO SCORES
     #> 
-    #> 88.89% [2019-06-09 22:38:59]: 8 out of 9 (88.89%)
+    #> 88.89% [2019-07-20 22:49:27]: 8 out of 9 (88.89%)
     #> text_id: #enfhxed
     #>  0.44 TOXICITY
     #>  0.22 SEVERE_TOXICITY
     #> 
-    #> 100.00% [2019-06-09 22:39:00]: 9 out of 9 (100.00%)
+    #> 100.00% [2019-07-20 22:49:29]: 9 out of 9 (100.00%)
     #> text_id: #efdmjd
     #> ERROR
     #> Error in .f(...): HTTP 400
-    #> INVALID_ARGUMENT: Attribute TOXICITY does not support request languages: ja-Latn
+    #> INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: ja-Latn
     #> NO SCORES
     #> # A tibble: 9 x 4
     #>   text_id  error                                   TOXICITY SEVERE_TOXICITY
@@ -442,50 +442,12 @@ Or the (not as pretty) output in Markdown
     #> 8 #enfhxed No Error                                  0.442           0.224 
     #> 9 #efdmjd  "Error in .f(...): HTTP 400\nINVALID_A…  NA              NA
 
-``` r
-sessionInfo()
-#> R version 3.6.0 (2019-04-26)
-#> Platform: x86_64-w64-mingw32/x64 (64-bit)
-#> Running under: Windows 10 x64 (build 17134)
-#> 
-#> Matrix products: default
-#> 
-#> locale:
-#> [1] LC_COLLATE=English_Germany.1252  LC_CTYPE=English_Germany.1252   
-#> [3] LC_MONETARY=English_Germany.1252 LC_NUMERIC=C                    
-#> [5] LC_TIME=English_Germany.1252    
-#> 
-#> attached base packages:
-#> [1] stats     graphics  grDevices utils     datasets  methods   base     
-#> 
-#> other attached packages:
-#>  [1] peRspective_0.1.0 forcats_0.4.0     stringr_1.4.0    
-#>  [4] dplyr_0.8.1       purrr_0.3.2       readr_1.3.1      
-#>  [7] tidyr_0.8.3       tibble_2.1.3      ggplot2_3.1.1    
-#> [10] tidyverse_1.2.1   badger_0.0.4     
-#> 
-#> loaded via a namespace (and not attached):
-#>  [1] tidyselect_0.2.5   xfun_0.7           haven_2.1.0       
-#>  [4] lattice_0.20-38    vctrs_0.1.0        colorspace_1.4-1  
-#>  [7] generics_0.0.2     htmltools_0.3.6    yaml_2.2.0        
-#> [10] utf8_1.1.4         rlang_0.3.4        pillar_1.4.0      
-#> [13] withr_2.1.2        glue_1.3.1         RColorBrewer_1.1-2
-#> [16] modelr_0.1.4       readxl_1.3.1       rvcheck_0.1.3     
-#> [19] plyr_1.8.4         dlstats_0.1.0      munsell_0.5.0     
-#> [22] gtable_0.3.0       cellranger_1.1.0   rvest_0.3.4       
-#> [25] evaluate_0.13      labeling_0.3       knitr_1.23        
-#> [28] curl_3.3           fansi_0.4.0        highr_0.8         
-#> [31] broom_0.5.2        Rcpp_1.0.1         scales_1.0.0      
-#> [34] backports_1.1.4    jsonlite_1.6       hms_0.4.2         
-#> [37] digest_0.6.19      stringi_1.4.3      rlist_0.4.6.1     
-#> [40] grid_3.6.0         cli_1.1.0          tools_3.6.0       
-#> [43] magrittr_1.5       lazyeval_0.2.2     zeallot_0.1.0     
-#> [46] crayon_1.3.4       pkgconfig_2.0.2    ellipsis_0.1.0    
-#> [49] data.table_1.12.2  xml2_1.2.0         lubridate_1.7.4   
-#> [52] assertthat_0.2.1   rmarkdown_1.12.6   httr_1.4.0        
-#> [55] rstudioapi_0.10    R6_2.4.0           nlme_3.1-139      
-#> [58] compiler_3.6.0
-```
+## Citation
+
+Thank you for using peRspective\! Please consider citing:
+
+Votta, Fabio. (2019). peRspective: A wrapper for the Perspective API.
+Source: <https://github.com/favstats>.
 
 <div>
 

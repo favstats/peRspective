@@ -4,6 +4,7 @@ globalVariables("type")
 globalVariables("summary_score")
 globalVariables("label")
 globalVariables(".")
+globalVariables("score_model")
 
 #' Stream comment scores with Perspective API
 #'
@@ -17,7 +18,7 @@ globalVariables(".")
 #' @param text_id a unique ID for the text that you supply (required)
 #' @param safe_output wraps the function into a `purrr::safely` environment (defaults to `FALSE`). Loop will run without pause and catch + output errors in a tidy `tibble` along with the results.
 #' @param verbose narrates the streaming procedure (defaults to `FALSE`).
-#' @param ... arguments passed to \code{\link{prsp_score}}.
+#' @param ... arguments passed to \code{\link{prsp_score}}. Don't forget to add the \code{score_model} argument (see `peRspective::prsp_models` for list of valid models).
 #' @return a `tibble`
 #' @examples
 #' \dontrun{
@@ -77,6 +78,7 @@ prsp_stream <- function(.data,
     stop("You need to provide a text_id column.")
   }
   
+  
   text_col <- .data %>% dplyr::pull(!!text)
   id_col <- .data %>% dplyr::pull(!!text_id)
   
@@ -101,6 +103,15 @@ prsp_stream <- function(.data,
 
   ## keep function parameters
   prsp_params <- list(...)
+  
+  
+  if (is.null(prsp_params$score_model)) {
+    stop(stringr::str_glue("No Model type provided in score_model.\n\nShould be one of the following:\n\n{peRspective::prsp_models %>% glue::glue_collapse('\n')}"))
+  }
+
+  if (!all(prsp_params$score_model %in% prsp_models | prsp_params$score_model %in% prsp_exp_models)) {
+    stop(stringr::str_glue("Invalid Model type provided.\n\nShould be one of the following:\n\n{peRspective::prsp_models %>% glue::glue_collapse('\n')}"))
+  }
   
   ## loop over prsp_score
   final_text <- .data %>%
@@ -132,6 +143,7 @@ prsp_stream <- function(.data,
                           c(
                             list(text = .x$text),
                             list(text_id = .x$text_id),
+                            # list(score_model = .x$score_model),
                             prsp_params
                           ))
 
@@ -153,7 +165,7 @@ prsp_stream <- function(.data,
         ## always print text_id first
         cat(stringr::str_glue("text_id: {int_id}\n\n"))
 
-        # browser()
+        
         ## when safe output show errors as you go
         if (safe_output) {
           if ("error" %in% class(raw_text$error)) {
@@ -165,7 +177,6 @@ prsp_stream <- function(.data,
           }
 
         }
-# browser()
       
         print_score_labels(prsp_params, int_results)
 

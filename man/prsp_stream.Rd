@@ -14,7 +14,7 @@ prsp_stream(.data, text = NULL, text_id = NULL, ..., safe_output = F,
 
 \item{text_id}{a unique ID for the text that you supply (required)}
 
-\item{...}{arguments passed to \code{\link{prsp_score}}.}
+\item{...}{arguments passed to \code{\link{prsp_score}}. Don't forget to add the \code{score_model} argument (see \code{peRspective::prsp_models} for list of valid models).}
 
 \item{safe_output}{wraps the function into a \code{purrr::safely} environment (defaults to \code{FALSE}). Loop will run without pause and catch + output errors in a tidy \code{tibble} along with the results.}
 
