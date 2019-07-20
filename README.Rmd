@@ -18,7 +18,6 @@ ggplot2::theme_set(ggplot2::theme_minimal())
 
 library(dplyr)
 library(tibble)
-library(forcats)
 library(tidyr)
 library(ggplot2)
 
