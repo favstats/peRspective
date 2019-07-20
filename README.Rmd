@@ -187,7 +187,7 @@ text_scores <- prsp_score(
 
 text_scores %>% 
   gather() %>% 
-  mutate(key = fct_reorder(key, value)) %>% 
+  mutate(key = forcats::fct_reorder(key, value)) %>% 
   ggplot(aes(key, value)) +
   geom_col() +
   coord_flip() +
@@ -214,7 +214,7 @@ text_scores <- prsp_score(
 
 text_scores %>% 
   gather() %>% 
-  mutate(key = fct_reorder(key, value)) %>% 
+  mutate(key = forcats::fct_reorder(key, value)) %>% 
   ggplot(aes(key, value)) +
   geom_col() +
   coord_flip() +
@@ -242,7 +242,7 @@ text_scores %>%
   unnest(sentence_scores) %>% 
   select(type, score, sentences) %>% 
   gather(value, key, -sentences, -score) %>% 
-  mutate(key = fct_reorder(key, score)) %>% 
+  mutate(key = forcats::fct_reorder(key, score)) %>% 
   ggplot(aes(key, score)) +
   geom_col() +
   coord_flip() +
@@ -271,7 +271,7 @@ text_scores <- prsp_score(
 
 text_scores %>% 
   gather() %>% 
-  mutate(key = fct_reorder(key, value)) %>% 
+  mutate(key = forcats::fct_reorder(key, value)) %>% 
   ggplot(aes(key, value)) +
   geom_col() +
   coord_flip() +
