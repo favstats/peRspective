@@ -4,3 +4,4 @@ test_that("specifying decimal works", {
   
   expect_equal(nchar(score), 5)
 })
+
