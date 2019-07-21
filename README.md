@@ -165,14 +165,14 @@ text_scores <- prsp_score(
            )
 
 text_scores %>% 
-  gather() %>% 
-  mutate(key = forcats::fct_reorder(key, value)) %>% 
-  ggplot(aes(key, value)) +
-  geom_col() +
-  coord_flip() +
-  ylim(0, 1) +
-  geom_hline(yintercept = 0.5, linetype = "dashed") +
-  labs(x = "Model", y = "Probability", title = "Perspective API Results")
+  tidyr::gather() %>% 
+  dplyr::mutate(key = forcats::fct_reorder(key, value)) %>% 
+  ggplot2::ggplot(ggplot2::aes(key, value)) +
+  ggplot2::geom_col() +
+  ggplot2::coord_flip() +
+  ggplot2::ylim(0, 1) +
+  ggplot2::geom_hline(yintercept = 0.5, linetype = "dashed") +
+  ggplot2::labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
 
 <img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
@@ -189,14 +189,14 @@ text_scores <- prsp_score(
            )
 
 text_scores %>% 
-  gather() %>% 
-  mutate(key = forcats::fct_reorder(key, value)) %>% 
-  ggplot(aes(key, value)) +
-  geom_col() +
-  coord_flip() +
-  ylim(0, 1) +
-  geom_hline(yintercept = 0.5, linetype = "dashed") +
-  labs(x = "Model", y = "Probability", title = "Perspective API Results")
+  tidyr::gather() %>% 
+  dplyr::mutate(key = forcats::fct_reorder(key, value)) %>% 
+  ggplot2::ggplot(ggplot2::aes(key, value)) +
+  ggplot2::geom_col() +
+  ggplot2::coord_flip() +
+  ggplot2::ylim(0, 1) +
+  ggplot2::geom_hline(yintercept = 0.5, linetype = "dashed") +
+  ggplot2::labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
 
 <img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
@@ -216,16 +216,16 @@ text_scores <- prsp_score(
            )
 
 text_scores %>% 
-  unnest(sentence_scores) %>% 
-  select(type, score, sentences) %>% 
-  gather(value, key, -sentences, -score) %>% 
-  mutate(key = forcats::fct_reorder(key, score)) %>% 
-  ggplot(aes(key, score)) +
-  geom_col() +
-  coord_flip() +
-  facet_wrap(~sentences, ncol = 2) +
-  geom_hline(yintercept = 0.5, linetype = "dashed") +
-  labs(x = "Model", y = "Probability", title = "Perspective API Results")
+  tidyr::unnest(sentence_scores) %>% 
+  dplyr::select(type, score, sentences) %>% 
+  tidyr::gather(value, key, -sentences, -score) %>% 
+  dplyr::mutate(key = forcats::fct_reorder(key, score)) %>% 
+  ggplot2::ggplot(ggplot2::aes(key, score)) +
+  ggplot2::geom_col() +
+  ggplot2::coord_flip() +
+  ggplot2::facet_wrap(~sentences, ncol = 2) +
+  ggplot2::geom_hline(yintercept = 0.5, linetype = "dashed") +
+  ggplot2::labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
 
 <img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
@@ -244,13 +244,13 @@ text_scores <- prsp_score(
            )
 
 text_scores %>% 
-  gather() %>% 
-  mutate(key = forcats::fct_reorder(key, value)) %>% 
-  ggplot(aes(key, value)) +
-  geom_col() +
-  coord_flip() +
-  geom_hline(yintercept = 0.5, linetype = "dashed")  +
-  labs(x = "Model", y = "Probability", title = "Perspective API Results")
+  tidyr::gather() %>% 
+  dplyr::mutate(key = forcats::fct_reorder(key, value)) %>% 
+  ggplot2::ggplot(ggplot2::aes(key, value)) +
+  ggplot2::geom_col() +
+  ggplot2::coord_flip() +
+  ggplot2::geom_hline(yintercept = 0.5, linetype = "dashed")  +
+  ggplot2::labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
 
 <img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" />
@@ -379,51 +379,51 @@ text_sample %>%
 
 Or the (not as pretty) output in Markdown
 
-    #> 11.11% [2019-07-21 01:07:40]: 1 out of 9 (11.11%)
+    #> 11.11% [2019-07-21 04:02:32]: 1 out of 9 (11.11%)
     #> text_id: #efdcxct
     #>  0.96 TOXICITY
     #>  0.79 SEVERE_TOXICITY
     #> 
-    #> 22.22% [2019-07-21 01:07:41]: 2 out of 9 (22.22%)
+    #> 22.22% [2019-07-21 04:02:33]: 2 out of 9 (22.22%)
     #> text_id: #ehfcsct
     #>  0.93 TOXICITY
     #>  0.44 SEVERE_TOXICITY
     #> 
-    #> 33.33% [2019-07-21 01:07:42]: 3 out of 9 (33.33%)
+    #> 33.33% [2019-07-21 04:02:34]: 3 out of 9 (33.33%)
     #> text_id: #ekacxwt
     #> ERROR
     #> Error in .f(...): HTTP 400
     #> INVALID_ARGUMENT: Comment must be non-empty.
     #> NO SCORES
     #> 
-    #> 44.44% [2019-07-21 01:07:44]: 4 out of 9 (44.44%)
+    #> 44.44% [2019-07-21 04:02:35]: 4 out of 9 (44.44%)
     #> text_id: #ewatxad
     #>  0.06 TOXICITY
     #>  0.02 SEVERE_TOXICITY
     #> 
-    #> 55.56% [2019-07-21 01:07:45]: 5 out of 9 (55.56%)
+    #> 55.56% [2019-07-21 04:02:37]: 5 out of 9 (55.56%)
     #> text_id: #ekacswt
     #>  0.67 TOXICITY
     #>  0.31 SEVERE_TOXICITY
     #> 
-    #> 66.67% [2019-07-21 01:07:46]: 6 out of 9 (66.67%)
+    #> 66.67% [2019-07-21 04:02:38]: 6 out of 9 (66.67%)
     #> text_id: #ewftxwd
     #>  0.07 TOXICITY
     #>  0.03 SEVERE_TOXICITY
     #> 
-    #> 77.78% [2019-07-21 01:07:47]: 7 out of 9 (77.78%)
+    #> 77.78% [2019-07-21 04:02:39]: 7 out of 9 (77.78%)
     #> text_id: #eeadswt
     #> ERROR
     #> Error in .f(...): HTTP 400
     #> INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: is
     #> NO SCORES
     #> 
-    #> 88.89% [2019-07-21 01:07:49]: 8 out of 9 (88.89%)
+    #> 88.89% [2019-07-21 04:02:40]: 8 out of 9 (88.89%)
     #> text_id: #enfhxed
     #>  0.44 TOXICITY
     #>  0.22 SEVERE_TOXICITY
     #> 
-    #> 100.00% [2019-07-21 01:07:50]: 9 out of 9 (100.00%)
+    #> 100.00% [2019-07-21 04:02:41]: 9 out of 9 (100.00%)
     #> text_id: #efdmjd
     #> ERROR
     #> Error in .f(...): HTTP 400

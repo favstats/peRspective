@@ -1,5 +1,6 @@
 # key <- readr::read_lines("prsp.txt")
 
+
 test_that("sentence choice works", {
 
   testthat::skip_if(Sys.getenv("perspective_api_key") == "", 

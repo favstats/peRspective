@@ -3,7 +3,12 @@ text_sample <- tibble::tibble(
             "I don't know what to say about this but it's not good. The commenter is just an idiot",
             "This goes even further!",
             "What the hell is going on?",
+            
+            
+            
             "Please. I don't get it. Explain it again",
+            
+            
             "Annoying and irrelevant! I'd rather watch the paint drying on the wall!"),
   textid = c("#efdcxct", "#ehfcsct",
              "#ekacxwt",  "#ewatxad",

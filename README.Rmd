@@ -17,10 +17,6 @@ knitr::opts_chunk$set(
 ggplot2::theme_set(ggplot2::theme_minimal())
 
 library(dplyr)
-library(tibble)
-library(tidyr)
-library(ggplot2)
-
 ```
 
 
@@ -87,7 +83,6 @@ For detailed overview of the used models [see here](https://github.com/conversat
 Here is a list of models currently supported by `peRspective`:
 
 ```{r, echo=F}
-library(dplyr)
 
 tibble::tribble(
   ~`Model Attribute Name`,  ~Version,                                  ~`Supported Languages`,   ~`Short Description`,
@@ -185,14 +180,14 @@ text_scores <- prsp_score(
            )
 
 text_scores %>% 
-  gather() %>% 
-  mutate(key = forcats::fct_reorder(key, value)) %>% 
-  ggplot(aes(key, value)) +
-  geom_col() +
-  coord_flip() +
-  ylim(0, 1) +
-  geom_hline(yintercept = 0.5, linetype = "dashed") +
-  labs(x = "Model", y = "Probability", title = "Perspective API Results")
+  tidyr::gather() %>% 
+  dplyr::mutate(key = forcats::fct_reorder(key, value)) %>% 
+  ggplot2::ggplot(ggplot2::aes(key, value)) +
+  ggplot2::geom_col() +
+  ggplot2::coord_flip() +
+  ggplot2::ylim(0, 1) +
+  ggplot2::geom_hline(yintercept = 0.5, linetype = "dashed") +
+  ggplot2::labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
 
 ```{r, echo=F}
@@ -212,14 +207,14 @@ text_scores <- prsp_score(
            )
 
 text_scores %>% 
-  gather() %>% 
-  mutate(key = forcats::fct_reorder(key, value)) %>% 
-  ggplot(aes(key, value)) +
-  geom_col() +
-  coord_flip() +
-  ylim(0, 1) +
-  geom_hline(yintercept = 0.5, linetype = "dashed") +
-  labs(x = "Model", y = "Probability", title = "Perspective API Results")
+  tidyr::gather() %>% 
+  dplyr::mutate(key = forcats::fct_reorder(key, value)) %>% 
+  ggplot2::ggplot(ggplot2::aes(key, value)) +
+  ggplot2::geom_col() +
+  ggplot2::coord_flip() +
+  ggplot2::ylim(0, 1) +
+  ggplot2::geom_hline(yintercept = 0.5, linetype = "dashed") +
+  ggplot2::labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
 
 ```{r, echo=F}
@@ -238,16 +233,16 @@ text_scores <- prsp_score(
            )
 
 text_scores %>% 
-  unnest(sentence_scores) %>% 
-  select(type, score, sentences) %>% 
-  gather(value, key, -sentences, -score) %>% 
-  mutate(key = forcats::fct_reorder(key, score)) %>% 
-  ggplot(aes(key, score)) +
-  geom_col() +
-  coord_flip() +
-  facet_wrap(~sentences, ncol = 2) +
-  geom_hline(yintercept = 0.5, linetype = "dashed") +
-  labs(x = "Model", y = "Probability", title = "Perspective API Results")
+  tidyr::unnest(sentence_scores) %>% 
+  dplyr::select(type, score, sentences) %>% 
+  tidyr::gather(value, key, -sentences, -score) %>% 
+  dplyr::mutate(key = forcats::fct_reorder(key, score)) %>% 
+  ggplot2::ggplot(ggplot2::aes(key, score)) +
+  ggplot2::geom_col() +
+  ggplot2::coord_flip() +
+  ggplot2::facet_wrap(~sentences, ncol = 2) +
+  ggplot2::geom_hline(yintercept = 0.5, linetype = "dashed") +
+  ggplot2::labs(x = "Model", y = "Probability", title = "Perspective API Results")
 
 
 ```
@@ -269,13 +264,13 @@ text_scores <- prsp_score(
            )
 
 text_scores %>% 
-  gather() %>% 
-  mutate(key = forcats::fct_reorder(key, value)) %>% 
-  ggplot(aes(key, value)) +
-  geom_col() +
-  coord_flip() +
-  geom_hline(yintercept = 0.5, linetype = "dashed")  +
-  labs(x = "Model", y = "Probability", title = "Perspective API Results")
+  tidyr::gather() %>% 
+  dplyr::mutate(key = forcats::fct_reorder(key, value)) %>% 
+  ggplot2::ggplot(ggplot2::aes(key, value)) +
+  ggplot2::geom_col() +
+  ggplot2::coord_flip() +
+  ggplot2::geom_hline(yintercept = 0.5, linetype = "dashed")  +
+  ggplot2::labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
 
 **NOTE:** Your provided text will be stored by the Perspective API for future research. This option is the default. If the supplied texts are private or any of the authors of the texts are below 13 years old, `doNotStore` should be set to `TRUE.`
