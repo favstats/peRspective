@@ -19,6 +19,7 @@ globalVariables("score_model")
 #' @param safe_output wraps the function into a `purrr::safely` environment (defaults to `FALSE`). Loop will run without pause and catch + output errors in a tidy `tibble` along with the results.
 #' @param verbose narrates the streaming procedure (defaults to `FALSE`).
 #' @param ... arguments passed to \code{\link{prsp_score}}. Don't forget to add the \code{score_model} argument (see `peRspective::prsp_models` for list of valid models).
+#' @param save saves data into SQLite database (defaults to `FALSE`).
 #' @return a `tibble`
 #' @examples
 #' \dontrun{
@@ -63,7 +64,8 @@ prsp_stream <- function(.data,
                         text_id = NULL,
                         ...,
                         safe_output = F,
-                        verbose = F) {
+                        verbose = F,
+                        save = F) {
   # browser()
   
   text_id <- dplyr::enquo(text_id)
@@ -199,12 +201,20 @@ prsp_stream <- function(.data,
       purrr::set_names(c("text_id", "error")) %>%
       dplyr::right_join(final_text %>% purrr::map_dfr("result"), by = "text_id")
     
+    if(save){
+      openmindR::db_append("data/persp.db", "perspective", data = final_text)
+    }
+    
     return(final_text)
   }
   
   cat("Binding rows...\n")
   
   final_text <- dplyr::bind_rows(final_text)
+  
+  if(save){
+     openmindR::db_append("data/persp.db", "perspective", data = final_text)
+  }
   
   return(final_text)
 }

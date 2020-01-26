@@ -5,7 +5,7 @@
 \title{Stream comment scores with Perspective API}
 \usage{
 prsp_stream(.data, text = NULL, text_id = NULL, ..., safe_output = F,
-  verbose = F)
+  verbose = F, save = F)
 }
 \arguments{
 \item{.data}{a dataset with a text and text_id column.}
@@ -19,6 +19,8 @@ prsp_stream(.data, text = NULL, text_id = NULL, ..., safe_output = F,
 \item{safe_output}{wraps the function into a \code{purrr::safely} environment (defaults to \code{FALSE}). Loop will run without pause and catch + output errors in a tidy \code{tibble} along with the results.}
 
 \item{verbose}{narrates the streaming procedure (defaults to \code{FALSE}).}
+
+\item{save}{saves data into SQLite database (defaults to \code{FALSE}).}
 }
 \value{
 a \code{tibble}
