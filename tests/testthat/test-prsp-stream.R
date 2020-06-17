@@ -257,3 +257,25 @@ test_that("verbose, score_sentences but no safe_output work together", {
 
 })
 
+
+test_that("numeric text_id works", {
+  
+  testthat::skip_if(Sys.getenv("perspective_api_key") == "", 
+                    message = "perspective_api_key not available in environment. Skipping test.")
+  
+  
+  
+  score <- tibble::tibble(
+    text_id = c(1L, 2L),
+    text = c("Sample text comment", "And another one")
+  ) %>% 
+    prsp_stream(text = text,
+                text_id = text_id,
+                safe_output = T,
+                score_model = "TOXICITY")
+  
+  expect_equal(nrow(score), 2)
+  
+})
+
+

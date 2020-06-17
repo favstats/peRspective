@@ -19,7 +19,7 @@ globalVariables("score_model")
 #' @param safe_output wraps the function into a `purrr::safely` environment (defaults to `FALSE`). Loop will run without pause and catch + output errors in a tidy `tibble` along with the results.
 #' @param verbose narrates the streaming procedure (defaults to `FALSE`).
 #' @param ... arguments passed to \code{\link{prsp_score}}. Don't forget to add the \code{score_model} argument (see `peRspective::prsp_models` for list of valid models).
-#' @param save saves data into SQLite database (defaults to `FALSE`).
+#' @param save NOT USABLE YET saves data into SQLite database (defaults to `FALSE`).
 #' @param dt_name what is the name of the dataset? (defaults to `persp`).
 #' @return a `tibble`
 #' @examples
@@ -201,7 +201,13 @@ prsp_stream <- function(.data,
       t() %>%
       tibble::as_tibble(rownames = .[1, ]) %>%
       purrr::set_names(c("text_id", "error")) %>%
-      dplyr::right_join(final_text %>% purrr::map_dfr("result"), by = "text_id")
+      dplyr::right_join(final_text %>% purrr::map_dfr("result") %>% dplyr::mutate(text_id = as.character(text_id)), by = "text_id")
+    
+    
+    if(is.numeric(id_col)){
+      final_text <- final_text %>%
+        dplyr::mutate(text_id = as.numeric(text_id))
+    }
     
     if(save){
       openmindR::db_append("data/{dt_name}.db", "perspective", data = final_text)

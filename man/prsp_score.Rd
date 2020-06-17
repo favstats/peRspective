@@ -4,9 +4,16 @@
 \alias{prsp_score}
 \title{Analyze comments with Perspective API}
 \usage{
-prsp_score(text, text_id = NULL, languages = NULL,
-  score_sentences = F, score_model, sleep = 1, doNotStore = F,
-  key = NULL)
+prsp_score(
+  text,
+  text_id = NULL,
+  languages = NULL,
+  score_sentences = F,
+  score_model,
+  sleep = 1,
+  doNotStore = F,
+  key = NULL
+)
 }
 \arguments{
 \item{text}{a character string.}

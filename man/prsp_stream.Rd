@@ -4,8 +4,16 @@
 \alias{prsp_stream}
 \title{Stream comment scores with Perspective API}
 \usage{
-prsp_stream(.data, text = NULL, text_id = NULL, ..., safe_output = F,
-  verbose = F, save = F)
+prsp_stream(
+  .data,
+  text = NULL,
+  text_id = NULL,
+  ...,
+  safe_output = F,
+  verbose = F,
+  save = F,
+  dt_name = "persp"
+)
 }
 \arguments{
 \item{.data}{a dataset with a text and text_id column.}
@@ -20,7 +28,9 @@ prsp_stream(.data, text = NULL, text_id = NULL, ..., safe_output = F,
 
 \item{verbose}{narrates the streaming procedure (defaults to \code{FALSE}).}
 
-\item{save}{saves data into SQLite database (defaults to \code{FALSE}).}
+\item{save}{NOT USABLE YET saves data into SQLite database (defaults to \code{FALSE}).}
+
+\item{dt_name}{what is the name of the dataset? (defaults to \code{persp}).}
 }
 \value{
 a \code{tibble}

@@ -4,8 +4,7 @@
 \alias{form_request}
 \title{Create a GET request for Perspective API}
 \usage{
-form_request(score_model, text, score_sentences, languages,
-  doNotStore = F)
+form_request(score_model, text, score_sentences, languages, doNotStore = F)
 }
 \arguments{
 \item{score_model}{Specify what model do you want to use (for example \code{TOXICITY} and/or \code{SEVERE_TOXICITY}). Specify a character vector if you want more than one score. See \code{peRspective::prsp_models}.}
