@@ -210,7 +210,7 @@ prsp_stream <- function(.data,
     }
     
     if(save){
-      openmindR::db_append("data/{dt_name}.db", "perspective", data = final_text)
+      db_append("data/{dt_name}.db", "perspective", data = final_text)
     }
     
     return(final_text)
@@ -287,7 +287,7 @@ print_score_labels <- function(prsp_params = NULL, int_results = NULL) {
       paste0("\t", .)
     
     cat(stringr::str_glue("{crayon::make_style('gray50')(score_label)}\n\n"))
-  }  else if (length(int_results) == 1) { ## there are not scores!
+  }  else if (length(int_results) == 1) { ## there are no scores!
     cat(stringr::str_glue("\t{crayon::red('NO SCORES')}\n\n\n"))
     
   }          
