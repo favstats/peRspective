@@ -66,7 +66,7 @@ For an excellent documentation of the Perspective API see [here](https://github.
 
 [Follow these steps](https://github.com/conversationai/perspectiveapi/tree/master/1-get-started#prerequisites) as outlined by the Perspective API to get an API key.
 
-**NOTE: You now have to apply for a key via a Google Form**
+**NOTE:** Perspective API made some changes recently and you now have to apply for an API key via a Google Form.
 
 ### Quota and character length Limits
 
