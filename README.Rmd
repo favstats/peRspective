@@ -45,7 +45,7 @@ Perspective is an API that uses machine learning models to score the perceived i
 
 `peRspective` provides access to the API using the R programming language.
 
-For an excellent documentation of the Perspective API see [here](https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md).
+For an excellent documentation of the Perspective API see [here](https://github.com/conversationai/perspectiveapi/tree/master/2-api).
 
 > This is a work-in-progress project and I welcome feedback and pull requests!
 
@@ -64,11 +64,9 @@ For an excellent documentation of the Perspective API see [here](https://github.
 
 ### Get an API key
 
-1. Create a Google Cloud project in your [Google Cloud console](https://console.developers.google.com/)
-2. Go to [Perspective API's overview page](https://console.developers.google.com/apis/api/commentanalyzer.googleapis.com/overview) and click **Enable**
-3. Go to the [API credentials page](https://console.developers.google.com/apis/credentials), just click **Create credentials**, and choose "API Key".
+[Follow these steps](https://github.com/conversationai/perspectiveapi/tree/master/1-get-started#prerequisites) as outlined by the Perspective API to get an API key.
 
-Now you are ready to make a request to the Perspective API!
+**NOTE: You now have to apply for a key via a Google Form**
 
 ### Quota and character length Limits
 
@@ -78,38 +76,57 @@ The maximum text size per request is 3000 bytes.
 
 ## Models
 
-For detailed overview of the used models [see here](https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md).
+For detailed overview of the used models [see here](https://github.com/conversationai/perspectiveapi/blob/master/2-api/models.md).
 
-Here is a list of models currently supported by `peRspective`:
 
-```{r, echo=F}
+### Languages in production 
 
-tibble::tribble(
-  ~`Model Attribute Name`,  ~Version,                                  ~`Supported Languages`,   ~`Short Description`,
-             "TOXICITY",     "Alpha",                                  "en, es, fr\\*, de\\*",    "rude, disrespectful, or unreasonable comment that is likely to make people leave a discussion.",  
-      "SEVERE_TOXICITY",     "Alpha",                                  "en, es, fr\\*, de\\*",    "Same deep-CNN algorithm as TOXICITY, but is trained on 'very toxic' labels.",
-      "IDENTITY_ATTACK",     "Experimental toxicity sub-attribute",    "en, fr\\*, de\\*, es\\*", "negative or hateful comments targeting someone because of their identity.",
-               "INSULT",     "Experimental toxicity sub-attribute",    "en, fr\\*, de\\*, es\\*", "insulting, inflammatory, or negative comment towards a person or a group of people.",
-            "PROFANITY",     "Experimental toxicity sub-attribute",    "en, fr\\*, de\\*, es\\*", "swear words, curse words, or other obscene or profane language.",
-    "SEXUALLY_EXPLICIT",     "Experimental toxicity sub-attribute",    "en, fr\\*, de\\*, es\\*", "contains references to sexual acts, body parts, or other lewd content.",
-               "THREAT",     "Experimental toxicity sub-attribute",    "en, fr\\*, de\\*, es\\*", "describes an intention to inflict pain, injury, or violence against an individual or group.",
-           "FLIRTATION",     "Experimental toxicity sub-attribute",    "en, fr\\*, de\\*, es\\*", "pickup lines, complimenting appearance, subtle sexual innuendos, etc.",
-     "ATTACK_ON_AUTHOR",     "NYT moderation models",                  "en",                      "Attack on the author of an article or post.",
-  "ATTACK_ON_COMMENTER",    "NYT moderation models",                   "en",                      "Attack on fellow commenter.",
-           "INCOHERENT",     "NYT moderation models",                  "en",                      "Difficult to understand, nonsensical.",
-         "INFLAMMATORY",     "NYT moderation models",                  "en",                      "Intending to provoke or inflame.",
-     "LIKELY_TO_REJECT",     "NYT moderation models",                  "en",                      "Overall measure of the likelihood for the comment to be rejected according to the NYT's moderation.",
-              "OBSCENE",     "NYT moderation models",                  "en",                      "Obscene or vulgar language such as cursing.",
-                 "SPAM",     "NYT moderation models",                  "en",                      "Irrelevant and unsolicited commercial content.",
-        "UNSUBSTANTIAL",     "NYT moderation models",                  "en",                       "Trivial or short comments."
-  ) %>% 
-  knitr::kable()
+Currently, Perspective API has production `TOXICITY` and `SEVERE_TOXICITY` attributes in the following languages:
 
-```
++ English (en)
++ Spanish (es)
++ French (fr)
++ German (de)
++ Portuguese (pt)
++ Italian (it)
++ Russian (ru)
 
-**Note:** Languages that are annotated with "*" are only accessible in the `_EXPERIMENTAL` version of the models. In order to access them just add to the supplied model string like this: `TOXICITY_EXPERIMENTAL`.
 
-A character vector that includes all supported models can be obtained like this:
+### Toxicity attributes
+ 
+| Attribute name | Type | Description | Language |
+| -------------------- | ---- | ----------- | -------- |
+| `TOXICITY` | prod. | Rude, disrespectful, or unreasonable comment that is likely to make people leave a discussion. | en, fr, es, de, it, pt, ru | 6 |
+| `SEVERE_TOXICITY` | prod. | A very hateful, aggressive, disrespectful comment or otherwise very likely to make a user leave a discussion or give up on sharing their perspective. This attribute is much less sensitive to comments that include positive uses of curse words, for example. A labelled dataset and details of the methodology can be found in the same toxicity dataset that is available for the toxicity attribute. | en, fr, es, de, it, pt, ru |
+| `TOXICITY_FAST` | exp. | This attribute is similar to `TOXICITY`, but has lower latency and lower accuracy in its predictions. Unlike `TOXICITY`, this attribute returns summary scores as well as span scores. This attribute uses character-level n-grams fed into a logistic regression, a method that has been surprisingly effective at detecting abusive language. | en |
+| `IDENTITY_ATTACK` | exp. | Negative or hateful comments targeting someone because of their identity. | en, de, it, pt, ru |
+| `IDENTITY_ATTACK_EXPERIMENTAL` | exp. | &nbsp; | fr, es |
+| `INSULT` | exp. | Insulting, inflammatory, or negative comment towards a person or a group of people. | en, de, it, pt, ru |
+| `INSULT_EXPERIMENTAL` | exp. | &nbsp; | fr, es |
+| `PROFANITY` | exp. | Swear words, curse words, or other obscene or profane language. | en, de, it, pt, ru |
+| `PROFANITY_EXPERIMENTAL` | exp. | &nbsp; | fr, es |
+| `THREAT` | exp. | Describes an intention to inflict pain, injury, or violence against an individual or group. | en, de, it, pt, ru |
+| `THREAT_EXPERIMENTAL` | exp. | &nbsp; | fr, es |
+| `SEXUALLY_EXPLICIT` | exp. |Contains references to sexual acts, body parts, or other lewd content. | en |
+|`FLIRTATION` | exp. | Pickup lines, complimenting appearance, subtle sexual innuendos, etc. | en |
+ 
+### New York Times attributes
+
+These attributes are experimental because they are trained on a single source of comments&mdash;New York Times (NYT) data tagged by their moderation team&mdash;and therefore may not work well for every use case. 
+
+| Attribute name | Type | Description | Language |
+| -------------------- | ---- | ----------- | -------- |
+| `ATTACK_ON_AUTHOR` | exp. | Attack on the author of an article or post. | en |
+| `ATTACK_ON_COMMENTER` | exp. | Attack on fellow commenter. | en |
+| `INCOHERENT` | exp. | Difficult to understand, nonsensical. | en |
+| `INFLAMMATORY` | exp. | Intending to provoke or inflame. | en |
+| `LIKELY_TO_REJECT` | exp. | Overall measure of the likelihood for the comment to be rejected according to the NYT's moderation. | en |
+| `OBSCENE` | exp. | Obscene or vulgar language such as cursing. | en |
+| `SPAM` | exp. | Irrelevant and unsolicited commercial content. | en |
+| `UNSUBSTANTIAL` | exp. | Trivial or short comments. | en |
+
+
+A character vector that includes all`peRspective`  supported models can be obtained like this:
 
 ```{r}
 c(

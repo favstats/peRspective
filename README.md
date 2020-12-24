@@ -19,7 +19,7 @@ perceived impact a comment might have on a conversation.
 language.
 
 For an excellent documentation of the Perspective API see
-[here](https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md).
+[here](https://github.com/conversationai/perspectiveapi/tree/master/2-api).
 
 > This is a work-in-progress project and I welcome feedback and pull
 > requests\!
@@ -36,16 +36,11 @@ For an excellent documentation of the Perspective API see
 
 ### Get an API key
 
-1.  Create a Google Cloud project in your [Google Cloud
-    console](https://console.developers.google.com/)
-2.  Go to [Perspective API’s overview
-    page](https://console.developers.google.com/apis/api/commentanalyzer.googleapis.com/overview)
-    and click **Enable**
-3.  Go to the [API credentials
-    page](https://console.developers.google.com/apis/credentials), just
-    click **Create credentials**, and choose “API Key”.
+[Follow these
+steps](https://github.com/conversationai/perspectiveapi/tree/master/1-get-started#prerequisites)
+as outlined by the Perspective API to get an API key.
 
-Now you are ready to make a request to the Perspective API\!
+**NOTE: You now have to apply for a key via a Google Form**
 
 ### Quota and character length Limits
 
@@ -58,35 +53,58 @@ The maximum text size per request is 3000 bytes.
 ## Models
 
 For detailed overview of the used models [see
-here](https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md).
+here](https://github.com/conversationai/perspectiveapi/blob/master/2-api/models.md).
 
-Here is a list of models currently supported by `peRspective`:
+### Languages in production
 
-| Model Attribute Name  | Version                             | Supported Languages  | Short Description                                                                                   |
-| :-------------------- | :---------------------------------- | :------------------- | :-------------------------------------------------------------------------------------------------- |
-| TOXICITY              | Alpha                               | en, es, fr\*, de\*   | rude, disrespectful, or unreasonable comment that is likely to make people leave a discussion.      |
-| SEVERE\_TOXICITY      | Alpha                               | en, es, fr\*, de\*   | Same deep-CNN algorithm as TOXICITY, but is trained on ‘very toxic’ labels.                         |
-| IDENTITY\_ATTACK      | Experimental toxicity sub-attribute | en, fr\*, de\*, es\* | negative or hateful comments targeting someone because of their identity.                           |
-| INSULT                | Experimental toxicity sub-attribute | en, fr\*, de\*, es\* | insulting, inflammatory, or negative comment towards a person or a group of people.                 |
-| PROFANITY             | Experimental toxicity sub-attribute | en, fr\*, de\*, es\* | swear words, curse words, or other obscene or profane language.                                     |
-| SEXUALLY\_EXPLICIT    | Experimental toxicity sub-attribute | en, fr\*, de\*, es\* | contains references to sexual acts, body parts, or other lewd content.                              |
-| THREAT                | Experimental toxicity sub-attribute | en, fr\*, de\*, es\* | describes an intention to inflict pain, injury, or violence against an individual or group.         |
-| FLIRTATION            | Experimental toxicity sub-attribute | en, fr\*, de\*, es\* | pickup lines, complimenting appearance, subtle sexual innuendos, etc.                               |
-| ATTACK\_ON\_AUTHOR    | NYT moderation models               | en                   | Attack on the author of an article or post.                                                         |
-| ATTACK\_ON\_COMMENTER | NYT moderation models               | en                   | Attack on fellow commenter.                                                                         |
-| INCOHERENT            | NYT moderation models               | en                   | Difficult to understand, nonsensical.                                                               |
-| INFLAMMATORY          | NYT moderation models               | en                   | Intending to provoke or inflame.                                                                    |
-| LIKELY\_TO\_REJECT    | NYT moderation models               | en                   | Overall measure of the likelihood for the comment to be rejected according to the NYT’s moderation. |
-| OBSCENE               | NYT moderation models               | en                   | Obscene or vulgar language such as cursing.                                                         |
-| SPAM                  | NYT moderation models               | en                   | Irrelevant and unsolicited commercial content.                                                      |
-| UNSUBSTANTIAL         | NYT moderation models               | en                   | Trivial or short comments.                                                                          |
+Currently, Perspective API has production `TOXICITY` and
+`SEVERE_TOXICITY` attributes in the following languages:
 
-**Note:** Languages that are annotated with "\*" are only accessible in
-the `_EXPERIMENTAL` version of the models. In order to access them just
-add to the supplied model string like this: `TOXICITY_EXPERIMENTAL`.
+  - English (en)
+  - Spanish (es)
+  - French (fr)
+  - German (de)
+  - Portuguese (pt)
+  - Italian (it)
+  - Russian (ru)
 
-A character vector that includes all supported models can be obtained
-like this:
+### Toxicity attributes
+
+| Attribute name                 | Type  | Description                                                                                                                                                                                                                                                                                                                                                                                               | Language                   |
+| ------------------------------ | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| `TOXICITY`                     | prod. | Rude, disrespectful, or unreasonable comment that is likely to make people leave a discussion.                                                                                                                                                                                                                                                                                                            | en, fr, es, de, it, pt, ru |
+| `SEVERE_TOXICITY`              | prod. | A very hateful, aggressive, disrespectful comment or otherwise very likely to make a user leave a discussion or give up on sharing their perspective. This attribute is much less sensitive to comments that include positive uses of curse words, for example. A labelled dataset and details of the methodology can be found in the same toxicity dataset that is available for the toxicity attribute. | en, fr, es, de, it, pt, ru |
+| `TOXICITY_FAST`                | exp.  | This attribute is similar to `TOXICITY`, but has lower latency and lower accuracy in its predictions. Unlike `TOXICITY`, this attribute returns summary scores as well as span scores. This attribute uses character-level n-grams fed into a logistic regression, a method that has been surprisingly effective at detecting abusive language.                                                           | en                         |
+| `IDENTITY_ATTACK`              | exp.  | Negative or hateful comments targeting someone because of their identity.                                                                                                                                                                                                                                                                                                                                 | en, de, it, pt, ru         |
+| `IDENTITY_ATTACK_EXPERIMENTAL` | exp.  |                                                                                                                                                                                                                                                                                                                                                                                                           | fr, es                     |
+| `INSULT`                       | exp.  | Insulting, inflammatory, or negative comment towards a person or a group of people.                                                                                                                                                                                                                                                                                                                       | en, de, it, pt, ru         |
+| `INSULT_EXPERIMENTAL`          | exp.  |                                                                                                                                                                                                                                                                                                                                                                                                           | fr, es                     |
+| `PROFANITY`                    | exp.  | Swear words, curse words, or other obscene or profane language.                                                                                                                                                                                                                                                                                                                                           | en, de, it, pt, ru         |
+| `PROFANITY_EXPERIMENTAL`       | exp.  |                                                                                                                                                                                                                                                                                                                                                                                                           | fr, es                     |
+| `THREAT`                       | exp.  | Describes an intention to inflict pain, injury, or violence against an individual or group.                                                                                                                                                                                                                                                                                                               | en, de, it, pt, ru         |
+| `THREAT_EXPERIMENTAL`          | exp.  |                                                                                                                                                                                                                                                                                                                                                                                                           | fr, es                     |
+| `SEXUALLY_EXPLICIT`            | exp.  | Contains references to sexual acts, body parts, or other lewd content.                                                                                                                                                                                                                                                                                                                                    | en                         |
+| `FLIRTATION`                   | exp.  | Pickup lines, complimenting appearance, subtle sexual innuendos, etc.                                                                                                                                                                                                                                                                                                                                     | en                         |
+
+### New York Times attributes
+
+These attributes are experimental because they are trained on a single
+source of comments—New York Times (NYT) data tagged by their moderation
+team—and therefore may not work well for every use case.
+
+| Attribute name        | Type | Description                                                                                         | Language |
+| --------------------- | ---- | --------------------------------------------------------------------------------------------------- | -------- |
+| `ATTACK_ON_AUTHOR`    | exp. | Attack on the author of an article or post.                                                         | en       |
+| `ATTACK_ON_COMMENTER` | exp. | Attack on fellow commenter.                                                                         | en       |
+| `INCOHERENT`          | exp. | Difficult to understand, nonsensical.                                                               | en       |
+| `INFLAMMATORY`        | exp. | Intending to provoke or inflame.                                                                    | en       |
+| `LIKELY_TO_REJECT`    | exp. | Overall measure of the likelihood for the comment to be rejected according to the NYT’s moderation. | en       |
+| `OBSCENE`             | exp. | Obscene or vulgar language such as cursing.                                                         | en       |
+| `SPAM`                | exp. | Irrelevant and unsolicited commercial content.                                                      | en       |
+| `UNSUBSTANTIAL`       | exp. | Trivial or short comments.                                                                          | en       |
+
+A character vector that includes all`peRspective` supported models can
+be obtained like this:
 
 ``` r
 c(
@@ -175,7 +193,7 @@ text_scores %>%
   ggplot2::labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
 
 A Trump Tweet:
 
@@ -199,7 +217,7 @@ text_scores %>%
   ggplot2::labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
 
 Instead of scoring just entire comments you can also score individual
 sentences with `score_sentences = T`. In this case the Perspective API
@@ -228,7 +246,7 @@ text_scores %>%
   ggplot2::labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
 
-<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" />
 
 You can also use Spanish (`es`) for `TOXICITY`, `SEVERE_TOXICITY` and
 `_EXPERIMENTAL` models.
@@ -253,7 +271,7 @@ text_scores %>%
   ggplot2::labs(x = "Model", y = "Probability", title = "Perspective API Results")
 ```
 
-<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
 
 **NOTE:** Your provided text will be stored by the Perspective API for
 future research. This option is the default. If the supplied texts are
@@ -295,12 +313,12 @@ text_sample %>%
 #> # A tibble: 6 x 3
 #>   text_id  TOXICITY SEVERE_TOXICITY
 #>   <chr>       <dbl>           <dbl>
-#> 1 #efdcxct   0.955           0.794 
-#> 2 #ehfcsct   0.927           0.436 
-#> 3 #ekacxwt   0.0562          0.0224
-#> 4 #ewatxad   0.666           0.309 
-#> 5 #ekacswt   0.0694          0.0290
-#> 6 #ewftxwd   0.442           0.224
+#> 1 #efdcxct   0.959           0.846 
+#> 2 #ehfcsct   0.932           0.534 
+#> 3 #ekacxwt   0.0652          0.0248
+#> 4 #ewatxad   0.605           0.319 
+#> 5 #ekacswt   0.0734          0.0257
+#> 6 #ewftxwd   0.350           0.137
 ```
 
 You receive a `tibble` with your desired scorings including the
@@ -345,17 +363,17 @@ text_sample %>%
               score_model = c("TOXICITY", "SEVERE_TOXICITY", "INSULT"),
               safe_output = T)
 #> # A tibble: 9 x 5
-#>   text_id  error                           TOXICITY SEVERE_TOXICITY  INSULT
-#>   <chr>    <chr>                              <dbl>           <dbl>   <dbl>
-#> 1 #efdcxct No Error                          0.955           0.794   0.923 
-#> 2 #ehfcsct No Error                          0.927           0.436   0.947 
-#> 3 #ekacxwt "Error in .f(...): HTTP 400\nI…  NA              NA      NA     
-#> 4 #ewatxad No Error                          0.0562          0.0224  0.0315
-#> 5 #ekacswt No Error                          0.666           0.309   0.331 
-#> 6 #ewftxwd No Error                          0.0694          0.0290  0.0499
-#> 7 #eeadswt "Error in .f(...): HTTP 400\nI…  NA              NA      NA     
-#> 8 #enfhxed No Error                          0.442           0.224   0.321 
-#> 9 #efdmjd  "Error in .f(...): HTTP 400\nI…  NA              NA      NA
+#>   text_id  error                                TOXICITY SEVERE_TOXICITY  INSULT
+#>   <chr>    <chr>                                   <dbl>           <dbl>   <dbl>
+#> 1 #efdcxct "No Error"                             0.959           0.846   0.958 
+#> 2 #ehfcsct "No Error"                             0.932           0.534   0.960 
+#> 3 #ekacxwt "Error in .f(...): HTTP 400\nINVALI~  NA              NA      NA     
+#> 4 #ewatxad "No Error"                             0.0652          0.0248  0.0309
+#> 5 #ekacswt "No Error"                             0.605           0.319   0.322 
+#> 6 #ewftxwd "No Error"                             0.0734          0.0257  0.0396
+#> 7 #eeadswt "No Error"                             0.143           0.0871  0.131 
+#> 8 #enfhxed "No Error"                             0.350           0.137   0.440 
+#> 9 #efdmjd  "Error in .f(...): HTTP 400\nINVALI~  NA              NA      NA
 ```
 
 `safe_output = T` will also provide us with the error messages that
@@ -379,68 +397,66 @@ text_sample %>%
 
 Or the (not as pretty) output in Markdown
 
-    #> 11.11% [2019-07-21 04:02:32]: 1 out of 9 (11.11%)
+    #> 11.11% [2020-12-24 16:25:21]: 1 out of 9 (11.11%)
     #> text_id: #efdcxct
     #>  0.96 TOXICITY
-    #>  0.79 SEVERE_TOXICITY
+    #>  0.85 SEVERE_TOXICITY
     #> 
-    #> 22.22% [2019-07-21 04:02:33]: 2 out of 9 (22.22%)
+    #> 22.22% [2020-12-24 16:25:22]: 2 out of 9 (22.22%)
     #> text_id: #ehfcsct
     #>  0.93 TOXICITY
-    #>  0.44 SEVERE_TOXICITY
+    #>  0.53 SEVERE_TOXICITY
     #> 
-    #> 33.33% [2019-07-21 04:02:34]: 3 out of 9 (33.33%)
+    #> 33.33% [2020-12-24 16:25:23]: 3 out of 9 (33.33%)
     #> text_id: #ekacxwt
     #> ERROR
     #> Error in .f(...): HTTP 400
     #> INVALID_ARGUMENT: Comment must be non-empty.
     #> NO SCORES
     #> 
-    #> 44.44% [2019-07-21 04:02:35]: 4 out of 9 (44.44%)
+    #> 44.44% [2020-12-24 16:25:25]: 4 out of 9 (44.44%)
     #> text_id: #ewatxad
-    #>  0.06 TOXICITY
+    #>  0.07 TOXICITY
     #>  0.02 SEVERE_TOXICITY
     #> 
-    #> 55.56% [2019-07-21 04:02:37]: 5 out of 9 (55.56%)
+    #> 55.56% [2020-12-24 16:25:26]: 5 out of 9 (55.56%)
     #> text_id: #ekacswt
-    #>  0.67 TOXICITY
-    #>  0.31 SEVERE_TOXICITY
+    #>  0.60 TOXICITY
+    #>  0.32 SEVERE_TOXICITY
     #> 
-    #> 66.67% [2019-07-21 04:02:38]: 6 out of 9 (66.67%)
+    #> 66.67% [2020-12-24 16:25:27]: 6 out of 9 (66.67%)
     #> text_id: #ewftxwd
     #>  0.07 TOXICITY
     #>  0.03 SEVERE_TOXICITY
     #> 
-    #> 77.78% [2019-07-21 04:02:39]: 7 out of 9 (77.78%)
+    #> 77.78% [2020-12-24 16:25:28]: 7 out of 9 (77.78%)
     #> text_id: #eeadswt
-    #> ERROR
-    #> Error in .f(...): HTTP 400
-    #> INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: is
-    #> NO SCORES
+    #>  0.14 TOXICITY
+    #>  0.09 SEVERE_TOXICITY
     #> 
-    #> 88.89% [2019-07-21 04:02:40]: 8 out of 9 (88.89%)
+    #> 88.89% [2020-12-24 16:25:29]: 8 out of 9 (88.89%)
     #> text_id: #enfhxed
-    #>  0.44 TOXICITY
-    #>  0.22 SEVERE_TOXICITY
+    #>  0.35 TOXICITY
+    #>  0.14 SEVERE_TOXICITY
     #> 
-    #> 100.00% [2019-07-21 04:02:41]: 9 out of 9 (100.00%)
+    #> 100.00% [2020-12-24 16:25:30]: 9 out of 9 (100.00%)
     #> text_id: #efdmjd
     #> ERROR
     #> Error in .f(...): HTTP 400
-    #> INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: ja-Latn
+    #> INVALID_ARGUMENT: Attribute TOXICITY does not support request languages: ja-Latn
     #> NO SCORES
     #> # A tibble: 9 x 4
-    #>   text_id  error                                   TOXICITY SEVERE_TOXICITY
-    #>   <chr>    <chr>                                      <dbl>           <dbl>
-    #> 1 #efdcxct No Error                                  0.955           0.794 
-    #> 2 #ehfcsct No Error                                  0.927           0.436 
-    #> 3 #ekacxwt "Error in .f(...): HTTP 400\nINVALID_A…  NA              NA     
-    #> 4 #ewatxad No Error                                  0.0562          0.0224
-    #> 5 #ekacswt No Error                                  0.666           0.309 
-    #> 6 #ewftxwd No Error                                  0.0694          0.0290
-    #> 7 #eeadswt "Error in .f(...): HTTP 400\nINVALID_A…  NA              NA     
-    #> 8 #enfhxed No Error                                  0.442           0.224 
-    #> 9 #efdmjd  "Error in .f(...): HTTP 400\nINVALID_A…  NA              NA
+    #>   text_id  error                                        TOXICITY SEVERE_TOXICITY
+    #>   <chr>    <chr>                                           <dbl>           <dbl>
+    #> 1 #efdcxct "No Error"                                     0.959           0.846 
+    #> 2 #ehfcsct "No Error"                                     0.932           0.534 
+    #> 3 #ekacxwt "Error in .f(...): HTTP 400\nINVALID_ARGUME~  NA              NA     
+    #> 4 #ewatxad "No Error"                                     0.0652          0.0248
+    #> 5 #ekacswt "No Error"                                     0.605           0.319 
+    #> 6 #ewftxwd "No Error"                                     0.0734          0.0257
+    #> 7 #eeadswt "No Error"                                     0.143           0.0871
+    #> 8 #enfhxed "No Error"                                     0.350           0.137 
+    #> 9 #efdmjd  "Error in .f(...): HTTP 400\nINVALID_ARGUME~  NA              NA
 
 ## Citation
 
