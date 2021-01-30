@@ -20,7 +20,7 @@ library(dplyr)
 ```
 
 
-# peRspective <img src="man/figures/perspective.png" width="160px" align="right" />
+# peRspective <img src="man/figures/perspective.png" width="160px" align="right"/>
 
 
 ```{r, echo = FALSE, results='asis', eval = T}

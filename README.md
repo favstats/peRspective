@@ -3,6 +3,8 @@
 
 # peRspective <img src="man/figures/perspective.png" width="160px" align="right" />
 
+# pkgdown <img src="man/figures/perspective.png" align="right" />
+
 [![](https://cranlogs.r-pkg.org/badges/grand-total/peRspective)](https://cran.rstudio.com/web/packages/peRspective/index.html)
 [![](https://travis-ci.org/favstats/peRspective.svg?branch=master)](https://travis-ci.org/favstats/peRspective)
 [![](https://www.r-pkg.org/badges/version/peRspective?color=blue)](https://cran.r-project.org/package=peRspective)
@@ -40,7 +42,8 @@ For an excellent documentation of the Perspective API see
 steps](https://github.com/conversationai/perspectiveapi/tree/master/1-get-started#prerequisites)
 as outlined by the Perspective API to get an API key.
 
-**NOTE:** Perspective API made some changes recently and you now have to apply for an API key via a Google Form.
+**NOTE:** Perspective API made some changes recently and you now have to
+apply for an API key via a Google Form.
 
 ### Quota and character length Limits
 
@@ -397,49 +400,53 @@ text_sample %>%
 
 Or the (not as pretty) output in Markdown
 
-    #> 11.11% [2020-12-24 16:25:21]: 1 out of 9 (11.11%)
+    #> 11.11% [2021-01-30 12:55:39]: 1 out of 9 (11.11%)
     #> text_id: #efdcxct
     #>  0.96 TOXICITY
     #>  0.85 SEVERE_TOXICITY
     #> 
-    #> 22.22% [2020-12-24 16:25:22]: 2 out of 9 (22.22%)
+    #> 22.22% [2021-01-30 12:55:40]: 2 out of 9 (22.22%)
     #> text_id: #ehfcsct
     #>  0.93 TOXICITY
     #>  0.53 SEVERE_TOXICITY
     #> 
-    #> 33.33% [2020-12-24 16:25:23]: 3 out of 9 (33.33%)
+    #> 33.33% [2021-01-30 12:55:41]: 3 out of 9 (33.33%)
     #> text_id: #ekacxwt
     #> ERROR
     #> Error in .f(...): HTTP 400
     #> INVALID_ARGUMENT: Comment must be non-empty.
     #> NO SCORES
     #> 
-    #> 44.44% [2020-12-24 16:25:25]: 4 out of 9 (44.44%)
+    #> 44.44% [2021-01-30 12:55:42]: 4 out of 9 (44.44%)
     #> text_id: #ewatxad
     #>  0.07 TOXICITY
     #>  0.02 SEVERE_TOXICITY
     #> 
-    #> 55.56% [2020-12-24 16:25:26]: 5 out of 9 (55.56%)
+    #> 55.56% [2021-01-30 12:55:43]: 5 out of 9 (55.56%)
     #> text_id: #ekacswt
-    #>  0.60 TOXICITY
-    #>  0.32 SEVERE_TOXICITY
+    #> ERROR
+    #> Error in .f(...): HTTP 429
+    #> RESOURCE_EXHAUSTED: Quota exceeded for quota metric 'Analysis requests (AnalyzeComment)' and limit 'Analysis requests (AnalyzeComment) per minute' of service 'commentanalyzer.googleapis.com' for consumer 'project_number:528508363881'.
+    #> NO SCORES
     #> 
-    #> 66.67% [2020-12-24 16:25:27]: 6 out of 9 (66.67%)
+    #> 66.67% [2021-01-30 12:55:44]: 6 out of 9 (66.67%)
     #> text_id: #ewftxwd
-    #>  0.07 TOXICITY
-    #>  0.03 SEVERE_TOXICITY
+    #> ERROR
+    #> Error in .f(...): HTTP 429
+    #> RESOURCE_EXHAUSTED: Quota exceeded for quota metric 'Analysis requests (AnalyzeComment)' and limit 'Analysis requests (AnalyzeComment) per minute' of service 'commentanalyzer.googleapis.com' for consumer 'project_number:528508363881'.
+    #> NO SCORES
     #> 
-    #> 77.78% [2020-12-24 16:25:28]: 7 out of 9 (77.78%)
+    #> 77.78% [2021-01-30 12:55:45]: 7 out of 9 (77.78%)
     #> text_id: #eeadswt
     #>  0.14 TOXICITY
     #>  0.09 SEVERE_TOXICITY
     #> 
-    #> 88.89% [2020-12-24 16:25:29]: 8 out of 9 (88.89%)
+    #> 88.89% [2021-01-30 12:55:46]: 8 out of 9 (88.89%)
     #> text_id: #enfhxed
     #>  0.35 TOXICITY
     #>  0.14 SEVERE_TOXICITY
     #> 
-    #> 100.00% [2020-12-24 16:25:30]: 9 out of 9 (100.00%)
+    #> 100.00% [2021-01-30 12:55:48]: 9 out of 9 (100.00%)
     #> text_id: #efdmjd
     #> ERROR
     #> Error in .f(...): HTTP 400
@@ -452,8 +459,8 @@ Or the (not as pretty) output in Markdown
     #> 2 #ehfcsct "No Error"                                     0.932           0.534 
     #> 3 #ekacxwt "Error in .f(...): HTTP 400\nINVALID_ARGUME~  NA              NA     
     #> 4 #ewatxad "No Error"                                     0.0652          0.0248
-    #> 5 #ekacswt "No Error"                                     0.605           0.319 
-    #> 6 #ewftxwd "No Error"                                     0.0734          0.0257
+    #> 5 #ekacswt "Error in .f(...): HTTP 429\nRESOURCE_EXHAU~  NA              NA     
+    #> 6 #ewftxwd "Error in .f(...): HTTP 429\nRESOURCE_EXHAU~  NA              NA     
     #> 7 #eeadswt "No Error"                                     0.143           0.0871
     #> 8 #enfhxed "No Error"                                     0.350           0.137 
     #> 9 #efdmjd  "Error in .f(...): HTTP 400\nINVALID_ARGUME~  NA              NA
