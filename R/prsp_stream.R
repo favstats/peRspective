@@ -221,7 +221,7 @@ prsp_stream <- function(.data,
   final_text <- dplyr::bind_rows(final_text)
   
   if(save){
-    openmindR::db_append(glue::glue("{dt_name}.db"), "perspective", data = final_text)
+    db_append(glue::glue("{dt_name}.db"), "perspective", data = final_text)
   }
   
   return(final_text)
