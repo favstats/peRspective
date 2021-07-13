@@ -4,6 +4,8 @@
 
 * Fixed bug where it would sometimes not correctly match the `text_id` due to one variable being numeric. Now always outputs character.
 
+* Updated documentation to reflect changes in the Perspective API (API key retrieval, available models, etc.).
+
 # peRspective 0.1.0 (2019-05-17)
 
 * Submit to CRAN

@@ -69,21 +69,22 @@ Currently, Perspective API has production `TOXICITY` and
 
 ### Toxicity attributes
 
-| Attribute name                 | Type  | Description                                                                                                                                                                                                                                                                                                                                                                                               | Language                   |
-|--------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|
-| `TOXICITY`                     | prod. | Rude, disrespectful, or unreasonable comment that is likely to make people leave a discussion.                                                                                                                                                                                                                                                                                                            | en, fr, es, de, it, pt, ru |
-| `SEVERE_TOXICITY`              | prod. | A very hateful, aggressive, disrespectful comment or otherwise very likely to make a user leave a discussion or give up on sharing their perspective. This attribute is much less sensitive to comments that include positive uses of curse words, for example. A labelled dataset and details of the methodology can be found in the same toxicity dataset that is available for the toxicity attribute. | en, fr, es, de, it, pt, ru |
-| `TOXICITY_FAST`                | exp.  | This attribute is similar to `TOXICITY`, but has lower latency and lower accuracy in its predictions. Unlike `TOXICITY`, this attribute returns summary scores as well as span scores. This attribute uses character-level n-grams fed into a logistic regression, a method that has been surprisingly effective at detecting abusive language.                                                           | en                         |
-| `IDENTITY_ATTACK`              | exp.  | Negative or hateful comments targeting someone because of their identity.                                                                                                                                                                                                                                                                                                                                 | en, de, it, pt, ru         |
-| `IDENTITY_ATTACK_EXPERIMENTAL` | exp.  |                                                                                                                                                                                                                                                                                                                                                                                                           | fr, es                     |
-| `INSULT`                       | exp.  | Insulting, inflammatory, or negative comment towards a person or a group of people.                                                                                                                                                                                                                                                                                                                       | en, de, it, pt, ru         |
-| `INSULT_EXPERIMENTAL`          | exp.  |                                                                                                                                                                                                                                                                                                                                                                                                           | fr, es                     |
-| `PROFANITY`                    | exp.  | Swear words, curse words, or other obscene or profane language.                                                                                                                                                                                                                                                                                                                                           | en, de, it, pt, ru         |
-| `PROFANITY_EXPERIMENTAL`       | exp.  |                                                                                                                                                                                                                                                                                                                                                                                                           | fr, es                     |
-| `THREAT`                       | exp.  | Describes an intention to inflict pain, injury, or violence against an individual or group.                                                                                                                                                                                                                                                                                                               | en, de, it, pt, ru         |
-| `THREAT_EXPERIMENTAL`          | exp.  |                                                                                                                                                                                                                                                                                                                                                                                                           | fr, es                     |
-| `SEXUALLY_EXPLICIT`            | exp.  | Contains references to sexual acts, body parts, or other lewd content.                                                                                                                                                                                                                                                                                                                                    | en                         |
-| `FLIRTATION`                   | exp.  | Pickup lines, complimenting appearance, subtle sexual innuendos, etc.                                                                                                                                                                                                                                                                                                                                     | en                         |
+| Attribute name                 | Type  | Description                                                                                                                                                                                                                                                                             | Available Languages                                                                               |
+|--------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| `TOXICITY`                     | prod. | A rude, disrespectful, or unreasonable comment that is likely to make people leave a discussion.                                                                                                                                                                                        | English (en), Spanish (es), French (fr), German (de), Portuguese (pt), Italian (it), Russian (ru) |
+| `TOXICITY_EXPERIMENTAL`        | exp.  | A rude, disrespectful, or unreasonable comment that is likely to make people leave a discussion.                                                                                                                                                                                        | Arabic (ar)                                                                                       |
+| `SEVERE_TOXICITY`              | prod. | A very hateful, aggressive, disrespectful comment or otherwise very likely to make a user leave a discussion or give up on sharing their perspective. This attribute is much less sensitive to more mild forms of toxicity, such as comments that include positive uses of curse words. | en, fr, es, de, it, pt, ru                                                                        |
+| `SEVERE_TOXICITY_EXPERIMENTAL` | exp.  | A very hateful, aggressive, disrespectful comment or otherwise very likely to make a user leave a discussion or give up on sharing their perspective. This attribute is much less sensitive to more mild forms of toxicity, such as comments that include positive uses of curse words. | ar                                                                                                |
+| `IDENTITY_ATTACK`              | prod. | Negative or hateful comments targeting someone because of their identity.                                                                                                                                                                                                               | de, it, pt, ru, en                                                                                |
+| `IDENTITY_ATTACK_EXPERIMENTAL` | exp.  | Negative or hateful comments targeting someone because of their identity.                                                                                                                                                                                                               | fr, es, ar                                                                                        |
+| `INSULT`                       | prod. | Insulting, inflammatory, or negative comment towards a person or a group of people.                                                                                                                                                                                                     | de, it, pt, ru, en                                                                                |
+| `INSULT_EXPERIMENTAL`          | exp.  | Insulting, inflammatory, or negative comment towards a person or a group of people.                                                                                                                                                                                                     | fr, es, ar                                                                                        |
+| `PROFANITY`                    | prod. | Swear words, curse words, or other obscene or profane language.                                                                                                                                                                                                                         | de, it, pt, ru, en                                                                                |
+| `PROFANITY_EXPERIMENTAL`       | exp.  | Swear words, curse words, or other obscene or profane language.                                                                                                                                                                                                                         | fr, es, ar                                                                                        |
+| `THREAT`                       | prod. | Describes an intention to inflict pain, injury, or violence against an individual or group.                                                                                                                                                                                             | de, it, pt, ru, en                                                                                |
+| `THREAT_EXPERIMENTAL`          | exp.  | Describes an intention to inflict pain, injury, or violence against an individual or group.                                                                                                                                                                                             | fr, es, ar                                                                                        |
+| `SEXUALLY_EXPLICIT`            | exp.  | Contains references to sexual acts, body parts, or other lewd content.                                                                                                                                                                                                                  | en                                                                                                |
+| `FLIRTATION`                   | exp.  | Pickup lines, complimenting appearance, subtle sexual innuendos, etc.                                                                                                                                                                                                                   | en                                                                                                |
 
 ### New York Times attributes
 
@@ -395,49 +396,49 @@ text_sample %>%
 
 Or the (not as pretty) output in Markdown
 
-    #> 11.11% [2021-07-13 11:15:16]: 1 out of 9 (11.11%)
+    #> 11.11% [2021-07-13 11:52:36]: 1 out of 9 (11.11%)
     #> text_id: #efdcxct
     #>  0.96 TOXICITY
     #>  0.85 SEVERE_TOXICITY
     #> 
-    #> 22.22% [2021-07-13 11:15:17]: 2 out of 9 (22.22%)
+    #> 22.22% [2021-07-13 11:52:37]: 2 out of 9 (22.22%)
     #> text_id: #ehfcsct
     #>  0.93 TOXICITY
     #>  0.53 SEVERE_TOXICITY
     #> 
-    #> 33.33% [2021-07-13 11:15:18]: 3 out of 9 (33.33%)
+    #> 33.33% [2021-07-13 11:52:38]: 3 out of 9 (33.33%)
     #> text_id: #ekacxwt
     #> ERROR
     #> Error in .f(...): HTTP 400
     #> INVALID_ARGUMENT: Comment must be non-empty.
     #> NO SCORES
     #> 
-    #> 44.44% [2021-07-13 11:15:19]: 4 out of 9 (44.44%)
+    #> 44.44% [2021-07-13 11:52:39]: 4 out of 9 (44.44%)
     #> text_id: #ewatxad
     #>  0.07 TOXICITY
     #>  0.02 SEVERE_TOXICITY
     #> 
-    #> 55.56% [2021-07-13 11:15:20]: 5 out of 9 (55.56%)
+    #> 55.56% [2021-07-13 11:52:40]: 5 out of 9 (55.56%)
     #> text_id: #ekacswt
     #>  0.60 TOXICITY
     #>  0.32 SEVERE_TOXICITY
     #> 
-    #> 66.67% [2021-07-13 11:15:22]: 6 out of 9 (66.67%)
+    #> 66.67% [2021-07-13 11:52:41]: 6 out of 9 (66.67%)
     #> text_id: #ewftxwd
     #>  0.07 TOXICITY
     #>  0.03 SEVERE_TOXICITY
     #> 
-    #> 77.78% [2021-07-13 11:15:23]: 7 out of 9 (77.78%)
+    #> 77.78% [2021-07-13 11:52:42]: 7 out of 9 (77.78%)
     #> text_id: #eeadswt
     #>  0.14 TOXICITY
     #>  0.09 SEVERE_TOXICITY
     #> 
-    #> 88.89% [2021-07-13 11:15:24]: 8 out of 9 (88.89%)
+    #> 88.89% [2021-07-13 11:52:43]: 8 out of 9 (88.89%)
     #> text_id: #enfhxed
     #>  0.35 TOXICITY
     #>  0.14 SEVERE_TOXICITY
     #> 
-    #> 100.00% [2021-07-13 11:15:25]: 9 out of 9 (100.00%)
+    #> 100.00% [2021-07-13 11:52:45]: 9 out of 9 (100.00%)
     #> text_id: #efdmjd
     #> ERROR
     #> Error in .f(...): HTTP 400

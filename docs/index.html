@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">peRspective</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -103,20 +103,19 @@
 <div id="get-an-api-key" class="section level3">
 <h3 class="hasAnchor">
 <a href="#get-an-api-key" class="anchor"></a>Get an API key</h3>
-<p><a href="https://github.com/conversationai/perspectiveapi/tree/master/1-get-started#prerequisites">Follow these steps</a> as outlined by the Perspective API to get an API key.</p>
+<p><a href="https://developers.perspectiveapi.com/s/docs-get-started">Follow these steps</a> as outlined by the Perspective API to get an API key.</p>
 <p><strong>NOTE:</strong> Perspective API made some changes recently and you now have to apply for an API key via a Google Form.</p>
 </div>
 <div id="quota-and-character-length-limits" class="section level3">
 <h3 class="hasAnchor">
 <a href="#quota-and-character-length-limits" class="anchor"></a>Quota and character length Limits</h3>
 <p>Be sure to check your quota limit! You can learn more about Perspective API quota limit by visiting <a href="https://console.cloud.google.com/apis/api/commentanalyzer.googleapis.com/quotas">your google cloud project’s Perspective API page</a>.</p>
-<p>The maximum text size per request is 3000 bytes.</p>
 </div>
 </div>
 <div id="models" class="section level2">
 <h2 class="hasAnchor">
 <a href="#models" class="anchor"></a>Models</h2>
-<p>For detailed overview of the used models <a href="https://github.com/conversationai/perspectiveapi/blob/master/2-api/models.md">see here</a>.</p>
+<p>For detailed overview of the used models <a href="https://developers.perspectiveapi.com/s/about-the-api-attributes-and-languages">see here</a>.</p>
 <div id="languages-in-production" class="section level3">
 <h3 class="hasAnchor">
 <a href="#languages-in-production" class="anchor"></a>Languages in production</h3>
@@ -136,91 +135,97 @@
 <a href="#toxicity-attributes" class="anchor"></a>Toxicity attributes</h3>
 <table class="table">
 <colgroup>
-<col width="6%">
+<col width="7%">
 <col width="1%">
-<col width="86%">
-<col width="5%">
+<col width="67%">
+<col width="23%">
 </colgroup>
 <thead><tr class="header">
 <th>Attribute name</th>
 <th>Type</th>
 <th>Description</th>
-<th>Language</th>
+<th>Available Languages</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td><code>TOXICITY</code></td>
 <td>prod.</td>
-<td>Rude, disrespectful, or unreasonable comment that is likely to make people leave a discussion.</td>
-<td>en, fr, es, de, it, pt, ru</td>
+<td>A rude, disrespectful, or unreasonable comment that is likely to make people leave a discussion.</td>
+<td>English (en), Spanish (es), French (fr), German (de), Portuguese (pt), Italian (it), Russian (ru)</td>
 </tr>
 <tr class="even">
+<td><code>TOXICITY_EXPERIMENTAL</code></td>
+<td>exp.</td>
+<td>A rude, disrespectful, or unreasonable comment that is likely to make people leave a discussion.</td>
+<td>Arabic (ar)</td>
+</tr>
+<tr class="odd">
 <td><code>SEVERE_TOXICITY</code></td>
 <td>prod.</td>
-<td>A very hateful, aggressive, disrespectful comment or otherwise very likely to make a user leave a discussion or give up on sharing their perspective. This attribute is much less sensitive to comments that include positive uses of curse words, for example. A labelled dataset and details of the methodology can be found in the same toxicity dataset that is available for the toxicity attribute.</td>
+<td>A very hateful, aggressive, disrespectful comment or otherwise very likely to make a user leave a discussion or give up on sharing their perspective. This attribute is much less sensitive to more mild forms of toxicity, such as comments that include positive uses of curse words.</td>
 <td>en, fr, es, de, it, pt, ru</td>
 </tr>
-<tr class="odd">
-<td><code>TOXICITY_FAST</code></td>
+<tr class="even">
+<td><code>SEVERE_TOXICITY_EXPERIMENTAL</code></td>
 <td>exp.</td>
-<td>This attribute is similar to <code>TOXICITY</code>, but has lower latency and lower accuracy in its predictions. Unlike <code>TOXICITY</code>, this attribute returns summary scores as well as span scores. This attribute uses character-level n-grams fed into a logistic regression, a method that has been surprisingly effective at detecting abusive language.</td>
-<td>en</td>
+<td>A very hateful, aggressive, disrespectful comment or otherwise very likely to make a user leave a discussion or give up on sharing their perspective. This attribute is much less sensitive to more mild forms of toxicity, such as comments that include positive uses of curse words.</td>
+<td>ar</td>
+</tr>
+<tr class="odd">
+<td><code>IDENTITY_ATTACK</code></td>
+<td>prod.</td>
+<td>Negative or hateful comments targeting someone because of their identity.</td>
+<td>de, it, pt, ru, en</td>
 </tr>
 <tr class="even">
-<td><code>IDENTITY_ATTACK</code></td>
-<td>exp.</td>
-<td>Negative or hateful comments targeting someone because of their identity.</td>
-<td>en, de, it, pt, ru</td>
-</tr>
-<tr class="odd">
 <td><code>IDENTITY_ATTACK_EXPERIMENTAL</code></td>
 <td>exp.</td>
-<td></td>
-<td>fr, es</td>
-</tr>
-<tr class="even">
-<td><code>INSULT</code></td>
-<td>exp.</td>
-<td>Insulting, inflammatory, or negative comment towards a person or a group of people.</td>
-<td>en, de, it, pt, ru</td>
+<td>Negative or hateful comments targeting someone because of their identity.</td>
+<td>fr, es, ar</td>
 </tr>
 <tr class="odd">
+<td><code>INSULT</code></td>
+<td>prod.</td>
+<td>Insulting, inflammatory, or negative comment towards a person or a group of people.</td>
+<td>de, it, pt, ru, en</td>
+</tr>
+<tr class="even">
 <td><code>INSULT_EXPERIMENTAL</code></td>
 <td>exp.</td>
-<td></td>
-<td>fr, es</td>
-</tr>
-<tr class="even">
-<td><code>PROFANITY</code></td>
-<td>exp.</td>
-<td>Swear words, curse words, or other obscene or profane language.</td>
-<td>en, de, it, pt, ru</td>
+<td>Insulting, inflammatory, or negative comment towards a person or a group of people.</td>
+<td>fr, es, ar</td>
 </tr>
 <tr class="odd">
+<td><code>PROFANITY</code></td>
+<td>prod.</td>
+<td>Swear words, curse words, or other obscene or profane language.</td>
+<td>de, it, pt, ru, en</td>
+</tr>
+<tr class="even">
 <td><code>PROFANITY_EXPERIMENTAL</code></td>
 <td>exp.</td>
-<td></td>
-<td>fr, es</td>
-</tr>
-<tr class="even">
-<td><code>THREAT</code></td>
-<td>exp.</td>
-<td>Describes an intention to inflict pain, injury, or violence against an individual or group.</td>
-<td>en, de, it, pt, ru</td>
+<td>Swear words, curse words, or other obscene or profane language.</td>
+<td>fr, es, ar</td>
 </tr>
 <tr class="odd">
-<td><code>THREAT_EXPERIMENTAL</code></td>
-<td>exp.</td>
-<td></td>
-<td>fr, es</td>
+<td><code>THREAT</code></td>
+<td>prod.</td>
+<td>Describes an intention to inflict pain, injury, or violence against an individual or group.</td>
+<td>de, it, pt, ru, en</td>
 </tr>
 <tr class="even">
+<td><code>THREAT_EXPERIMENTAL</code></td>
+<td>exp.</td>
+<td>Describes an intention to inflict pain, injury, or violence against an individual or group.</td>
+<td>fr, es, ar</td>
+</tr>
+<tr class="odd">
 <td><code>SEXUALLY_EXPLICIT</code></td>
 <td>exp.</td>
 <td>Contains references to sexual acts, body parts, or other lewd content.</td>
 <td>en</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>FLIRTATION</code></td>
 <td>exp.</td>
 <td>Pickup lines, complimenting appearance, subtle sexual innuendos, etc.</td>
@@ -235,10 +240,10 @@
 <p>These attributes are experimental because they are trained on a single source of comments—New York Times (NYT) data tagged by their moderation team—and therefore may not work well for every use case.</p>
 <table class="table">
 <colgroup>
-<col width="15%">
-<col width="3%">
-<col width="75%">
-<col width="6%">
+<col width="16%">
+<col width="4%">
+<col width="72%">
+<col width="7%">
 </colgroup>
 <thead><tr class="header">
 <th>Attribute name</th>
@@ -327,7 +332,7 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/favstats/peRspective">peRspective</a></span><span class="op">)</span></code></pre></div>
 <p>Also the <code>tidyverse</code> for examples.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
 <p><strong>Define your key variable.</strong></p>
 <p><code>peRspective</code> functions will read the API key from environment variable <code>perspective_api_key</code>. In order to add your key to your environment file, you can use the function <code>edit_r_environ()</code> from the <a href="https://usethis.r-lib.org/"><code>usethis</code> package</a>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -343,8 +348,7 @@
 </h3>
 <p>Now you can use <code>prsp_score</code> to score your comments with various models provided by the Perspective API.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="va">my_text</span> <span class="op">&lt;-</span> <span class="st">"You wrote this? Wow. This is dumb and childish, please go f**** yourself."</span>
+<code class="sourceCode R"><span class="va">my_text</span> <span class="op">&lt;-</span> <span class="st">"You wrote this? Wow. This is dumb and childish, please go f**** yourself."</span>
 
 <span class="va">text_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prsp_score.html">prsp_score</a></span><span class="op">(</span>
            text <span class="op">=</span> <span class="va">my_text</span>, 
@@ -512,66 +516,66 @@
               safe_output <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/prsp_stream_output.png"></p>
 <p>Or the (not as pretty) output in Markdown</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co">#&gt; 11.11% [2020-12-24 16:25:21]: 1 out of 9 (11.11%)</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="co">#&gt; text_id: #efdcxct</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a><span class="co">#&gt;  0.96 TOXICITY</span></span>
-<span id="cb16-4"><a href="#cb16-4"></a><span class="co">#&gt;  0.85 SEVERE_TOXICITY</span></span>
-<span id="cb16-5"><a href="#cb16-5"></a><span class="co">#&gt; </span></span>
-<span id="cb16-6"><a href="#cb16-6"></a><span class="co">#&gt; 22.22% [2020-12-24 16:25:22]: 2 out of 9 (22.22%)</span></span>
-<span id="cb16-7"><a href="#cb16-7"></a><span class="co">#&gt; text_id: #ehfcsct</span></span>
-<span id="cb16-8"><a href="#cb16-8"></a><span class="co">#&gt;  0.93 TOXICITY</span></span>
-<span id="cb16-9"><a href="#cb16-9"></a><span class="co">#&gt;  0.53 SEVERE_TOXICITY</span></span>
-<span id="cb16-10"><a href="#cb16-10"></a><span class="co">#&gt; </span></span>
-<span id="cb16-11"><a href="#cb16-11"></a><span class="co">#&gt; 33.33% [2020-12-24 16:25:23]: 3 out of 9 (33.33%)</span></span>
-<span id="cb16-12"><a href="#cb16-12"></a><span class="co">#&gt; text_id: #ekacxwt</span></span>
-<span id="cb16-13"><a href="#cb16-13"></a><span class="co">#&gt; ERROR</span></span>
-<span id="cb16-14"><a href="#cb16-14"></a><span class="co">#&gt; Error in .f(...): HTTP 400</span></span>
-<span id="cb16-15"><a href="#cb16-15"></a><span class="co">#&gt; INVALID_ARGUMENT: Comment must be non-empty.</span></span>
-<span id="cb16-16"><a href="#cb16-16"></a><span class="co">#&gt; NO SCORES</span></span>
-<span id="cb16-17"><a href="#cb16-17"></a><span class="co">#&gt; </span></span>
-<span id="cb16-18"><a href="#cb16-18"></a><span class="co">#&gt; 44.44% [2020-12-24 16:25:25]: 4 out of 9 (44.44%)</span></span>
-<span id="cb16-19"><a href="#cb16-19"></a><span class="co">#&gt; text_id: #ewatxad</span></span>
-<span id="cb16-20"><a href="#cb16-20"></a><span class="co">#&gt;  0.07 TOXICITY</span></span>
-<span id="cb16-21"><a href="#cb16-21"></a><span class="co">#&gt;  0.02 SEVERE_TOXICITY</span></span>
-<span id="cb16-22"><a href="#cb16-22"></a><span class="co">#&gt; </span></span>
-<span id="cb16-23"><a href="#cb16-23"></a><span class="co">#&gt; 55.56% [2020-12-24 16:25:26]: 5 out of 9 (55.56%)</span></span>
-<span id="cb16-24"><a href="#cb16-24"></a><span class="co">#&gt; text_id: #ekacswt</span></span>
-<span id="cb16-25"><a href="#cb16-25"></a><span class="co">#&gt;  0.60 TOXICITY</span></span>
-<span id="cb16-26"><a href="#cb16-26"></a><span class="co">#&gt;  0.32 SEVERE_TOXICITY</span></span>
-<span id="cb16-27"><a href="#cb16-27"></a><span class="co">#&gt; </span></span>
-<span id="cb16-28"><a href="#cb16-28"></a><span class="co">#&gt; 66.67% [2020-12-24 16:25:27]: 6 out of 9 (66.67%)</span></span>
-<span id="cb16-29"><a href="#cb16-29"></a><span class="co">#&gt; text_id: #ewftxwd</span></span>
-<span id="cb16-30"><a href="#cb16-30"></a><span class="co">#&gt;  0.07 TOXICITY</span></span>
-<span id="cb16-31"><a href="#cb16-31"></a><span class="co">#&gt;  0.03 SEVERE_TOXICITY</span></span>
-<span id="cb16-32"><a href="#cb16-32"></a><span class="co">#&gt; </span></span>
-<span id="cb16-33"><a href="#cb16-33"></a><span class="co">#&gt; 77.78% [2020-12-24 16:25:28]: 7 out of 9 (77.78%)</span></span>
-<span id="cb16-34"><a href="#cb16-34"></a><span class="co">#&gt; text_id: #eeadswt</span></span>
-<span id="cb16-35"><a href="#cb16-35"></a><span class="co">#&gt;  0.14 TOXICITY</span></span>
-<span id="cb16-36"><a href="#cb16-36"></a><span class="co">#&gt;  0.09 SEVERE_TOXICITY</span></span>
-<span id="cb16-37"><a href="#cb16-37"></a><span class="co">#&gt; </span></span>
-<span id="cb16-38"><a href="#cb16-38"></a><span class="co">#&gt; 88.89% [2020-12-24 16:25:29]: 8 out of 9 (88.89%)</span></span>
-<span id="cb16-39"><a href="#cb16-39"></a><span class="co">#&gt; text_id: #enfhxed</span></span>
-<span id="cb16-40"><a href="#cb16-40"></a><span class="co">#&gt;  0.35 TOXICITY</span></span>
-<span id="cb16-41"><a href="#cb16-41"></a><span class="co">#&gt;  0.14 SEVERE_TOXICITY</span></span>
-<span id="cb16-42"><a href="#cb16-42"></a><span class="co">#&gt; </span></span>
-<span id="cb16-43"><a href="#cb16-43"></a><span class="co">#&gt; 100.00% [2020-12-24 16:25:30]: 9 out of 9 (100.00%)</span></span>
-<span id="cb16-44"><a href="#cb16-44"></a><span class="co">#&gt; text_id: #efdmjd</span></span>
-<span id="cb16-45"><a href="#cb16-45"></a><span class="co">#&gt; ERROR</span></span>
-<span id="cb16-46"><a href="#cb16-46"></a><span class="co">#&gt; Error in .f(...): HTTP 400</span></span>
-<span id="cb16-47"><a href="#cb16-47"></a><span class="co">#&gt; INVALID_ARGUMENT: Attribute TOXICITY does not support request languages: ja-Latn</span></span>
-<span id="cb16-48"><a href="#cb16-48"></a><span class="co">#&gt; NO SCORES</span></span>
-<span id="cb16-49"><a href="#cb16-49"></a><span class="co">#&gt; # A tibble: 9 x 4</span></span>
-<span id="cb16-50"><a href="#cb16-50"></a><span class="co">#&gt;   text_id  error                                        TOXICITY SEVERE_TOXICITY</span></span>
-<span id="cb16-51"><a href="#cb16-51"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;                                           &lt;dbl&gt;           &lt;dbl&gt;</span></span>
-<span id="cb16-52"><a href="#cb16-52"></a><span class="co">#&gt; 1 #efdcxct "No Error"                                     0.959           0.846 </span></span>
-<span id="cb16-53"><a href="#cb16-53"></a><span class="co">#&gt; 2 #ehfcsct "No Error"                                     0.932           0.534 </span></span>
-<span id="cb16-54"><a href="#cb16-54"></a><span class="co">#&gt; 3 #ekacxwt "Error in .f(...): HTTP 400\nINVALID_ARGUME~  NA              NA     </span></span>
-<span id="cb16-55"><a href="#cb16-55"></a><span class="co">#&gt; 4 #ewatxad "No Error"                                     0.0652          0.0248</span></span>
-<span id="cb16-56"><a href="#cb16-56"></a><span class="co">#&gt; 5 #ekacswt "No Error"                                     0.605           0.319 </span></span>
-<span id="cb16-57"><a href="#cb16-57"></a><span class="co">#&gt; 6 #ewftxwd "No Error"                                     0.0734          0.0257</span></span>
-<span id="cb16-58"><a href="#cb16-58"></a><span class="co">#&gt; 7 #eeadswt "No Error"                                     0.143           0.0871</span></span>
-<span id="cb16-59"><a href="#cb16-59"></a><span class="co">#&gt; 8 #enfhxed "No Error"                                     0.350           0.137 </span></span>
-<span id="cb16-60"><a href="#cb16-60"></a><span class="co">#&gt; 9 #efdmjd  "Error in .f(...): HTTP 400\nINVALID_ARGUME~  NA              NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11.11% [2021-07-13 11:52:36]: 1 out of 9 (11.11%)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; text_id: #efdcxct</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  0.96 TOXICITY</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  0.85 SEVERE_TOXICITY</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22.22% [2021-07-13 11:52:37]: 2 out of 9 (22.22%)</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; text_id: #ehfcsct</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  0.93 TOXICITY</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  0.53 SEVERE_TOXICITY</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 33.33% [2021-07-13 11:52:38]: 3 out of 9 (33.33%)</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; text_id: #ekacxwt</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ERROR</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in .f(...): HTTP 400</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; INVALID_ARGUMENT: Comment must be non-empty.</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; NO SCORES</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 44.44% [2021-07-13 11:52:39]: 4 out of 9 (44.44%)</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; text_id: #ewatxad</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  0.07 TOXICITY</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  0.02 SEVERE_TOXICITY</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 55.56% [2021-07-13 11:52:40]: 5 out of 9 (55.56%)</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; text_id: #ekacswt</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  0.60 TOXICITY</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  0.32 SEVERE_TOXICITY</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 66.67% [2021-07-13 11:52:41]: 6 out of 9 (66.67%)</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; text_id: #ewftxwd</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  0.07 TOXICITY</span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  0.03 SEVERE_TOXICITY</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 77.78% [2021-07-13 11:52:42]: 7 out of 9 (77.78%)</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; text_id: #eeadswt</span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  0.14 TOXICITY</span></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  0.09 SEVERE_TOXICITY</span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 88.89% [2021-07-13 11:52:43]: 8 out of 9 (88.89%)</span></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; text_id: #enfhxed</span></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  0.35 TOXICITY</span></span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  0.14 SEVERE_TOXICITY</span></span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 100.00% [2021-07-13 11:52:45]: 9 out of 9 (100.00%)</span></span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; text_id: #efdmjd</span></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ERROR</span></span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in .f(...): HTTP 400</span></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: ja-Latn</span></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; NO SCORES</span></span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 9 x 4</span></span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   text_id  error                                        TOXICITY SEVERE_TOXICITY</span></span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;                                           &lt;dbl&gt;           &lt;dbl&gt;</span></span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 #efdcxct "No Error"                                     0.959           0.846 </span></span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 #ehfcsct "No Error"                                     0.932           0.534 </span></span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 #ekacxwt "Error in .f(...): HTTP 400\nINVALID_ARGUME~  NA              NA     </span></span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 #ewatxad "No Error"                                     0.0652          0.0248</span></span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 #ekacswt "No Error"                                     0.605           0.319 </span></span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 #ewftxwd "No Error"                                     0.0734          0.0257</span></span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 #eeadswt "No Error"                                     0.143           0.0871</span></span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8 #enfhxed "No Error"                                     0.350           0.137 </span></span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9 #efdmjd  "Error in .f(...): HTTP 400\nINVALID_ARGUME~  NA              NA</span></span></code></pre></div>
 </div>
 </div>
 <div id="citation" class="section level2">
@@ -616,7 +620,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.rstudio.com/web/packages/peRspective/index.html"><img src="https://cranlogs.r-pkg.org/badges/grand-total/peRspective"></a></li>
-<li><a href="https://travis-ci.org/favstats/peRspective"><img src="https://travis-ci.org/favstats/peRspective.svg?branch=master"></a></li>
+<li><a href="https://github.com/favstats/peRspective/actions"><img src="https://github.com/favstats/peRspective/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://cran.r-project.org/package=peRspective"><img src="https://www.r-pkg.org/badges/version/peRspective?color=blue"></a></li>
 <li><a href="https://codecov.io/gh/favstats/peRspective?branch=master"><img src="https://codecov.io/gh/favstats/peRspective/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://github.com/favstats/peRspective"><img src="https://img.shields.io/github/languages/code-size/favstats/peRspective.svg"></a></li>
