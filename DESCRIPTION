@@ -5,7 +5,7 @@ Authors@R: person("Fabio", "Votta", email = "fabio.votta@gmail.com", role = c("a
 Description: Interface to the 'Perspective' API, which can be found at the following URL: <https://github.com/conversationai/perspectiveapi#perspective-comment-analyzer-api>. 
     The 'Perspective' API uses machine learning models to score the perceived impact a comment might have on a conversation (i.e. TOXICITY, INFLAMMATORY, etc.).     
     'peRspective' provides access to the API and returns tidy data frames with results of the specified machine learning model(s).
-URL: https://favstats.github.io/peRspective, https://github.com/favstats/peRspective
+URL: https://favstats.github.io/peRspective/, https://github.com/favstats/peRspective
 BugReports: https://github.com/favstats/peRspective
 Depends: R (>= 3.5.0)
 License: MIT + file LICENSE

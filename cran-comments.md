@@ -21,12 +21,7 @@ There are currently no downstream dependencies for this package.
 ## Resubmission
 This is a resubmission. In this version I have:
 
-* Turned sleeps below 0.7 intervals into a warning (rather than error) as to give more choice to the user if they have a better API quota.
-
-* Fixed bug where it would sometimes not correctly match the `text_id` due to one variable being numeric. Now always outputs character.
-
-* Updated documentation to reflect changes in the Perspective API (API key retrieval, available models, etc.).
-
+* Replaced an URL which was giving a NOTE. Now it says: https://favstats.github.io/peRspective/
 
 
 
