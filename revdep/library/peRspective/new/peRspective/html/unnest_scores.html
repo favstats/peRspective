@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Unnest scores coming out of Perspective API</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for unnest_scores {peRspective}"><tr><td>unnest_scores {peRspective}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Unnest scores coming out of Perspective API</h2>
+
+<h3>Description</h3>
+
+<p>For more details see <code>?peRspective</code> or <a href="https://developers.perspectiveapi.com/s/docs">Perspective API documentation</a>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+unnest_scores(Output, score_model, score_sentences, text)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>Output</code></td>
+<td>
+<p>comes out of the <code>GET</code> call.</p>
+</td></tr>
+<tr valign="top"><td><code>score_model</code></td>
+<td>
+<p>Specify what model do you want to use (for example <code>TOXICITY</code> and/or <code>SEVERE_TOXICITY</code>). Specify a character vector if you want more than one score. See <code>peRspective::prsp_models</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>score_sentences</code></td>
+<td>
+<p>A boolean value that indicates if the request should return spans that describe the scores for each part of the text (currently done at per sentence level). Defaults to <code>FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>text</code></td>
+<td>
+<p>a character string.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a <code>tibble</code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>peRspective</em> version 0.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

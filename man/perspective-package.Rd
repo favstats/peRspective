@@ -8,15 +8,11 @@
 \description{
 Provides access to the Perspective API (\url{http://www.perspectiveapi.com/}). Perspective is an API that uses machine learning models to score the perceived impact a comment might have on a conversation.
 \code{peRspective} provides access to the API using the R programming language.
-For an excellent documentation of the Perspective API see \href{https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md}{here}.
+For an excellent documentation of the Perspective API see \href{https://developers.perspectiveapi.com/s/docs}{here}.
 }
 \section{Get API Key}{
 
-\enumerate{
-\item Create a Google Cloud project in your \href{https://console.developers.google.com/}{Google Cloud console}
-\item Go to \href{https://console.developers.google.com/apis/api/commentanalyzer.googleapis.com/overview}{Perspective API's overview page} and click \strong{\emph{Enable}}
-\item Go to the \href{https://console.developers.google.com/apis/credentials}{API credentials page}, just click \strong{\emph{Create credentials}}, and choose "API Key".
-}
+\href{https://developers.perspectiveapi.com/s/docs-get-started}{Follow these steps} as outlined by the Perspective API to get an API key.
 }
 
 \section{Suggested Usage of API Key}{
@@ -45,23 +41,23 @@ your projects quota usage at
 The maximum text size per request is 3000 bytes.
 }
 
-\section{Alpha models}{
+\section{Models in Productions}{
 
 
-The following alpha models are \strong{recommended} for use. They have been tested
+The following production-ready models are \strong{recommended} for use. They have been tested
 across multiple domains and trained on hundreds of thousands of comments tagged
-by thousands of human moderators. These are available in \strong{English (en) and Spanish (es)}.
+by thousands of human moderators. These are available in \strong{English (en), Spanish, (es), French (fr), German (de), Portuguese (pt), Italian (it), Russian (ru)}.
 \itemize{
 \item \strong{TOXICITY}: rude, disrespectful, or unreasonable comment that is likely to
 make people leave a discussion. This model is a
 \href{https://en.wikipedia.org/wiki/Convolutional_neural_network}{Convolutional Neural Network} (CNN)
-trained with \href{https://www.tensorflow.org/tutorials/word2vec}{word-vector}
+trained with \href{https://www.tensorflow.org/tutorials/text/word2vec}{word-vector}
 inputs.
 \item \strong{SEVERE_TOXICITY}: This model uses the same deep-CNN algorithm as the
 TOXICITY model, but is trained to recognize examples that were considered
 to be 'very toxic' by crowdworkers. This makes it much less sensitive to
 comments that include positive uses of curse-words for example. A labelled dataset
-and details of the methodology can be found in the same \href{https://figshare.com/articles/Wikipedia_Talk_Labels_Toxicity/4563973}{toxicity dataset} that is
+and details of the methodology can be found in the same \href{https://figshare.com/articles/dataset/Wikipedia_Talk_Labels_Toxicity/4563973}{toxicity dataset} that is
 available for the toxicity model.
 }
 }

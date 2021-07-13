@@ -19,5 +19,5 @@ unnest_scores(Output, score_model, score_sentences, text)
 a \code{tibble}
 }
 \description{
-For more details see \code{?peRspective} or \href{https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md}{Perspective API documentation}
+For more details see \code{?peRspective} or \href{https://developers.perspectiveapi.com/s/docs}{Perspective API documentation}
 }

@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: peRspective: Interface to the Perspective API</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for perspective-package {peRspective}"><tr><td>perspective-package {peRspective}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>peRspective: Interface to the Perspective API</h2>
+
+<h3>Description</h3>
+
+<p>Provides access to the Perspective API (<a href="http://www.perspectiveapi.com/">http://www.perspectiveapi.com/</a>). Perspective is an API that uses machine learning models to score the perceived impact a comment might have on a conversation.
+<code>peRspective</code> provides access to the API using the R programming language.
+For an excellent documentation of the Perspective API see <a href="https://developers.perspectiveapi.com/s/docs">here</a>.
+</p>
+
+
+<h3>Get API Key</h3>
+
+<p><a href="https://developers.perspectiveapi.com/s/docs-get-started">Follow these steps</a> as outlined by the Perspective API to get an API key.
+</p>
+
+
+<h3>Suggested Usage of API Key</h3>
+
+<p><span class="pkg">peRspective</span> functions will read the API key from
+environment variable <code>perspective_api_key</code>.
+You can specify it like this at the start of your script:
+</p>
+<p><code>Sys.setenv(perspective_api_key = "**********")</code>
+</p>
+<p>To start R session with the
+initialized environment variable create an <code>.Renviron</code> file in your R home
+with a line like this:
+</p>
+<p><code>perspective_api_key = "**********"</code>
+</p>
+<p>To check where your R home is, try <code>normalizePath("~")</code>.
+</p>
+
+
+<h3>Quota and character length Limits</h3>
+
+<p>You can check your quota limits by going to <a href="https://console.cloud.google.com/apis/api/commentanalyzer.googleapis.com/quotas">your google cloud project's Perspective API page</a>, and check
+your projects quota usage at
+<a href="https://console.cloud.google.com/iam-admin/quotas">the cloud console quota usage page</a>.
+</p>
+<p>The maximum text size per request is 3000 bytes.
+</p>
+
+
+<h3>Models in Productions</h3>
+
+<p>The following production-ready models are <strong>recommended</strong> for use. They have been tested
+across multiple domains and trained on hundreds of thousands of comments tagged
+by thousands of human moderators. These are available in <strong>English (en), Spanish, (es), French (fr), German (de), Portuguese (pt), Italian (it), Russian (ru)</strong>.
+</p>
+
+<ul>
+<li> <p><strong>TOXICITY</strong>: rude, disrespectful, or unreasonable comment that is likely to
+make people leave a discussion. This model is a
+<a href="https://en.wikipedia.org/wiki/Convolutional_neural_network">Convolutional Neural Network</a> (CNN)
+trained with <a href="https://www.tensorflow.org/tutorials/text/word2vec">word-vector</a>
+inputs.
+</p>
+</li>
+<li> <p><strong>SEVERE_TOXICITY</strong>: This model uses the same deep-CNN algorithm as the
+TOXICITY model, but is trained to recognize examples that were considered
+to be 'very toxic' by crowdworkers. This makes it much less sensitive to
+comments that include positive uses of curse-words for example. A labelled dataset
+and details of the methodology can be found in the same <a href="https://figshare.com/articles/dataset/Wikipedia_Talk_Labels_Toxicity/4563973">toxicity dataset</a> that is
+available for the toxicity model.
+</p>
+</li></ul>
+
+
+
+<h3>Experimental models</h3>
+
+<p>The following experimental models give more fine-grained classifications than
+overall toxicity. They were trained on a relatively smaller amount of data
+compared to the primary toxicity models above and have not been tested as
+thoroughly.
+</p>
+
+<ul>
+<li> <p><strong>IDENTITY_ATTACK</strong>: negative or hateful comments targeting someone because of their identity.
+</p>
+</li>
+<li> <p><strong>INSULT</strong>: insulting, inflammatory, or negative comment towards a person
+or a group of people.
+</p>
+</li>
+<li> <p><strong>PROFANITY</strong>: swear words, curse words, or other obscene or profane
+language.
+</p>
+</li>
+<li> <p><strong>THREAT</strong>: describes an intention to inflict pain, injury, or violence
+against an individual or group.
+</p>
+</li>
+<li> <p><strong>SEXUALLY_EXPLICIT</strong>: contains references to sexual acts, body parts, or
+other lewd content.
+</p>
+</li>
+<li> <p><strong>FLIRTATION</strong>: pickup lines, complimenting appearance, subtle sexual
+innuendos, etc.
+</p>
+</li></ul>
+
+<p>For more details on how these were trained, see the <a href="https://github.com/conversationai/conversationai.github.io/blob/master/crowdsourcing_annotation_schemes/toxicity_with_subattributes.md">Toxicity and sub-attribute annotation guidelines</a>.
+</p>
+
+
+<h3>New York Times moderation models</h3>
+
+<p>The following experimental models were trained on New York Times data tagged by
+their moderation team.
+</p>
+
+<ul>
+<li> <p><strong>ATTACK_ON_AUTHOR</strong>: Attack on the author of an article or post.
+</p>
+</li>
+<li> <p><strong>ATTACK_ON_COMMENTER</strong>: Attack on fellow commenter.
+</p>
+</li>
+<li> <p><strong>INCOHERENT</strong>: Difficult to understand, nonsensical.
+</p>
+</li>
+<li> <p><strong>INFLAMMATORY</strong>: Intending to provoke or inflame.
+</p>
+</li>
+<li> <p><strong>LIKELY_TO_REJECT</strong>: Overall measure of the likelihood for the comment to
+be rejected according to the NYT's moderation.
+</p>
+</li>
+<li> <p><strong>OBSCENE</strong>: Obscene or vulgar language such as cursing.
+</p>
+</li>
+<li> <p><strong>SPAM</strong>: Irrelevant and unsolicited commercial content.
+</p>
+</li>
+<li> <p><strong>UNSUBSTANTIAL</strong>: Trivial or short comments.
+</p>
+</li></ul>
+
+
+
+<h3>Don't forget to regain your spirits</h3>
+
+<p>Analyzing toxic comments can be disheartening sometimes. Feel free to look at this picture of cute kittens whenever you need to:
+</p>
+<p><img src="../help/figures/kittens.jpg" alt="Kittens" />
+
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>peRspective</em> version 0.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

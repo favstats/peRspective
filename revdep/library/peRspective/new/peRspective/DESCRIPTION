@@ -1,0 +1,25 @@
+Package: peRspective
+Title: Interface to the 'Perspective' API
+Version: 0.1.1
+Authors@R: person("Fabio", "Votta", email = "fabio.votta@gmail.com", role = c("aut", "cre"))
+Description: Interface to the 'Perspective' API, which can be found at the following URL: <https://github.com/conversationai/perspectiveapi#perspective-comment-analyzer-api>. 
+    The 'Perspective' API uses machine learning models to score the perceived impact a comment might have on a conversation (i.e. TOXICITY, INFLAMMATORY, etc.).     
+    'peRspective' provides access to the API and returns tidy data frames with results of the specified machine learning model(s).
+URL: https://github.com/favstats/peRspective
+BugReports: https://github.com/favstats/peRspective
+Depends: R (>= 3.5.0)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: crayon, dplyr, glue, httr, jsonlite, magrittr, purrr, rlang,
+        rlist, stringr, tibble
+Suggests: testthat (>= 2.1.0), covr, badger, DBI, RSQLite
+RemoteType: local
+RemoteUrl: C:\Users\favoo\Documents\git_proj\peRspective
+NeedsCompilation: no
+Packaged: 2021-07-13 08:08:21 UTC; favoo
+Author: Fabio Votta [aut, cre]
+Maintainer: Fabio Votta <fabio.votta@gmail.com>
+Built: R 4.1.0; ; 2021-07-13 08:08:22 UTC; windows

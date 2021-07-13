@@ -1,3 +1,7 @@
+## Release summary
+
+This is a minor release in the 0.1 series.
+
 ## Test environments
 * local OS X install, R 3.6.0
 * ubuntu 14.04 (on travis-ci), R 3.6.0
@@ -7,12 +11,7 @@
 * R-hub fedora-clang-devel (r-devel)
 
 ## R CMD check results
-There were no ERRORs or WARNINGs
-
-### NOTEs
-checking CRAN incoming feasibility ... NOTE
-Maintainer: 'Fabio Votta <fabio.votta@gmail.com>'
-New submission
+There were no NOTEs, ERRORs or WARNINGs
 
 ## Downstream dependencies
 There are currently no downstream dependencies for this package. 
@@ -20,11 +19,8 @@ There are currently no downstream dependencies for this package.
 ## Resubmission
 This is a resubmission. In this version I have:
 
-* Added single quotes to mentioned package names and API names (e.g. 'Perspective') in Title and Description (DESCRIPTION file).
+* Turned sleeps below 0.7 intervals only into a warning as to give more choice to the user if they have a better API quota.
 
-* Added an URL for the used API ('Perspective') in the Description text (DESCRIPTION file).
+* Fixed a bug where it would sometimes not correctly match the `text_id` due to one being numeric. Now always outputs character
 
-* Added more details about the package functionality and the 'Perspective' API functionality in the Description text (DESCRIPTION file).
-
-* Added missing quotation marks in the examples of man/prsp_score.Rd
 

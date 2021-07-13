@@ -22,68 +22,66 @@ For an excellent documentation of the Perspective API see
 [here](https://github.com/conversationai/perspectiveapi/tree/master/2-api).
 
 > This is a work-in-progress project and I welcome feedback and pull
-> requests\!
+> requests!
 
 ## Overview
 
-  - [Setup](https://github.com/favstats/peRspective#setup)
-  - [Models](https://github.com/favstats/peRspective#models)
-  - [Usage](https://github.com/favstats/peRspective#usage)
-      - [`prsp_score`](https://github.com/favstats/peRspective#prsp_score)
-      - [`prsp_stream`](https://github.com/favstats/peRspective#prsp_stream)
+-   [Setup](https://github.com/favstats/peRspective#setup)
+-   [Models](https://github.com/favstats/peRspective#models)
+-   [Usage](https://github.com/favstats/peRspective#usage)
+    -   [`prsp_score`](https://github.com/favstats/peRspective#prsp_score)
+    -   [`prsp_stream`](https://github.com/favstats/peRspective#prsp_stream)
 
 ## Setup
 
 ### Get an API key
 
 [Follow these
-steps](https://github.com/conversationai/perspectiveapi/tree/master/1-get-started#prerequisites)
-as outlined by the Perspective API to get an API key.
+steps](https://developers.perspectiveapi.com/s/docs-get-started) as
+outlined by the Perspective API to get an API key.
 
 **NOTE:** Perspective API made some changes recently and you now have to
 apply for an API key via a Google Form.
 
 ### Quota and character length Limits
 
-Be sure to check your quota limit\! You can learn more about Perspective
+Be sure to check your quota limit! You can learn more about Perspective
 API quota limit by visiting [your google cloud project’s Perspective API
 page](https://console.cloud.google.com/apis/api/commentanalyzer.googleapis.com/quotas).
-
-The maximum text size per request is 3000 bytes.
 
 ## Models
 
 For detailed overview of the used models [see
-here](https://github.com/conversationai/perspectiveapi/blob/master/2-api/models.md).
+here](https://developers.perspectiveapi.com/s/about-the-api-attributes-and-languages).
 
 ### Languages in production
 
 Currently, Perspective API has production `TOXICITY` and
 `SEVERE_TOXICITY` attributes in the following languages:
 
-  - English (en)
-  - Spanish (es)
-  - French (fr)
-  - German (de)
-  - Portuguese (pt)
-  - Italian (it)
-  - Russian (ru)
+-   English (en)
+-   Spanish (es)
+-   French (fr)
+-   German (de)
+-   Portuguese (pt)
+-   Italian (it)
+-   Russian (ru)
 
 ### Toxicity attributes
 
 | Attribute name                 | Type  | Description                                                                                                                                                                                                                                                                                                                                                                                               | Language                   |
-| ------------------------------ | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+|--------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|
 | `TOXICITY`                     | prod. | Rude, disrespectful, or unreasonable comment that is likely to make people leave a discussion.                                                                                                                                                                                                                                                                                                            | en, fr, es, de, it, pt, ru |
 | `SEVERE_TOXICITY`              | prod. | A very hateful, aggressive, disrespectful comment or otherwise very likely to make a user leave a discussion or give up on sharing their perspective. This attribute is much less sensitive to comments that include positive uses of curse words, for example. A labelled dataset and details of the methodology can be found in the same toxicity dataset that is available for the toxicity attribute. | en, fr, es, de, it, pt, ru |
 | `TOXICITY_FAST`                | exp.  | This attribute is similar to `TOXICITY`, but has lower latency and lower accuracy in its predictions. Unlike `TOXICITY`, this attribute returns summary scores as well as span scores. This attribute uses character-level n-grams fed into a logistic regression, a method that has been surprisingly effective at detecting abusive language.                                                           | en                         |
 | `IDENTITY_ATTACK`              | exp.  | Negative or hateful comments targeting someone because of their identity.                                                                                                                                                                                                                                                                                                                                 | en, de, it, pt, ru         |
-| `IDENTITY_ATTACK_EXPERIMENTAL` | exp.  |                                                                                                                                                                                                                                                                                                                                                                                                           | fr, es                     |
+| `IDENTITY_ATTACK_EXPERIMENTAL` | exp.  |                                                                                                                                                                                                                                                                                                                                                                                                           | fr, es                     |
 | `INSULT`                       | exp.  | Insulting, inflammatory, or negative comment towards a person or a group of people.                                                                                                                                                                                                                                                                                                                       | en, de, it, pt, ru         |
-| `INSULT_EXPERIMENTAL`          | exp.  |                                                                                                                                                                                                                                                                                                                                                                                                           | fr, es                     |
+| `INSULT_EXPERIMENTAL`          | exp.  |                                                                                                                                                                                                                                                                                                                                                                                                           | fr, es                     |
 | `PROFANITY`                    | exp.  | Swear words, curse words, or other obscene or profane language.                                                                                                                                                                                                                                                                                                                                           | en, de, it, pt, ru         |
-| `PROFANITY_EXPERIMENTAL`       | exp.  |                                                                                                                                                                                                                                                                                                                                                                                                           | fr, es                     |
+| `PROFANITY_EXPERIMENTAL`       | exp.  |                                                                                                                                                                                                                                                                                                                                                                                                           | fr, es                     |
 | `THREAT`                       | exp.  | Describes an intention to inflict pain, injury, or violence against an individual or group.                                                                                                                                                                                                                                                                                                               | en, de, it, pt, ru         |
-| `THREAT_EXPERIMENTAL`          | exp.  |                                                                                                                                                                                                                                                                                                                                                                                                           | fr, es                     |
+| `THREAT_EXPERIMENTAL`          | exp.  |                                                                                                                                                                                                                                                                                                                                                                                                           | fr, es                     |
 | `SEXUALLY_EXPLICIT`            | exp.  | Contains references to sexual acts, body parts, or other lewd content.                                                                                                                                                                                                                                                                                                                                    | en                         |
 | `FLIRTATION`                   | exp.  | Pickup lines, complimenting appearance, subtle sexual innuendos, etc.                                                                                                                                                                                                                                                                                                                                     | en                         |
 
@@ -94,7 +92,7 @@ source of comments—New York Times (NYT) data tagged by their moderation
 team—and therefore may not work well for every use case.
 
 | Attribute name        | Type | Description                                                                                         | Language |
-| --------------------- | ---- | --------------------------------------------------------------------------------------------------- | -------- |
+|-----------------------|------|-----------------------------------------------------------------------------------------------------|----------|
 | `ATTACK_ON_AUTHOR`    | exp. | Attack on the author of an article or post.                                                         | en       |
 | `ATTACK_ON_COMMENTER` | exp. | Attack on fellow commenter.                                                                         | en       |
 | `INCOHERENT`          | exp. | Difficult to understand, nonsensical.                                                               | en       |
@@ -174,7 +172,6 @@ Now you can use `prsp_score` to score your comments with various models
 provided by the Perspective API.
 
 ``` r
-
 my_text <- "You wrote this? Wow. This is dumb and childish, please go f**** yourself."
 
 text_scores <- prsp_score(
@@ -378,7 +375,7 @@ text_sample %>%
 ```
 
 `safe_output = T` will also provide us with the error messages that
-occured so that we can check what went wrong\!
+occured so that we can check what went wrong!
 
 Finally, there is one last argument: `verbose = TRUE`. Enable this
 argument and thanks to [`crayon`](https://github.com/r-lib/crayon) you
@@ -398,53 +395,53 @@ text_sample %>%
 
 Or the (not as pretty) output in Markdown
 
-    #> 11.11% [2021-07-12 21:52:16]: 1 out of 9 (11.11%)
+    #> 11.11% [2021-07-13 00:25:25]: 1 out of 9 (11.11%)
     #> text_id: #efdcxct
     #>  0.96 TOXICITY
     #>  0.85 SEVERE_TOXICITY
     #> 
-    #> 22.22% [2021-07-12 21:52:17]: 2 out of 9 (22.22%)
+    #> 22.22% [2021-07-13 00:25:26]: 2 out of 9 (22.22%)
     #> text_id: #ehfcsct
     #>  0.93 TOXICITY
     #>  0.53 SEVERE_TOXICITY
     #> 
-    #> 33.33% [2021-07-12 21:52:18]: 3 out of 9 (33.33%)
+    #> 33.33% [2021-07-13 00:25:28]: 3 out of 9 (33.33%)
     #> text_id: #ekacxwt
     #> ERROR
     #> Error in .f(...): HTTP 400
     #> INVALID_ARGUMENT: Comment must be non-empty.
     #> NO SCORES
     #> 
-    #> 44.44% [2021-07-12 21:52:20]: 4 out of 9 (44.44%)
+    #> 44.44% [2021-07-13 00:25:29]: 4 out of 9 (44.44%)
     #> text_id: #ewatxad
     #>  0.07 TOXICITY
     #>  0.02 SEVERE_TOXICITY
     #> 
-    #> 55.56% [2021-07-12 21:52:21]: 5 out of 9 (55.56%)
+    #> 55.56% [2021-07-13 00:25:30]: 5 out of 9 (55.56%)
     #> text_id: #ekacswt
     #>  0.60 TOXICITY
     #>  0.32 SEVERE_TOXICITY
     #> 
-    #> 66.67% [2021-07-12 21:52:22]: 6 out of 9 (66.67%)
+    #> 66.67% [2021-07-13 00:25:31]: 6 out of 9 (66.67%)
     #> text_id: #ewftxwd
     #>  0.07 TOXICITY
     #>  0.03 SEVERE_TOXICITY
     #> 
-    #> 77.78% [2021-07-12 21:52:23]: 7 out of 9 (77.78%)
+    #> 77.78% [2021-07-13 00:25:32]: 7 out of 9 (77.78%)
     #> text_id: #eeadswt
     #>  0.14 TOXICITY
     #>  0.09 SEVERE_TOXICITY
     #> 
-    #> 88.89% [2021-07-12 21:52:24]: 8 out of 9 (88.89%)
+    #> 88.89% [2021-07-13 00:25:33]: 8 out of 9 (88.89%)
     #> text_id: #enfhxed
     #>  0.35 TOXICITY
     #>  0.14 SEVERE_TOXICITY
     #> 
-    #> 100.00% [2021-07-12 21:52:25]: 9 out of 9 (100.00%)
+    #> 100.00% [2021-07-13 00:25:34]: 9 out of 9 (100.00%)
     #> text_id: #efdmjd
     #> ERROR
     #> Error in .f(...): HTTP 400
-    #> INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: ja-Latn
+    #> INVALID_ARGUMENT: Attribute TOXICITY does not support request languages: ja-Latn
     #> NO SCORES
     #> # A tibble: 9 x 4
     #>   text_id  error                                        TOXICITY SEVERE_TOXICITY
@@ -461,7 +458,7 @@ Or the (not as pretty) output in Markdown
 
 ## Citation
 
-Thank you for using peRspective\! Please consider citing:
+Thank you for using peRspective! Please consider citing:
 
 Votta, Fabio. (2019). peRspective: A wrapper for the Perspective API.
 Source: <https://github.com/favstats>.

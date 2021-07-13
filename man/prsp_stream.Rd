@@ -30,7 +30,7 @@ prsp_stream(
 
 \item{save}{NOT USABLE YET saves data into SQLite database (defaults to \code{FALSE}).}
 
-\item{dt_name}{what is the name of the dataset? (defaults to \code{persp}).}
+\item{dt_name}{NOT USABLE YET what is the name of the dataset? (defaults to \code{persp}).}
 }
 \value{
 a \code{tibble}
@@ -39,7 +39,7 @@ a \code{tibble}
 This function wraps \code{\link{prsp_score}} and loops over your text input. Provide a character string with your text and which scores you want to obtain. Make sure to keep track of your ratelimit with on \href{https://console.cloud.google.com/iam-admin/quotas}{the cloud console quota usage page}.
 }
 \details{
-For more details see \code{?peRspective} or \href{https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md}{Perspective API documentation}
+For more details see \code{?peRspective} or \href{https://developers.perspectiveapi.com/s/docs}{Perspective API documentation}
 }
 \examples{
 \dontrun{

@@ -1,0 +1,12 @@
+form_request            Create a GET request for Perspective API
+msg                     Send a fancy message
+perspective-package     peRspective: Interface to the Perspective API
+perspective_api_key     Check if API key is present
+print_progress          Print progress in purrr::imap environment
+prsp_exp_models         All valid experimental Perspective API models
+prsp_models             All valid (non-experimental) Perspective API
+                        models
+prsp_score              Analyze comments with Perspective API
+prsp_stream             Stream comment scores with Perspective API
+specify_decimal         Specify a decimal
+unnest_scores           Unnest scores coming out of Perspective API

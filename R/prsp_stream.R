@@ -10,7 +10,7 @@ globalVariables("score_model")
 #'
 #' This function wraps \code{\link{prsp_score}} and loops over your text input. Provide a character string with your text and which scores you want to obtain. Make sure to keep track of your ratelimit with on [the cloud console quota usage page](https://console.cloud.google.com/iam-admin/quotas).
 #'
-#' For more details see `?peRspective` or [Perspective API documentation](https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md)
+#' For more details see `?peRspective` or [Perspective API documentation](https://developers.perspectiveapi.com/s/docs)
 #'
 #' @md
 #' @param .data a dataset with a text and text_id column.
@@ -20,7 +20,7 @@ globalVariables("score_model")
 #' @param verbose narrates the streaming procedure (defaults to `FALSE`).
 #' @param ... arguments passed to \code{\link{prsp_score}}. Don't forget to add the \code{score_model} argument (see `peRspective::prsp_models` for list of valid models).
 #' @param save NOT USABLE YET saves data into SQLite database (defaults to `FALSE`).
-#' @param dt_name what is the name of the dataset? (defaults to `persp`).
+#' @param dt_name NOT USABLE YET what is the name of the dataset? (defaults to `persp`).
 #' @return a `tibble`
 #' @examples
 #' \dontrun{
@@ -210,6 +210,7 @@ prsp_stream <- function(.data,
     }
     
     if(save){
+      if(!dir.exists("data")) dir.create("data")
       db_append("data/{dt_name}.db", "perspective", data = final_text)
     }
     
@@ -243,17 +244,6 @@ NULL
 #' @keywords datasets
 #' @name prsp_exp_models
 NULL
-
-
-# TODO: Write tests 
-# ss <- 
-  # tibble(ctext = "kdlfkmgkdfmgjgkfmg", textid = "#ewqyccfr") #%>%
-  # prsp_stream_nolimit(text_sample, text = ctext,
-  #             text_id = textid,
-  #             score_model = c("TOXICITY", "SEVERE_TOXICITY"),
-  #             score_sentences  = T,
-  #             verbose = T,
-  #             safe_output = F)
 
 
 print_score_labels <- function(prsp_params = NULL, int_results = NULL) {

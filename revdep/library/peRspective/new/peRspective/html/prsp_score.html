@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Analyze comments with Perspective API</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for prsp_score {peRspective}"><tr><td>prsp_score {peRspective}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Analyze comments with Perspective API</h2>
+
+<h3>Description</h3>
+
+<p>Provide a character string with your text, your API key and what scores you want to obtain.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+prsp_score(
+  text,
+  text_id = NULL,
+  languages = NULL,
+  score_sentences = F,
+  score_model,
+  sleep = 1,
+  doNotStore = F,
+  key = NULL
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>text</code></td>
+<td>
+<p>a character string.</p>
+</td></tr>
+<tr valign="top"><td><code>text_id</code></td>
+<td>
+<p>a unique ID for the text that you supply (required).</p>
+</td></tr>
+<tr valign="top"><td><code>languages</code></td>
+<td>
+<p>A vector of <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 631-1</a> two-letter language codes specifying the language(s) that comment is in (for example, &quot;en&quot;, &quot;es&quot;, &quot;fr&quot;, &quot;de&quot;, etc). If unspecified, the API will autodetect the comment language. If language detection fails, the API returns an error.</p>
+</td></tr>
+<tr valign="top"><td><code>score_sentences</code></td>
+<td>
+<p>A boolean value that indicates if the request should return spans that describe the scores for each part of the text (currently done at per sentence level). Defaults to <code>FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>score_model</code></td>
+<td>
+<p>Specify what model do you want to use (for example <code>TOXICITY</code> and/or <code>SEVERE_TOXICITY</code>). Specify a character vector if you want more than one score. See <code>peRspective::prsp_models</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>sleep</code></td>
+<td>
+<p>how long should <code>prsp_score</code> wait between each call</p>
+</td></tr>
+<tr valign="top"><td><code>doNotStore</code></td>
+<td>
+<p>Whether the API is permitted to store comment from this request. Stored comments will be used for future research and community model building purposes to improve the API over time. Perspective API also plans to provide dashboards and automated analysis of the comments submitted, which will apply only to those stored. Defaults to <code>FALSE</code> (request data may be stored). Important note: This should be set to true if data being submitted is private (i.e. not publicly accessible), or if the data submitted contains content written by someone under 13 years old.</p>
+</td></tr>
+<tr valign="top"><td><code>key</code></td>
+<td>
+<p>Your API key (<a href="https://developers.perspectiveapi.com/s/docs-get-started">see here</a> to set up an API key).</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>For more details see <code>?peRspective</code> or <a href="https://developers.perspectiveapi.com/s/docs">Perspective API documentation</a>
+</p>
+
+
+<h3>Value</h3>
+
+<p>a <code>tibble</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+## GET TOXICITY SCORES for a comment
+prsp_score("Hello, I am a test comment!",
+           score_model = "TOXICITY")
+           
+## GET TOXICITY and SEVERE_TOXICITY Scores for a comment
+prsp_score("Hello, I am a test comment!",
+           score_model = c("TOXICITY", "SEVERE_TOXICITY"))
+  
+## GET TOXICITY and SEVERE_TOXICITY Scores for each sentence of a comment
+prsp_score("Hello, I am a test comment! 
+           I am a second sentence and I will (hopefully) be scored seperately",
+           score_model = c("TOXICITY", "SEVERE_TOXICITY"),
+           score_sentences = T)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>peRspective</em> version 0.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

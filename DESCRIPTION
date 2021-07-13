@@ -1,6 +1,6 @@
 Package: peRspective
 Title: Interface to the 'Perspective' API
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Fabio", "Votta", email = "fabio.votta@gmail.com", role = c("aut", "cre"))
 Description: Interface to the 'Perspective' API, which can be found at the following URL: <https://github.com/conversationai/perspectiveapi#perspective-comment-analyzer-api>. 
     The 'Perspective' API uses machine learning models to score the perceived impact a comment might have on a conversation (i.e. TOXICITY, INFLAMMATORY, etc.).     
@@ -28,4 +28,6 @@ Imports:
 Suggests: 
     testthat (>= 2.1.0),
     covr,
-    badger
+    badger,
+    DBI,
+    RSQLite

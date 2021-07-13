@@ -30,7 +30,7 @@ prsp_score(
 
 \item{doNotStore}{Whether the API is permitted to store comment from this request. Stored comments will be used for future research and community model building purposes to improve the API over time. Perspective API also plans to provide dashboards and automated analysis of the comments submitted, which will apply only to those stored. Defaults to \code{FALSE} (request data may be stored). Important note: This should be set to true if data being submitted is private (i.e. not publicly accessible), or if the data submitted contains content written by someone under 13 years old.}
 
-\item{key}{Your API key (\href{https://github.com/conversationai/perspectiveapi/blob/master/quickstart.md}{see here} to set up an API key).}
+\item{key}{Your API key (\href{https://developers.perspectiveapi.com/s/docs-get-started}{see here} to set up an API key).}
 }
 \value{
 a \code{tibble}
@@ -39,7 +39,7 @@ a \code{tibble}
 Provide a character string with your text, your API key and what scores you want to obtain.
 }
 \details{
-For more details see \code{?peRspective} or \href{https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md}{Perspective API documentation}
+For more details see \code{?peRspective} or \href{https://developers.perspectiveapi.com/s/docs}{Perspective API documentation}
 }
 \examples{
 \dontrun{

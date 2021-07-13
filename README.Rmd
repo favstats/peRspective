@@ -63,7 +63,7 @@ For an excellent documentation of the Perspective API see [here](https://github.
 
 ### Get an API key
 
-[Follow these steps](https://github.com/conversationai/perspectiveapi/tree/master/1-get-started#prerequisites) as outlined by the Perspective API to get an API key.
+[Follow these steps](https://developers.perspectiveapi.com/s/docs-get-started) as outlined by the Perspective API to get an API key.
 
 **NOTE:** Perspective API made some changes recently and you now have to apply for an API key via a Google Form.
 
@@ -71,11 +71,9 @@ For an excellent documentation of the Perspective API see [here](https://github.
 
 Be sure to check your quota limit! You can learn more about Perspective API quota limit by visiting [your google cloud project's Perspective API page](https://console.cloud.google.com/apis/api/commentanalyzer.googleapis.com/quotas).
 
-The maximum text size per request is 3000 bytes.
-
 ## Models
 
-For detailed overview of the used models [see here](https://github.com/conversationai/perspectiveapi/blob/master/2-api/models.md).
+For detailed overview of the used models [see here](https://developers.perspectiveapi.com/s/about-the-api-attributes-and-languages).
 
 
 ### Languages in production 

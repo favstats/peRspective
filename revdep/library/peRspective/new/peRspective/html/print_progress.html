@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Print progress in purrr::imap environment</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for print_progress {peRspective}"><tr><td>print_progress {peRspective}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Print progress in purrr::imap environment</h2>
+
+<h3>Description</h3>
+
+<p>Provide iterator number and total length of items to be iterated over
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+print_progress(x, total, print_prct = F)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>iterator number.</p>
+</td></tr>
+<tr valign="top"><td><code>total</code></td>
+<td>
+<p>length of items to be iterated over.</p>
+</td></tr>
+<tr valign="top"><td><code>print_prct</code></td>
+<td>
+<p>only print percentage progress (defaults to <code>FALSE</code>).</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a <code>chr</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Print progress (1 out of 100)
+print_progress(1, 100)
+
+## Only print percentage
+print_progress(1, 100, print_prct = TRUE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>peRspective</em> version 0.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

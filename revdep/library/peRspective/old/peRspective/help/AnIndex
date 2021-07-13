@@ -1,0 +1,13 @@
+perspective-package	perspective-package
+%>%	pipe
+form_request	form_request
+msg	msg
+peRspective	perspective-package
+perspective_api_key	perspective_api_key
+print_progress	print_progress
+prsp_exp_models	prsp_exp_models
+prsp_models	prsp_models
+prsp_score	prsp_score
+prsp_stream	prsp_stream
+specify_decimal	specify_decimal
+unnest_scores	unnest_scores

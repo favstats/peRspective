@@ -2,15 +2,11 @@
 #'
 #' Provides access to the Perspective API (\url{http://www.perspectiveapi.com/}). Perspective is an API that uses machine learning models to score the perceived impact a comment might have on a conversation.
 #' `peRspective` provides access to the API using the R programming language.
-#' For an excellent documentation of the Perspective API see [here](https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md).
+#' For an excellent documentation of the Perspective API see [here](https://developers.perspectiveapi.com/s/docs).
 #'
 #' @section Get API Key:
-#'   1. Create a Google Cloud project in your [Google Cloud console](https://console.developers.google.com/)
-#'
-#'   2. Go to [Perspective API's overview page](https://console.developers.google.com/apis/api/commentanalyzer.googleapis.com/overview) and click **_Enable_**
+#'   [Follow these steps](https://developers.perspectiveapi.com/s/docs-get-started) as outlined by the Perspective API to get an API key.
 #'   
-#'   3. Go to the [API credentials page](https://console.developers.google.com/apis/credentials), just click **_Create credentials_**, and choose "API Key".
-#' 
 #' @section Suggested Usage of API Key:
 #'   \pkg{peRspective} functions will read the API key from
 #'   environment variable \code{perspective_api_key}. 
@@ -33,22 +29,22 @@
 #'
 #'   The maximum text size per request is 3000 bytes.
 #'   
-#' @section Alpha models:
+#' @section Models in Productions:
 #' 
-#' The following alpha models are **recommended** for use. They have been tested
+#' The following production-ready models are **recommended** for use. They have been tested
 #' across multiple domains and trained on hundreds of thousands of comments tagged
-#' by thousands of human moderators. These are available in **English (en) and Spanish (es)**.
+#' by thousands of human moderators. These are available in **English (en), Spanish, (es), French (fr), German (de), Portuguese (pt), Italian (it), Russian (ru)**.
 #' 
 #' *   **TOXICITY**: rude, disrespectful, or unreasonable comment that is likely to
 #' make people leave a discussion. This model is a
 #' [Convolutional Neural Network](https://en.wikipedia.org/wiki/Convolutional_neural_network) (CNN)
-#' trained with [word-vector](https://www.tensorflow.org/tutorials/word2vec)
+#' trained with [word-vector](https://www.tensorflow.org/tutorials/text/word2vec)
 #' inputs.
 #' *   **SEVERE_TOXICITY**: This model uses the same deep-CNN algorithm as the
 #' TOXICITY model, but is trained to recognize examples that were considered
 #' to be 'very toxic' by crowdworkers. This makes it much less sensitive to
 #' comments that include positive uses of curse-words for example. A labelled dataset
-#' and details of the methodology can be found in the same [toxicity dataset](https://figshare.com/articles/Wikipedia_Talk_Labels_Toxicity/4563973) that is
+#' and details of the methodology can be found in the same [toxicity dataset](https://figshare.com/articles/dataset/Wikipedia_Talk_Labels_Toxicity/4563973) that is
 #' available for the toxicity model.
 #' 
 #' @section Experimental models:

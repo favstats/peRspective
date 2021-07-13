@@ -43,7 +43,7 @@ test_that("you can't specify a faster rate limit than 0.7 per second", {
                     message = "perspective_api_key not available in environment. Skipping test.")
   
 
-  testthat::expect_error(peRspective::prsp_score("Hello, I am a testbot",
+  testthat::expect_warning(peRspective::prsp_score("Hello, I am a testbot",
                                                  score_model = "TOXICITY",
                                                  sleep = 0.1))
 

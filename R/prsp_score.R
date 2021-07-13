@@ -6,7 +6,7 @@ globalVariables("prsp_exp_models")
 #'
 #' Provide a character string with your text, your API key and what scores you want to obtain.
 #'
-#' For more details see `?peRspective` or [Perspective API documentation](https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md)
+#' For more details see `?peRspective` or [Perspective API documentation](https://developers.perspectiveapi.com/s/docs)
 #'
 #' @md
 #' @param text a character string.
@@ -16,7 +16,7 @@ globalVariables("prsp_exp_models")
 #' @param languages A vector of [ISO 631-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) two-letter language codes specifying the language(s) that comment is in (for example, "en", "es", "fr", "de", etc). If unspecified, the API will autodetect the comment language. If language detection fails, the API returns an error.
 #' @param sleep how long should `prsp_score` wait between each call
 #' @param doNotStore Whether the API is permitted to store comment from this request. Stored comments will be used for future research and community model building purposes to improve the API over time. Perspective API also plans to provide dashboards and automated analysis of the comments submitted, which will apply only to those stored. Defaults to `FALSE` (request data may be stored). Important note: This should be set to true if data being submitted is private (i.e. not publicly accessible), or if the data submitted contains content written by someone under 13 years old.
-#' @param key Your API key ([see here](https://github.com/conversationai/perspectiveapi/blob/master/quickstart.md) to set up an API key).
+#' @param key Your API key ([see here](https://developers.perspectiveapi.com/s/docs-get-started) to set up an API key).
 #' @return a `tibble`
 #' @examples
 #' \dontrun{
@@ -97,7 +97,7 @@ prsp_score <- function(text, text_id = NULL,
 
 #' Unnest scores coming out of Perspective API
 #'
-#' For more details see `?peRspective` or [Perspective API documentation](https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md)
+#' For more details see `?peRspective` or [Perspective API documentation](https://developers.perspectiveapi.com/s/docs)
 #'
 #' @md
 #' @param Output comes out of the `GET` call.
@@ -180,7 +180,7 @@ unnest_scores <- function(Output, score_model, score_sentences, text){
 
 #' Create a GET request for Perspective API
 #'
-#' For more details see `?peRspective` or [Perspective API documentation](https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md)
+#' For more details see `?peRspective` or [Perspective API documentation](https://developers.perspectiveapi.com/s/docs)
 #'
 #' @md
 #' @param score_model Specify what model do you want to use (for example `TOXICITY` and/or `SEVERE_TOXICITY`). Specify a character vector if you want more than one score. See `peRspective::prsp_models`.
