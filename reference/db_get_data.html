@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a GET request for Perspective API — form_request • peRspective</title>
+<title>SQL Database Retrieve — db_get_data • peRspective</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Create a GET request for Perspective API — form_request" />
-<meta property="og:description" content="For more details see ?peRspective or Perspective API documentation" />
+<meta property="og:title" content="SQL Database Retrieve — db_get_data" />
+<meta property="og:description" content="This is a helper function that will retreive a dataframe to a SQL database" />
 
 
 
@@ -111,45 +111,30 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a GET request for Perspective API</h1>
-    <small class="dont-index">Source: <a href='https://github.com/favstats/peRspective/blob/master/R/prsp_score.R'><code>R/prsp_score.R</code></a></small>
-    <div class="hidden name"><code>form_request.Rd</code></div>
+    <h1>SQL Database Retrieve</h1>
+    <small class="dont-index">Source: <a href='https://github.com/favstats/peRspective/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <div class="hidden name"><code>db_get_data.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>For more details see <code><a href='perspective-package.html'>?peRspective</a></code> or <a href='https://developers.perspectiveapi.com/s/docs'>Perspective API documentation</a></p>
+    <p>This is a helper function that will retreive a dataframe to a SQL database</p>
     </div>
 
-    <pre class="usage"><span class='fu'>form_request</span><span class='op'>(</span><span class='va'>score_model</span>, <span class='va'>text</span>, <span class='va'>score_sentences</span>, <span class='va'>languages</span>, doNotStore <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>db_get_data</span><span class='op'>(</span><span class='va'>tbl_dat</span>, path <span class='op'>=</span> <span class='st'>"sql_data/omdata.db"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>score_model</th>
-      <td><p>Specify what model do you want to use (for example <code>TOXICITY</code> and/or <code>SEVERE_TOXICITY</code>). Specify a character vector if you want more than one score. See <code><a href='prsp_models.html'>peRspective::prsp_models</a></code>.</p></td>
+      <th>tbl_dat</th>
+      <td><p>which table from the SQL database do you want to retrieve</p></td>
     </tr>
     <tr>
-      <th>text</th>
-      <td><p>a character string.</p></td>
-    </tr>
-    <tr>
-      <th>score_sentences</th>
-      <td><p>A boolean value that indicates if the request should return spans that describe the scores for each part of the text (currently done at per sentence level). Defaults to <code>FALSE</code>.</p></td>
-    </tr>
-    <tr>
-      <th>languages</th>
-      <td><p>A vector of <a href='https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes'>ISO 631-1</a> two-letter language codes specifying the language(s) that comment is in (for example, "en", "es", "fr", "de", etc). If unspecified, the API will autodetect the comment language. If language detection fails, the API returns an error.</p></td>
-    </tr>
-    <tr>
-      <th>doNotStore</th>
-      <td><p>Whether the API is permitted to store comment from this request. Stored comments will be used for future research and community model building purposes to improve the API over time. Perspective API also plans to provide dashboards and automated analysis of the comments submitted, which will apply only to those stored. Defaults to <code>FALSE</code> (request data may be stored). Important note: This should be set to true if data being submitted is private (i.e. not publicly accessible), or if the data submitted contains content written by someone under 13 years old.</p></td>
+      <th>path</th>
+      <td><p>path to database</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>a <code>tibble</code></p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
