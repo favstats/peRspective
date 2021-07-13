@@ -1,6 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^\.travis\.yml$
 ^codecov\.yml$
 ^prsp\.txt$
 ^LICENSE\.md$
@@ -16,3 +15,4 @@
 ^CODE_OF_CONDUCT\.md$
 ^README\.md$
 ^NEWS\.md$
+^\.github$

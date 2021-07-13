@@ -4,7 +4,7 @@
 # peRspective <img src="man/figures/perspective.png" width="160px" align="right"/>
 
 [![](https://cranlogs.r-pkg.org/badges/grand-total/peRspective)](https://cran.rstudio.com/web/packages/peRspective/index.html)
-[![](https://travis-ci.org/favstats/peRspective.svg?branch=master)](https://travis-ci.org/favstats/peRspective)
+[![R-CMD-check](https://github.com/favstats/peRspective/workflows/R-CMD-check/badge.svg)](https://github.com/favstats/peRspective/actions)
 [![](https://www.r-pkg.org/badges/version/peRspective?color=blue)](https://cran.r-project.org/package=peRspective)
 [![Codecov test
 coverage](https://codecov.io/gh/favstats/peRspective/branch/master/graph/badge.svg)](https://codecov.io/gh/favstats/peRspective?branch=master)
@@ -395,53 +395,53 @@ text_sample %>%
 
 Or the (not as pretty) output in Markdown
 
-    #> 11.11% [2021-07-13 00:25:25]: 1 out of 9 (11.11%)
+    #> 11.11% [2021-07-13 11:15:16]: 1 out of 9 (11.11%)
     #> text_id: #efdcxct
     #>  0.96 TOXICITY
     #>  0.85 SEVERE_TOXICITY
     #> 
-    #> 22.22% [2021-07-13 00:25:26]: 2 out of 9 (22.22%)
+    #> 22.22% [2021-07-13 11:15:17]: 2 out of 9 (22.22%)
     #> text_id: #ehfcsct
     #>  0.93 TOXICITY
     #>  0.53 SEVERE_TOXICITY
     #> 
-    #> 33.33% [2021-07-13 00:25:28]: 3 out of 9 (33.33%)
+    #> 33.33% [2021-07-13 11:15:18]: 3 out of 9 (33.33%)
     #> text_id: #ekacxwt
     #> ERROR
     #> Error in .f(...): HTTP 400
     #> INVALID_ARGUMENT: Comment must be non-empty.
     #> NO SCORES
     #> 
-    #> 44.44% [2021-07-13 00:25:29]: 4 out of 9 (44.44%)
+    #> 44.44% [2021-07-13 11:15:19]: 4 out of 9 (44.44%)
     #> text_id: #ewatxad
     #>  0.07 TOXICITY
     #>  0.02 SEVERE_TOXICITY
     #> 
-    #> 55.56% [2021-07-13 00:25:30]: 5 out of 9 (55.56%)
+    #> 55.56% [2021-07-13 11:15:20]: 5 out of 9 (55.56%)
     #> text_id: #ekacswt
     #>  0.60 TOXICITY
     #>  0.32 SEVERE_TOXICITY
     #> 
-    #> 66.67% [2021-07-13 00:25:31]: 6 out of 9 (66.67%)
+    #> 66.67% [2021-07-13 11:15:22]: 6 out of 9 (66.67%)
     #> text_id: #ewftxwd
     #>  0.07 TOXICITY
     #>  0.03 SEVERE_TOXICITY
     #> 
-    #> 77.78% [2021-07-13 00:25:32]: 7 out of 9 (77.78%)
+    #> 77.78% [2021-07-13 11:15:23]: 7 out of 9 (77.78%)
     #> text_id: #eeadswt
     #>  0.14 TOXICITY
     #>  0.09 SEVERE_TOXICITY
     #> 
-    #> 88.89% [2021-07-13 00:25:33]: 8 out of 9 (88.89%)
+    #> 88.89% [2021-07-13 11:15:24]: 8 out of 9 (88.89%)
     #> text_id: #enfhxed
     #>  0.35 TOXICITY
     #>  0.14 SEVERE_TOXICITY
     #> 
-    #> 100.00% [2021-07-13 00:25:34]: 9 out of 9 (100.00%)
+    #> 100.00% [2021-07-13 11:15:25]: 9 out of 9 (100.00%)
     #> text_id: #efdmjd
     #> ERROR
     #> Error in .f(...): HTTP 400
-    #> INVALID_ARGUMENT: Attribute TOXICITY does not support request languages: ja-Latn
+    #> INVALID_ARGUMENT: Attribute SEVERE_TOXICITY does not support request languages: ja-Latn
     #> NO SCORES
     #> # A tibble: 9 x 4
     #>   text_id  error                                        TOXICITY SEVERE_TOXICITY
